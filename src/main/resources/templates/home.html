@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    <h1>Welcome <span th:text="${username}"></span></h1>
 
-<h1>Welcome <span th:text="${username}"></span></h1>
 
+    <h3>-- services --</h3>
 
-<h3>-- services --</h3>
+    <br>
+    <a href="/onLeave" >All staff who are on leave or have applied leave</a>
 
-<br>
-<a href="/onLeave" >All staff who are on leave or have applied leave</a>
-
-<br>
-<h3>-- logout --</h3>
-<br>
-<a href="/logout" >logout here</a>
-<br>
-
+    <br>
+    <h3>-- logout --</h3>
+    <br>
+    <a href="/logout" >logout here</a>
+    <br>
 </body>
 </html>
