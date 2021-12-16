@@ -18,7 +18,11 @@ public class Employee {
 
 	private String name;
 	private String jobTitle;
-	private Integer managerId;
+
+	// do not need manager_id as the navigation already created department id for us
+	// which can be used to get manager id
+	//private Integer managerId;
+
 	private Double annualLeaveCount;
 	private Double medicalLeaveCount;
 	private Double compensationLeaveCount;

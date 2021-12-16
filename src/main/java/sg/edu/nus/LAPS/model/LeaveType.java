@@ -13,10 +13,9 @@ import lombok.NoArgsConstructor;
 public class LeaveType {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	/*@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "leaveTypeId")
-	private Integer leaveTypeId;
-
+	private Integer leaveTypeId;*/
 	@Column(name = "leaveName")
 	private String leaveName;
 
