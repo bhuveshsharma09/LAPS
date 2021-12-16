@@ -17,6 +17,7 @@ import sg.edu.nus.LAPS.services.UserCredentialsService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.awt.desktop.UserSessionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
