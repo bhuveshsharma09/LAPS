@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import Exceptions.EmployeeNotFound;
-import Validators.EmployeeValidator;
-import sg.edu.nus.LAP.model.Employee;
-import sg.edu.nus.LAP.service.EmployeeService;
-import sg.edu.nus.LAP.service.EmployeeServiceImpl;
+///import Exceptions.EmployeeNotFound;
+//import Validators.EmployeeValidator;
+import sg.edu.nus.LAPS.model.Employee;
+import sg.edu.nus.LAPS.services.EmployeeService;
+import sg.edu.nus.LAPS.services.EmployeeServiceImpl;
+import sg.edu.nus.LAPS.services.EmployeeService;
+
 
 
 @Controller
@@ -28,7 +30,8 @@ import sg.edu.nus.LAP.service.EmployeeServiceImpl;
 public class AdminEmployeeController {
 	
 	@Autowired
-	private EmployeeService empService;
+	EmployeeService empService;
+
 	@Autowired
 	public void setEmployeeService(EmployeeServiceImpl empServiceImpl) {
 		this.empService = empServiceImpl;

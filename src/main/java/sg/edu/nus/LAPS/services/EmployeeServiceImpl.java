@@ -7,8 +7,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sg.edu.nus.LAP.model.Employee;
-import sg.edu.nus.LAP.repo.EmployeeRepository;
+import org.springframework.stereotype.Service;
+import sg.edu.nus.LAPS.model.Employee;
+import sg.edu.nus.LAPS.repo.EmployeeRepository;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
 

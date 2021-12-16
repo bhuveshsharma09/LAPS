@@ -9,9 +9,9 @@
 
 
 <body>
-	<header th:insert="fragments/general.html :: header"> </header>
+	<!--<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
-
+-->
 	<h1>Employee List</h1>
 	<!-- Add Hyperlink -->
 	<a href="employee-form.html" th:href="@{/employee/add}">Add Employee</a>
@@ -26,14 +26,19 @@
 			<th >Delete Employee</th>
 		</tr>
 		<tr th:each="employee:${employees}" class="table-row">
-			<td th:text=${employee.employeeId}>ID</td>
-			<td th:text=${employee.name}>Name</td>
+			<td th:text="${employee.employeeId}">ID</td>
+			<td th:text="${employee.name}">Name</td>
 
 
 		</tr>
+
+
+
+
+
 	</table>
     <br/>
-	<div th:replace="fragments/general.html :: footer"></div>
+<!--	<div th:replace="fragments/general.html :: footer"></div>-->
 	
 </body>
 </html>

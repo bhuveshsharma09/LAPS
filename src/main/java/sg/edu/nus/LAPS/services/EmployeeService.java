@@ -3,7 +3,8 @@ package sg.edu.nus.LAPS.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import sg.edu.nus.LAP.model.Employee;
+import org.springframework.stereotype.Service;
+import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 
 public interface EmployeeService {
