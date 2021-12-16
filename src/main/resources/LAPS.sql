@@ -1,6 +1,3 @@
--- to add data in user_credential table
-
-
 DROP SCHEMA IF EXISTS laps;
 
 CREATE SCHEMA laps;
@@ -48,9 +45,6 @@ VALUES ROW
         (4,1004,"12345","steven",1004);
 
 
-
-
-
 INSERT INTO laps.user_credential (user_id,employee_id,password,username,employee_employee_id)
 VALUES ROW
     (5,1005,"12345","steven1",1004);
@@ -66,11 +60,15 @@ VALUES ROW
 --
 INSERT INTO laps.user_credential_roles
 VALUES ROW
-    (1,1),
+    (1,3),
     ROW
         (2,2),
     ROW
-        (3,3);
+        (3,1),
+    ROW
+        (4,3),
+    ROW
+        (5,3);
 ---
 
 INSERT INTO laps.leave_type
@@ -87,11 +85,20 @@ VALUES ROW
 
 INSERT INTO laps.leave_application
 VALUES ROW
-    (2,1,"223345","Nobody",STR_TO_DATE('17/01/2012', '%d/%m/%Y'),"i am sick",STR_TO_DATE('18/01/2012', '%d/%m/%Y'),1002,"AL");
+    (2,1,"223345","Nobody",STR_TO_DATE('12/01/2012', '%d/%m/%Y'),"i am sick",STR_TO_DATE('14/01/2012', '%d/%m/%Y'),1001,"AL");
 
 INSERT INTO laps.leave_application
 VALUES ROW
-    (3,1,"223345","Nobody",STR_TO_DATE('22/01/2012', '%d/%m/%Y'),"i am sick",STR_TO_DATE('23/01/2012', '%d/%m/%Y'),1003,"AL");
+    (3,1,"223345","Nobody",STR_TO_DATE('12/01/2012', '%d/%m/%Y'),"i am sick",STR_TO_DATE('14/01/2012', '%d/%m/%Y'),1001,"AL");
 
+INSERT INTO laps.leave_application
+VALUES ROW
+    (4,1,"223345","Nobody",STR_TO_DATE('12/01/2012', '%d/%m/%Y'),"i am sick",STR_TO_DATE('14/01/2012', '%d/%m/%Y'),1002,"ML");
+
+
+--- SET SQL_SAFE_UPDATES = 0;
+--- DELETE FROM instructor WHERE salary BETWEEN 13000 AND 15000;
+--- SQL_SAFE_UPDATES = 1;
+--- DELETE FROM user_credential_roles;
 
 

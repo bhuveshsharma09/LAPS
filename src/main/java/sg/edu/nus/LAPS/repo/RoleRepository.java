@@ -5,4 +5,9 @@ import sg.edu.nus.LAPS.model.Role;
 
 public interface RoleRepository extends JpaRepository <Role, Integer>{
 
+
+   // Role findByRoleId
+
+
+
 }

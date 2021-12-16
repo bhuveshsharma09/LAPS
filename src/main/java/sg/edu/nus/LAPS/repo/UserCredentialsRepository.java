@@ -13,7 +13,8 @@ public interface UserCredentialsRepository extends JpaRepository<UserCredentials
     UserCredentials findUserCredentialsByUsernameAndPassword(@Param("username") String username,
                                                              @Param("password") String password);
 
-
+    @Query("SELECT user from UserCredentials user WHERE user.userId=:userId")
+    UserCredentials findByUserId(@Param("userId") Integer userid);
 
 
 

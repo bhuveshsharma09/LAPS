@@ -36,4 +36,10 @@ public class UserCredentialsServiceImpl implements UserCredentialsService{
         // may need to manage null
         return userCredential;
     }
+
+    @Override
+    public UserCredentials findByUserId(Integer id) {
+        UserCredentials userCredentials = userCredentialsRepository.findByUserId(id);
+        return userCredentials;
+    }
 }

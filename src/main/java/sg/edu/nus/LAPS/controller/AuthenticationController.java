@@ -7,12 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sg.edu.nus.LAPS.model.Role;
 import sg.edu.nus.LAPS.model.UserCredentials;
 import sg.edu.nus.LAPS.services.UserCredentialsService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.awt.desktop.UserSessionEvent;
+import java.util.List;
 
 @Controller
 public class AuthenticationController {
@@ -74,6 +76,13 @@ public class AuthenticationController {
 
             model.addAttribute("username",userCredentials1.getUsername());
             httpSession.setAttribute("userSession", sessionController);
+
+            // understand the role of user who just logged in
+            // the role can help to allow certain services
+            UserCredentials u = userCredentialsService.findByUserId(userCredentials1.getUserId());
+            List<Role> rolesList= u.getRoles();
+           // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
+            model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
             return "home";
 
         }

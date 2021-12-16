@@ -13,6 +13,8 @@ public interface UserCredentialsService {
 
     UserCredentials findUserCredentialByUserNameAndPassword(String username,String password) ;
 
+    UserCredentials findByUserId(Integer id);
+
 
 
 
