@@ -21,16 +21,18 @@ public class ClaimHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "claimHistoryId")
-	private Integer claimHistoryId;
+	private Integer claimHistoryId; //1
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "timestamp")
-	private Date timestamp;
+	private Date timestamp; //2
 
-	private String changedBy;
-	private String remarks;
-	private ApprovalStatus approvalStatus;
+	private String changedBy; //3
+	private String remarks; //4
+	private ApprovalStatus approvalStatus; //5
 
+	
+	//Relations
 	@ManyToOne
 	@JoinColumn(name = "claimId")
 	private Claim claim;

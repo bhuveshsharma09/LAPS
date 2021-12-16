@@ -16,22 +16,24 @@ public class Claim {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "claimId")
-	private Integer claimId;
+	private Integer claimId; //1
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "overtimeDate")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date overtimeDate;
+	private Date overtimeDate; //2
 
-	private Double hoursWorked;
-	private Double eligibleClaim;
-	private String remarks;
-	private ApprovalStatus approvalStatus;
+	private Double hoursWorked; //3
+	private Double eligibleClaim; //4
+	private String remarks; //5
+	private ApprovalStatus approvalStatus; //6
 
-	@ManyToOne
+	
+	//Relations
+	@ManyToOne //Many claims can belong to the same employee
 	@JoinColumn(name = "employeeId")
 	private Employee employee;
 
-	@OneToMany(mappedBy = "claim")
+	@OneToMany(mappedBy = "claim") //one claim can appear many times under claim history with different statuses
 	private List<ClaimHistory> claimHistories;
 }

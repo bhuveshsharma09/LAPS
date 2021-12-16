@@ -20,13 +20,15 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "departmentId")
-	private Integer departmentId;
+	private Integer departmentId; //1
 
-	private String departmentName;
+	private String departmentName; //2
 
 	@NotNull
-	private Integer managerId;
+	private Integer managerId; //3
 
-	@OneToMany(mappedBy = "department")
+	//Relations
+	@OneToMany(mappedBy = "department") //one Department can have many Employees
 	private List<Employee> employees;
+	
 }

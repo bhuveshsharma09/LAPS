@@ -11,24 +11,25 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "user_credential")
 public class UserCredentials {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userId")
-	private int userId;
-
-	@NonNull
-	private String username;
+	private Integer userId; //1
 
 	@NotNull
-	private String password;
+	private String username; //2
 
-	private Integer employeeId;
+	@NotNull
+	private String password; //3
 
-	@OneToOne
+	private Integer employeeId; //4
+
+	
+	//Relations
+	@OneToOne //One employee can only have one login account
 	private Employee employee;
 
-	@ManyToMany
+	@ManyToMany //One User can have many roles, and every role can have many Users
 	private List<Role> roles;
 }

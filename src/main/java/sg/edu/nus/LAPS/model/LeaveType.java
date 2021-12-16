@@ -11,14 +11,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class LeaveType {
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "leaveTypeId")
+	private Integer leaveTypeId; //1
+	
 	@Column(name = "leaveName")
-	private String leaveName;
+	private String leaveName; //2
 
-	private Integer granularity;
-	private String leaveCode;
+	@Column(name = "granularity")
+	private Integer granularity; //3
+	
+	@Column(name = "leaveCode")
+	private String leaveCode; //4 - ML, AL, CL
 
-	@OneToMany(mappedBy = "leaveType")
+	//Relations
+	@OneToMany(mappedBy = "leaveType") //one leave type can have many leave applications under it
 	private List<LeaveApplication> leaves;
 }

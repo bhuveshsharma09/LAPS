@@ -19,11 +19,12 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "roleId")
-	private Integer roleId;
+	private Integer roleId; //1
 
-	private String roleTitle;
-	private String roleDesc;
+	private String roleTitle; //2
+	private String roleDesc; //3
 
-	@ManyToMany(mappedBy = "roles")
+	//Relations
+	@ManyToMany(mappedBy = "roles") // one User can have many roles, and every role can have many Users
 	private List<UserCredentials> userCredentials;
 }
