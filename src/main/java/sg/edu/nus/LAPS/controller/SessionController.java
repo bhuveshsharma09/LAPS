@@ -1,11 +1,11 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.UserCredentials;
-
-import java.util.List;
 
 @NoArgsConstructor
 @Data

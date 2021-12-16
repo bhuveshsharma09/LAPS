@@ -40,6 +40,15 @@ public class Employee {
 
 	@OneToMany(mappedBy = "employee") //one Employee can have many compensation leave claims
 	private List<Claim> claims;
+	
+	@ManyToOne
+	private Employee manager;
+
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + "]";
+	}
+	
 
 
 	

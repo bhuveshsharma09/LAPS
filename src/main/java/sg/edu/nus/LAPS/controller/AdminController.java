@@ -1,14 +1,14 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sg.edu.nus.LAPS.model.LeaveApplication;
-import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
-import sg.edu.nus.LAPS.services.LeaveApplicationService;
 
-import java.util.List;
+import sg.edu.nus.LAPS.model.LeaveApplication;
+import sg.edu.nus.LAPS.services.LeaveApplicationService;
 
 @Controller
 public class AdminController {

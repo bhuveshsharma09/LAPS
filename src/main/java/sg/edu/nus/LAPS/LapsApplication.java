@@ -5,9 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import sg.edu.nus.LAPS.model.Employee;
-import sg.edu.nus.LAPS.model.LeaveApplication;
-import sg.edu.nus.LAPS.model.UserCredentials;
+
 import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
 import sg.edu.nus.LAPS.repo.UserCredentialsRepository;
 

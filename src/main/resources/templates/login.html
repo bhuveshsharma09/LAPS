@@ -1,49 +1,30 @@
-<!DOCTYPE html >
-<html xmlns:th="http://www.thymeleaf.org">
-
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login form</title>
 </head>
 <body>
-
-<form action="#" th:object="${usercredentials}" th:action="@{'/authenticate'}">
-
-
-
-<p>Please login using the correct credentials</p>
-
-
-<h3>Username
-
-
-<input type="text" th:field="*{username}">
-
-
-</h3>
-
-
-<h3>Password
-
-
-    <input type="text" th:field="*{password}">
-</h3>
-
-
-<input type="submit" name="login" value="login"/>
-
-</form>
-
-
-
-
-
-
-
-
-
-
-
+    <form action="#" th:object="${usercredentials}" th:action="@{'/authenticate'}">
+        <p>Please login using the correct credentials</p>
+        <label>Username
+        <input type="text" th:field="*{username}">
+        
+        
+        </lable>
+        
+        
+        <lable>Password
+        
+        
+            <input type="text" th:field="*{password}">
+        </lable>
+        
+        
+        <input type="submit" name="login" value="login"/>
+        
+        </form>
 </body>
 </html>
