@@ -33,7 +33,7 @@ public class ClaimHistory {
 
 	
 	//Relations
-	@ManyToOne
+	@ManyToOne //One claim can appear many times in claim history with different statuses
 	@JoinColumn(name = "claimId")
 	private Claim claim;
 }
