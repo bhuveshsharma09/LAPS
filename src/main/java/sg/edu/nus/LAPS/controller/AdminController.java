@@ -1,5 +1,8 @@
 package sg.edu.nus.LAPS.controller;
 
-public class AdminController { // to manage department-manager hierarchy
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class AdminController {
 
 }
