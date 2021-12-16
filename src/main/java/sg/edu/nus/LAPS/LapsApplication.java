@@ -36,7 +36,6 @@ public class LapsApplication {
 
 			Employee employee1 = new Employee();
 
-
 			LeaveApplication leaveApplication1 = new LeaveApplication();
 
 
