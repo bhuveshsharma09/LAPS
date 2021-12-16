@@ -1,0 +1,49 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login form</title>
+</head>
+<body>
+
+<form action="#" th:object="${usercredentials}" th:action="@{'/authenticate'}">
+
+
+
+<p>Please login using the correct credentials</p>
+
+
+<h3>Username
+
+
+<input type="text" th:field="*{username}">
+
+
+</h3>
+
+
+<h3>Password
+
+
+    <input type="text" th:field="*{password}">
+</h3>
+
+
+<input type="submit" name="login" value="login"/>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

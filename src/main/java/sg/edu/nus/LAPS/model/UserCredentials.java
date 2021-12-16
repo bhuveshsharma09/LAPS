@@ -11,21 +11,23 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "user_credential")
 public class UserCredentials {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userId")
 	private Integer userId; //1
 
-	@NotNull
-	private String username; //2
+	@NonNull
+	@Column(name="username")
+	private String username;//2
 
 	@NotNull
-	private String password; //3
+	@Column(name="password")
+	private String password;//3
 
 	private Integer employeeId; //4
 
-	
 	//Relations
 	@OneToOne //One employee can only have one login account
 	private Employee employee;
