@@ -34,4 +34,10 @@ public class UserCredentials {
 
 	@ManyToMany //One User can have many roles, and every role can have many Users
 	private List<Role> roles;
+
+	public UserCredentials(Integer userId, @NonNull String username, String password) {
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+	}
 }

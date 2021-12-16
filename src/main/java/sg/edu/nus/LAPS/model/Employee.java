@@ -40,5 +40,7 @@ public class Employee {
 
 	@OneToMany(mappedBy = "employee") //one Employee can have many compensation leave claims
 	private List<Claim> claims;
+
+
 	
 }

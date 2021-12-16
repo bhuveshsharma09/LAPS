@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class LeaveType {
+
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	//@Column(name = "leaveTypeId")
+	//private Integer leaveTypeId; //1
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "leaveTypeId")
-	private Integer leaveTypeId; //1
-	
 	@Column(name = "leaveName")
 	private String leaveName; //2
 

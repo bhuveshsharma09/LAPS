@@ -48,7 +48,16 @@ public class LeaveApplication {
 	@ManyToOne //One leave type can have have many leave applications e.g. medical has 10 applications
 	@JoinColumn(name="leaveName") 
 	private LeaveType leaveType;
-	
 
 
+	public LeaveApplication(Integer leaveId, Date fromDate, Date toDate, String remarks, String coveringEmp, String contactDetails, ApprovalStatus approvalStatus, Employee employee) {
+		this.leaveId = leaveId;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.remarks = remarks;
+		this.coveringEmp = coveringEmp;
+		this.contactDetails = contactDetails;
+		this.approvalStatus = approvalStatus;
+		this.employee = employee;
+	}
 }
