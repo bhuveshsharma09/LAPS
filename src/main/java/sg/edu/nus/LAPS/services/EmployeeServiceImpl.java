@@ -12,6 +12,7 @@ import sg.edu.nus.LAP.repo.EmployeeRepository;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private LeaveApplicationRepository LARepo;
