@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" th:object="${newLeave}" th:action="@{/employee/saveLeave}" method="post">
+        <fieldset>
+            <input type="hidden" th:field="*{leaveId}"/>
+        </fieldset>
+        <fieldset>
+            <label for="fromDate">From Date: </label>
+            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}"/>
+        </fieldset>
+        <fieldset>
+            <label for="toDate">To Date: </label>
+            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"/>
+        </fieldset>
+        <fieldset>
+            <label for="remarks">Remarks: </label>
+            <input type="text" name="remarks" id="remarks" th:field="*{remarks}">
+        </fieldset>
+        <fieldset>
+            <label for="coveringEmp">Covering Employee: </label>
+            <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}">
+        </fieldset>
+        <fieldset>
+            <label for="contactDetails">Contact Details: </label>
+            <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}">
+        </fieldset>
+        <fieldset>
+            <label for="leaveName">Leave Type: </label>
+            <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}">
+        </fieldset>
+        <!-- <fieldset>
+            <input type="hidden" th:field="*{employeeId}">
+        </fieldset> -->
+        <fieldset>
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+</body>
+</html>

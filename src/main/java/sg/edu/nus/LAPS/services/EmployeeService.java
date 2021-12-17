@@ -12,4 +12,5 @@ public interface EmployeeService {
     public boolean saveEmployee(Employee employee);
 	public ArrayList<Employee> findAllEmployees();
 
+    public Employee findEmployeeById(Integer id);
 }

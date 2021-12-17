@@ -14,4 +14,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	//added on 17Dec 1.17am while doing Add Employee
 	 @Query("Select m from Employee m where m.name LIKE :name")
 	 List<Employee> findMemberByFirstName(@Param("name") String name);
+
+	Employee findByEmployeeId(Integer employeeId);
 }

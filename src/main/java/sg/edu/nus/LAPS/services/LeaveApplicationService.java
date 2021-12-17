@@ -9,4 +9,6 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findAllLeaves(Integer eid);
 
     List<LeaveApplication> findAllById(Integer id);
+
+    LeaveApplication saveLeaveApplication(LeaveApplication LA);
 }

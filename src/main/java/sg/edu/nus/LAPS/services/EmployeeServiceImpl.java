@@ -28,6 +28,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public ArrayList<Employee> findAllEmployees() {
 		return (ArrayList<Employee>) emprepo.findAll();
 	}
+	@Transactional
+	@Override
+	public Employee findEmployeeById(Integer id) {
+		return emprepo.findByEmployeeId(id);
+	}
 	
 
     
