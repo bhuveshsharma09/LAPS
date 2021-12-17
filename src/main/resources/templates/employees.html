@@ -25,6 +25,8 @@
 		<tr >
 			<th >Employee ID</th>
 			<th >Name</th>
+			<th >Position</th>
+			<th >Manager ID</th>
 
 			<th >Edit Employee</th>
 			<th >Delete Employee</th>
@@ -32,6 +34,8 @@
 		<tr th:each="employee:${employees}" class="table-row">
 			<td th:text="${employee.employeeId}">ID</td>
 			<td th:text="${employee.name}">Name</td>
+			<td th:text=${employee.jobTitle}>Position</td>
+			<td th:text=${employee.managerId}>Manager ID</td>
 
 		<td><a href="employee-edit.html"
 				th:href="@{/employee/edit/}+${employee.employeeId}">Edit</a>
