@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.services.EmployeeService;
@@ -41,4 +42,16 @@ public class StaffController {
         leaveApplicationService.saveLeaveApplication(LA);
         return "forward:/employee/leaveList/"+id;
     }
+
+@RequestMapping(value = "/claim")
+    public String applyClaim(Model model)
+    {
+        model.addAttribute("claim",new Claim());
+        return "claim-form";
+    }
+
+
+
+
+
 }

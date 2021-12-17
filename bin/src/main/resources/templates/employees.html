@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Employees</title>
+</head>
+
+
+<body>
+	<!--<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+-->
+	<h1>Employee List</h1>
+	<!-- Add Hyperlink -->
+	<a href="employee-form.html" th:href="@{/employee/add}">Add Employee</a>
+
+	<h2 th:if="${not #lists.isEmpty(employees)}">Employee List</h2>
+	<table th:if="${not #lists.isEmpty(employees)}" >
+		<tr >
+			<th >Employee ID</th>
+			<th >Name</th>
+
+			<th >Edit Employee</th>
+			<th >Delete Employee</th>
+		</tr>
+		<tr th:each="employee:${employees}" class="table-row">
+			<td th:text="${employee.employeeId}">ID</td>
+			<td th:text="${employee.name}">Name</td>
+
+
+		</tr>
+
+
+
+
+
+	</table>
+    <br/>
+<!--	<div th:replace="fragments/general.html :: footer"></div>-->
+	
+</body>
+</html>

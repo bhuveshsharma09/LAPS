@@ -31,11 +31,6 @@ public class AuthenticationController {
     EmployeeRepository employeeRepository;
 
 
-
-
-
-
-
     @RequestMapping("/")
     public String getWelcomePage()
     {
@@ -56,17 +51,20 @@ public class AuthenticationController {
                                Model model)
     {
 
-        System.out.println("incoming data--------------------");
+       /* System.out.println("incoming data--------------------");
         System.out.println(userCredentials.getUsername());
-        System.out.println(userCredentials.getPassword());
+        System.out.println(userCredentials.getPassword());*/
 
-
+        // in case the data is empty etc
+        // open login page again
         SessionController sessionController = new SessionController();
         if(bindingResult.hasErrors())
         {
             return "login";
         }
 
+        // if the form data is correct
+        // go ahead
         else
         {
             UserCredentials userCredentials1 = userCredentialsService
@@ -78,25 +76,46 @@ public class AuthenticationController {
                 return "login";
             }
 
-            System.out.println("Will render the home page now");
-            System.out.println(userCredentials1.getEmployeeId());
+           // System.out.println("Will render the home page now");
+           // System.out.println(userCredentials1.getEmployeeId());
+
+            // adding data in the session
+
+
+            //---> this needs to be worked on. for now the results are null<-----
+            ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository
+                    .findEmployeesByManagerId
+                            (userCredentials1
+                                    .getEmployee()
+                                    .getEmployeeId());
+
             sessionController.setUserCredentials(userCredentials1);
             sessionController.setEmployee(userCredentials1.getEmployee());
-            ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository.findEmployeesByManager_EmployeeId(userCredentials1.getEmployee().getEmployeeId());
 			if (subordinates != null) {
 				sessionController.setSubordinates(subordinates);
-			}
 
-            model.addAttribute("username",userCredentials1.getUsername());
+			}
+            System.out.println("printing subordinate names");
+            subordinates.forEach(games -> System.out.println(games.getName()));
+
+
+
+            // save data in sessionController object
             httpSession.setAttribute("userSession", sessionController);
 
-            // understand the role of user who just logged in
+            // to understand the role of user who just logged in
             // the role can help to allow certain services
             UserCredentials u = userCredentialsService.findByUserId(userCredentials1.getUserId());
             List<Role> rolesList= u.getRoles();
-           // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
+
+            // prepare data to send to front end
+            model.addAttribute("username",userCredentials1.getUsername());
+            // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
+            model.addAttribute("subordinates",subordinates);
             model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
             model.addAttribute("id", userCredentials1.getEmployeeId());
+
+            // start the Home page
             return "home";
 
         }
