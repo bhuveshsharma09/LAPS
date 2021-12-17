@@ -17,6 +17,7 @@ import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.services.EmployeeService;
 import sg.edu.nus.LAPS.services.LeaveApplicationService;
+import sg.edu.nus.LAPS.services.LeaveTypeService;
 
 @Controller
 @RequestMapping("/employee")
@@ -26,6 +27,8 @@ public class StaffController {
     LeaveApplicationService leaveApplicationService;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    LeaveTypeService leaveTypeService;
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
@@ -46,7 +49,6 @@ public class StaffController {
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
         Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
-
         return "forward:/employee/leaveList/"+id;
     }
 

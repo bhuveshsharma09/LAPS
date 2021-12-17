@@ -23,10 +23,10 @@
         <tbody>
     <tr th:each="leave: ${leaveList}">
         <td th:text="${leave.leaveId}" />
-        <td th:text="${leave.employee.name}" />
+        <td th:text="${leave.employee.employeeId}" />
         <td th:text="${leave.fromDate}" />
         <td th:text="${leave.toDate}" />
-        <td th:text="${leave.leaveType.leaveCode}" />
+        <td th:text="${leave.leaveType.leaveName}" />
         <td th:text="${leave.remarks}" />
         <td th:text="${leave.contactDetails}" />
         <td th:text="${leave.approvalStatus}" />
@@ -34,5 +34,7 @@
         </tbody>
     
     </table>
+    //Need to get back to home page...
+    <a th:href="@{/authenticate/home}">Back</a>
 </body>
 </html>
