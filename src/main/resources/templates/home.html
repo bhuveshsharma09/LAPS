@@ -7,11 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome <span th:text="${username}"></span></h1>
-
-
 <h1>Welcome <span th:text="${username}"></span></h1>
-<h2>Role title is : <span th:text="${roletitle}"></span></h2>
+
 <h2>Services available for : <span th:text="${roletitle}"></span> are </h2>
 
 
@@ -36,6 +33,7 @@
 
 
 <div th:if="${roletitle} == MANAGER">
+    <h3>STAFF services</h3>
     <br>
     <a href="/onLeave" >Employees on leave (Movement Register)</a>
     <br>
@@ -43,10 +41,14 @@
     <br>
     <a href="/onLeave" >Manage leave application</a>
     <br>
-    <a href="/onLeave" >Claim compensation</a>
+    <a href="/onLeave" >submit Claim compensation</a>
+    <br>
+
+    <a href="/onLeave" >manage Claim compensation</a>
     <br>
     <a th:href="@{/employee/leaveList/}+${id}" >View personal leave history </a>
     <br>
+    <h3>Manager services</h3>
     <a href="/onLeave" >View Applications from approval </a>
     <br>
     <a href="/onLeave" >View subordinate leave history</a>
@@ -65,7 +67,9 @@
     <br>
     <a href="/onLeave" >Manage leave application</a>
     <br>
-    <a href="/onLeave" >Claim compensation</a>
+    <a href="/onLeave" >submit Claim compensation</a>
+    <br>
+    <a href="/onLeave" >manage Claim compensation</a>
     <br>
     <a th:href="@{/employee/leaveList/}+${id}" >View personal leave history </a>
     <br>

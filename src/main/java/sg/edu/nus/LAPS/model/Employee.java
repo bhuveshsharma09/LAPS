@@ -21,7 +21,7 @@ public class Employee {
 
 	// do not need manager_id as the navigation already created department id for us
 	// which can be used to get manager id
-	//private Integer managerId;
+	private Integer managerId;
 
 	private Double annualLeaveCount; //4
 	private Double medicalLeaveCount; //5

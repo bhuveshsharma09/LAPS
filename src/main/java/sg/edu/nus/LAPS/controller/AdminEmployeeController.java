@@ -23,16 +23,16 @@ import sg.edu.nus.LAPS.services.EmployeeServiceImpl;
 public class AdminEmployeeController {
 	
 	@Autowired
-	EmployeeService empService;
+	EmployeeService employeeService;
 
 	@Autowired
 	public void setEmployeeService(EmployeeServiceImpl empServiceImpl) {
-		this.empService = empServiceImpl;
+		this.employeeService = empServiceImpl;
 	}
 	
 	@RequestMapping(value = "/all")
 	public String list(Model model) {
-		model.addAttribute("employees", empService.findAllEmployees());
+		model.addAttribute("employees", employeeService.findAllEmployees());
 		return "employees";
 	}
 	
@@ -48,7 +48,7 @@ public class AdminEmployeeController {
 		if (bindingResult.hasErrors()) {
 			return "employee-form";
 		}
-		empService.saveEmployee(employee);
+		employeeService.saveEmployee(employee);
 		return "forward:/employee/all";
 	}
 
