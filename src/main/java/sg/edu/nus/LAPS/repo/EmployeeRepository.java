@@ -12,8 +12,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	public List<Employee> findEmployeesByManager_EmployeeId(Integer employeeId);
 	
 	//added on 17Dec 1.17am while doing Add Employee
-	 @Query("Select m from Employee m where m.name LIKE :name")
-	 List<Employee> findMemberByFirstName(@Param("name") String name);
+	@Query("Select m from Employee m where m.name LIKE :name")
+	List<Employee> findMemberByFirstName(@Param("name") String name);
 
-	Employee findByEmployeeId(Integer employeeId);
+	@Query("Select e from Employee e where e.employeeId = :id")
+	Employee findByEmployeeId(@Param("id") Integer employeeId);
 }

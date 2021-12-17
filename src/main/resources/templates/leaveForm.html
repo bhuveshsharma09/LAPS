@@ -35,9 +35,9 @@
             <label for="leaveName">Leave Type: </label>
             <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}">
         </fieldset>
-        <!-- <fieldset>
-            <input type="hidden" th:field="*{employeeId}">
-        </fieldset> -->
+        <fieldset>
+            <input type="hidden" th:field="${employee.employeeId}">
+        </fieldset>
         <fieldset>
             <input type="submit" value="Submit">
         </fieldset>

@@ -3,11 +3,22 @@ package sg.edu.nus.LAPS.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -34,6 +45,6 @@ public class Claim {
 	@JoinColumn(name = "employeeId")
 	private Employee employee;
 
-	@OneToMany(mappedBy = "claim") //one claim can appear many times under claim history with different statuses
+	@OneToMany(mappedBy = "claim", cascade = CascadeType.ALL) //one claim can appear many times under claim history with different statuses
 	private List<ClaimHistory> claimHistories;
 }

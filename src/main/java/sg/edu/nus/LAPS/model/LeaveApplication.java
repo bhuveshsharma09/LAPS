@@ -5,6 +5,7 @@ package sg.edu.nus.LAPS.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,7 +53,7 @@ public class LeaveApplication {
 	@JoinColumn(name = "employeeId")
 	private Employee employee;
 
-	@OneToMany(mappedBy = "leaveApplication") //One leave application can appear many times in Leave History with different statuses
+	@OneToMany(mappedBy = "leaveApplication", cascade = CascadeType.ALL) //One leave application can appear many times in Leave History with different statuses
 	private List<LeaveHistory> leaveHistories;
 
 	@ManyToOne //One leave type can have have many leave applications e.g. medical has 10 applications

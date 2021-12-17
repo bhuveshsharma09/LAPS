@@ -2,7 +2,11 @@ package sg.edu.nus.LAPS.model;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +31,6 @@ public class LeaveType {
 	private String leaveCode; //4 - ML, AL, CL
 
 	//Relations
-	@OneToMany(mappedBy = "leaveType") //one leave type can have many leave applications under it
+	@OneToMany(mappedBy = "leaveType", cascade = CascadeType.ALL) //one leave type can have many leave applications under it
 	private List<LeaveApplication> leaves;
 }
