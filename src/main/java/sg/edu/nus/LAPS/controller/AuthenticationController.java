@@ -98,6 +98,8 @@ public class AuthenticationController {
             System.out.println("printing subordinate names");
             subordinates.forEach(games -> System.out.println(games.getName()));
 
+
+
             // save data in sessionController object
             httpSession.setAttribute("userSession", sessionController);
 
@@ -109,6 +111,7 @@ public class AuthenticationController {
             // prepare data to send to front end
             model.addAttribute("username",userCredentials1.getUsername());
             // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
+            model.addAttribute("subordinates",subordinates);
             model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
             model.addAttribute("id", userCredentials1.getEmployeeId());
 

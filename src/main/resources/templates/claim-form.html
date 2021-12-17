@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>make a claim</title>
+</head>
+<body>
+<H1>Make a claim</H1>
+<form action="#" th:object="${claim}" th:action="@{/Claim/save}"method="post">
+
+    <fieldset>
+        Full Name: <input type="text" th:field="*{overtimeDate}">
+
+    </fieldset>
+
+    <fieldset>
+        Position: <input type="text" th:field="*{jobTitle}">
+
+    </fieldset>
+
+
+    <fieldset>
+        Annual Leave Entitlement: <input type="number" th:field="*{annualLeaveCount}">
+    </fieldset>
+
+    <fieldset>
+        Medical Leave Entitlement: <input type="number" th:field="*{medicalLeaveCount}">
+    </fieldset>
+
+    <fieldset>
+        Compensation Leave Entitlement:<input type="number" th:field="*{compensationLeaveCount}">
+    </fieldset>
+
+    <fieldset>
+        <input type="submit" value="Save" /> &nbsp; &nbsp; <input
+            type="reset" value="Reset" />
+    </fieldset>
+
+
+</form>
+
+</body>
+</html>

@@ -13,6 +13,41 @@
 
 
 
+<h2>sub ordinates</h2>
+
+<table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    <thead>
+    <tr>
+        <th >Emp Id</th>
+        <th>Employee name</th>
+        <th>Anaual leave count</th>
+        <th>mdeical leave count</th>
+        <th>comp leave count</th>
+        <th>job title</th>
+
+
+    </tr>
+    </thead>
+<tbody>
+<tr th:each="subordinate: ${subordinates}">
+    <td th:text="${subordinate.employeeId}" />
+    <td th:text="${subordinate.name}" />
+    <td th:text="${subordinate.annualLeaveCount}" />
+    <td th:text="${subordinate.medicalLeaveCount}" />
+    <td th:text="${subordinate.compensationLeaveCount}" />
+    <td th:text="${subordinate.jobTitle}" />
+<!--
+    <td> <a href="/employee/leaveList/+${subordinate.employeeId}" >Manage Leave entitlement</a><td  />
+-->
+
+    <td><a th:href="@{/employee/leaveList/{id}(id=${subordinate.employeeId})}">view</a></td>
+
+
+</tr>
+</tbody>
+</table>
+
+
 
 <h3>-- services --</h3>
 
