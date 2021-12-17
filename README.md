@@ -1,4 +1,4 @@
 # Java CA document
-# ERD for reference
+# updated ERD for reference
 
-![image](https://user-images.githubusercontent.com/62707309/146299758-43a0b507-aad8-4e2e-87f0-7142dc0563e6.png)
+![image](https://user-images.githubusercontent.com/62707309/146504687-5b80db18-4607-4076-84f6-d7433aeff508.png)
