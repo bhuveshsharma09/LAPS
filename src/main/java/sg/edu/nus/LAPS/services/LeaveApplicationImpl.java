@@ -1,11 +1,12 @@
 package sg.edu.nus.LAPS.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
-
-import java.util.List;
 
 @Service
 public class LeaveApplicationImpl implements LeaveApplicationService{
@@ -13,7 +14,10 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     LeaveApplicationRepository leaveApplicationRepository;
 
 
-
+    @Override
+    public List<LeaveApplication> findAllLeaves(Integer eid) {
+        return leaveApplicationRepository.findAllLeaves(eid);
+    }
 
     @Override
     public List<LeaveApplication> findAllById(Integer id) {

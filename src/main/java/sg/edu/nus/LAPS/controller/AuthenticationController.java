@@ -1,24 +1,24 @@
 package sg.edu.nus.LAPS.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sg.edu.nus.LAPS.model.Role;
 
 import sg.edu.nus.LAPS.model.Employee;
+import sg.edu.nus.LAPS.model.Role;
 import sg.edu.nus.LAPS.model.UserCredentials;
 import sg.edu.nus.LAPS.repo.EmployeeRepository;
 import sg.edu.nus.LAPS.services.UserCredentialsService;
-
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.awt.desktop.UserSessionEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class AuthenticationController {
@@ -79,6 +79,7 @@ public class AuthenticationController {
             }
 
             System.out.println("Will render the home page now");
+            System.out.println(userCredentials1.getEmployeeId());
             sessionController.setUserCredentials(userCredentials1);
             sessionController.setEmployee(userCredentials1.getEmployee());
             ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository.findEmployeesByManager_EmployeeId(userCredentials1.getEmployee().getEmployeeId());
@@ -95,6 +96,7 @@ public class AuthenticationController {
             List<Role> rolesList= u.getRoles();
            // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
             model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
+            model.addAttribute("id", userCredentials1.getEmployeeId());
             return "home";
 
         }
