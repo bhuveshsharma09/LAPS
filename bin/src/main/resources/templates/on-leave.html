@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+<span th:text="${leavelist}"></span></h1>
+-->
+
+<h3>ON LEAVE PAGE</h3>
+
+
+<table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    <thead>
+    <tr>
+        <th >Leave Id</th>
+        <th>Employee Id</th>
+        <th>from date</th>
+        <th>to date</th>
+        <th>leave type</th>
+        <th>remark</th>
+        <th>contact detail</th>
+        <th>Status</th>
+
+    </tr>
+    </thead>
+    <tbody>
+<tr th:each="leave: ${leavelist}">
+    <td th:text="${leave.leaveId}" />
+    <td th:text="${leave.employee.name}" />
+    <td th:text="${leave.fromDate}" />
+    <td th:text="${leave.toDate}" />
+    <td th:text="${leave.leaveType.leaveCode}" />
+    <td th:text="${leave.remarks}" />
+    <td th:text="${leave.contactDetails}" />
+    <td th:text="${leave.approvalStatus}" />
+</tr>
+    </tbody>
+
+</table>
+
+<a href="/login" >login</a>
+</body>
+</html>
