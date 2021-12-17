@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All claim</title>
+</head>
+
+
+<body>
+<!--<header th:insert="fragments/general.html :: header"> </header>
+<div th:replace="fragments/general.html :: menu"></div>
+-->
+<h1>claim List</h1>
+<!-- Add Hyperlink -->
+<a href="employee-form.html" th:href="@{/claims/add}">Add claim</a>
+
+<h2 th:if="${not #lists.isEmpty(claims)}">claim List</h2>
+<table th:if="${not #lists.isEmpty(claims)}" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    <tr >
+        <th >claim ID</th>
+        <th >approval status</th>
+        <th >eligibleClaim</th>
+        <th >hoursWorked</th>
+        <th >overtimeDate</th>
+        <th >remarks</th>
+
+        <th >Edit claim</th>
+        <th >Delete claim</th>
+    </tr>
+    <tr th:each="claim:${claims}" class="table-row">
+        <td th:text="${claim.claimId}">ID</td>
+        <td th:text="${claim.approvalStatus}">Name</td>
+        <td th:text="${claim.eligibleClaim}">ID</td>
+        <td th:text="${claim.hoursWorked}">Name</td>
+        <td th:text="${claim.overtimeDate}">ID</td>
+        <td th:text="${claim.remarks}">Name</td>
+
+
+    </tr>
+
+
+
+
+
+</table>
+<br/>
+<!--	<div th:replace="fragments/general.html :: footer"></div>-->
+
+</body>
+</html>

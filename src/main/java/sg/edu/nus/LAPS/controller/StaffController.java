@@ -25,6 +25,7 @@ public class StaffController {
 @RequestMapping(value = "/claim")
     public String applyClaim(Model model)
     {
+
         model.addAttribute("claim",new Claim());
         return "claim-form";
     }
