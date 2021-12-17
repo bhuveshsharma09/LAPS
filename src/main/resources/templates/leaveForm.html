@@ -20,6 +20,11 @@
             <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"/>
         </fieldset>
         <fieldset>
+            <!-- <select name="" id=""></select> -->
+            <label for="status">Status: </label>
+            <input type="text" name="status" id="status" th:field="*{approvalStatus}">
+        </fieldset>
+        <fieldset>
             <label for="remarks">Remarks: </label>
             <input type="text" name="remarks" id="remarks" th:field="*{remarks}">
         </fieldset>
@@ -40,6 +45,10 @@
         </fieldset>
         <fieldset>
             <input type="submit" value="Submit">
+        </fieldset>
+        <fieldset>
+            <input th:href="@{update}">
+            <input th:href="@{delete}">
         </fieldset>
     </form>
 </body>

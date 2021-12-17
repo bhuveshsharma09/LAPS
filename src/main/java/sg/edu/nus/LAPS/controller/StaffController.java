@@ -23,6 +23,7 @@ public class StaffController {
     EmployeeService employeeService;
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
+        System.out.println(id);
         model.addAttribute("leaveList", leaveApplicationService.findAllLeaves(id));
         return "leaveList";
     }
@@ -36,7 +37,8 @@ public class StaffController {
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
     public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
         LA.setEmployee(employee);
+        Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
-        return "forward:/home";
+        return "forward:/employee/leaveList/"+id;
     }
 }
