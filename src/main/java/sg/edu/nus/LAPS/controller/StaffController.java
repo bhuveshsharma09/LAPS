@@ -1,5 +1,8 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
@@ -24,8 +28,9 @@ public class StaffController {
     EmployeeService employeeService;
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
-        System.out.println(id);
-        model.addAttribute("leaveList", leaveApplicationService.findAllLeaves(id));
+        List<LeaveApplication> list = new ArrayList<LeaveApplication>();
+        list.addAll(leaveApplicationService.findAllLeaves(id));
+        model.addAttribute("leaveList", list);
         return "leaveList";
     }
     @RequestMapping("/addLeave/{id}")
@@ -38,8 +43,10 @@ public class StaffController {
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
     public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
         LA.setEmployee(employee);
+        LA.setApprovalStatus(ApprovalStatus.APPLIED);
         Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
+
         return "forward:/employee/leaveList/"+id;
     }
 

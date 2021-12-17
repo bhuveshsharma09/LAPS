@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,6 +47,8 @@ public class LeaveApplication {
 	private String remarks; //4
 	private String coveringEmp; //5 
 	private String contactDetails; //6 
+	@Column(name="approvalStatus",columnDefinition = "ENUM('APPLIED', 'UPDATED', 'CANCELLED', 'APPROVED', 'DELETED', 'REJECTED')")
+	@Enumerated(EnumType.STRING)
 	private ApprovalStatus approvalStatus; //7
 
 	
