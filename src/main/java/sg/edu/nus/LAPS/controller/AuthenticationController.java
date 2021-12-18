@@ -2,7 +2,6 @@ package sg.edu.nus.LAPS.controller;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.nus.LAPS.model.Employee;
-import sg.edu.nus.LAPS.model.Role;
 import sg.edu.nus.LAPS.model.UserCredentials;
 import sg.edu.nus.LAPS.repo.EmployeeRepository;
 import sg.edu.nus.LAPS.services.UserCredentialsService;
@@ -105,17 +103,18 @@ public class AuthenticationController {
 
             // to understand the role of user who just logged in
             // the role can help to allow certain services
-            UserCredentials u = userCredentialsService.findByUserId(userCredentials1.getUserId());
-            List<Role> rolesList= u.getRoles();
+//            UserCredentials u = userCredentialsService.findByUserId(userCredentials1.getUserId());
+//            List<Role> rolesList= u.getRoles();
 
             // prepare data to send to front end
-            model.addAttribute("username",userCredentials1.getUsername());
+//            model.addAttribute("username",userCredentials1.getUsername());
             // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
-            model.addAttribute("subordinates",subordinates);
-            model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
-            model.addAttribute("id", u.getEmployeeId());
+//            model.addAttribute("subordinates",subordinates);
+//            model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
+//            model.addAttribute("id", userCredentials1.getEmployeeId());
 
             // start the Home page
+            // return
             return "home";
 
         }

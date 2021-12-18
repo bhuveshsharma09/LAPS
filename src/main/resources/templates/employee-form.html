@@ -22,6 +22,11 @@
 			<p th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></p>
 		</fieldset>
 		
+		<fieldset>
+			Manager ID: <input type="number" th:field="*{managerId}">
+			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
+		</fieldset>
+		
 		
 		<fieldset>
 			Annual Leave Entitlement: <input type="number" th:field="*{annualLeaveCount}">

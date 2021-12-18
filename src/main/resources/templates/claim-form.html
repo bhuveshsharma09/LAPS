@@ -6,30 +6,30 @@
 </head>
 <body>
 <H1>Make a claim</H1>
-<form action="#" th:object="${claim}" th:action="@{/Claim/save}"method="post">
+<form action="#" th:object="${claim}" th:action="@{/Claim/save}">
 
     <fieldset>
-        Full Name: <input type="text" th:field="*{overtimeDate}">
+        status: <input th:field="*{approvalStatus}">
+
+    </fieldset>
+    <fieldset>
+        Overtime Date: <input type="date" th:field="*{overtimeDate}">
 
     </fieldset>
 
     <fieldset>
-        Position: <input type="text" th:field="*{jobTitle}">
-
-    </fieldset>
-
-
-    <fieldset>
-        Annual Leave Entitlement: <input type="number" th:field="*{annualLeaveCount}">
+        Over time hours: <input type="number" th:field="*{hoursWorked}">
     </fieldset>
 
     <fieldset>
-        Medical Leave Entitlement: <input type="number" th:field="*{medicalLeaveCount}">
+        Eligible claim: <input type="number" th:field="*{eligibleClaim}">
     </fieldset>
 
     <fieldset>
-        Compensation Leave Entitlement:<input type="number" th:field="*{compensationLeaveCount}">
+        Remarks: <input type="text" th:field="*{remarks}">
     </fieldset>
+
+
 
     <fieldset>
         <input type="submit" value="Save" /> &nbsp; &nbsp; <input

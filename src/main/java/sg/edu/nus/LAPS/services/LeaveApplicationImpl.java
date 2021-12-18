@@ -34,5 +34,10 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     public List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,String status) {
         
         return leaveApplicationRepository.findAllLeavesOfEmployeeByManagerIdWithStatus(mid,status);
+    
+    @Override
+    public List<LeaveApplication> findPastLeavesByEmployeeId(Integer id) {
+        List<LeaveApplication> leaveApplication= leaveApplicationRepository.findPastLeavesByEmployeeId(id);
+        return leaveApplication;
     }
 }

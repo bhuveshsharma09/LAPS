@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<h2>Employee Leave History</h2>
+		<table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    <thead>
+    <tr>
+        <th >Leave Id</th>
+        <th>from date</th>
+        <th>to date</th>
+        <th>leave type</th>
+        <th>remark</th>
+        <th>contact detail</th>
+        <th>Status</th>
+
+    </tr>
+    </thead>
+    
+    <tbody>
+<tr th:each="leave: ${leaveHistory}">
+    <td th:text="${leave.leaveId}" />
+    <td th:text="${leave.fromDate}" />
+    <td th:text="${leave.toDate}" />
+    <td th:text="${leave.leaveType.leaveCode}" />
+    <td th:text="${leave.remarks}" />
+    <td th:text="${leave.contactDetails}" />
+    <td th:text="${leave.approvalStatus}" />-->
+
+</tr>
+    </tbody>
+
+</table>
+</body>

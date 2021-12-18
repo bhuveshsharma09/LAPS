@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View All Employees</title>
+    <title>List of Employees</title>
 </head>
 
 
@@ -12,15 +12,21 @@
 	<!--<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 -->
-	<h1>Employee List</h1>
+	<h1>Hey Admin, here's where you manage all employees</h1>
 	<!-- Add Hyperlink -->
+	
+	<h4>Add a new employee via the link below.</h4>
 	<a href="employee-form.html" th:href="@{/employee/add}">Add Employee</a>
 
-	<h2 th:if="${not #lists.isEmpty(employees)}">Employee List</h2>
+	<h4 th:if="${not #lists.isEmpty(employees)}">
+	Edit or delete an employee using the options available below.</h4>
+	
 	<table th:if="${not #lists.isEmpty(employees)}" >
 		<tr >
 			<th >Employee ID</th>
 			<th >Name</th>
+			<th >Position</th>
+			<th >Manager ID</th>
 
 			<th >Edit Employee</th>
 			<th >Delete Employee</th>
@@ -28,13 +34,17 @@
 		<tr th:each="employee:${employees}" class="table-row">
 			<td th:text="${employee.employeeId}">ID</td>
 			<td th:text="${employee.name}">Name</td>
+			<td th:text=${employee.jobTitle}>Position</td>
+			<td th:text=${employee.managerId}>Manager ID</td>
 
+		<td><a href="employee-edit.html"
+				th:href="@{/employee/edit/}+${employee.employeeId}">Edit</a>
+		</td>
+		<td><a href="employee-delete.html"
+				th:href="@{/employee/delete/}+${employee.employeeId}">Delete</a>
+		</td>
 
 		</tr>
-
-
-
-
 
 	</table>
     <br/>

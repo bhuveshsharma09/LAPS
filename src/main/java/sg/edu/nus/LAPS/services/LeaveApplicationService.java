@@ -13,4 +13,6 @@ public interface LeaveApplicationService {
     LeaveApplication saveLeaveApplication(LeaveApplication LA);
 
     List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,String status);
+    
+    List<LeaveApplication> findPastLeavesByEmployeeId(Integer id);
 }
