@@ -31,6 +31,7 @@ public class StaffController {
     EmployeeService employeeService;
     @Autowired
     LeaveTypeService leaveTypeService;
+
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
@@ -54,12 +55,6 @@ public class StaffController {
         return "home";
     }
 
-	@RequestMapping(value = "/claim")
-	    public String applyClaim(Model model)
-	    {
-	        model.addAttribute("claim",new Claim());
-	        return "claim-form";
-	    }
 
 	@RequestMapping(value = "/history")
 	public String LeaveHistory(HttpSession session, Model model) {
@@ -75,7 +70,4 @@ public class StaffController {
 		}
 		return "login";
 	}
-
-
-
 }
