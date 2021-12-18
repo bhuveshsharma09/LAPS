@@ -1,11 +1,13 @@
 package sg.edu.nus.LAPS.repo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 
 public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication, Integer> {
@@ -25,4 +27,11 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 
     @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 3", nativeQuery = true)
     List<LeaveApplication> findPastLeavesByEmployeeId(@Param("eid") int eid);
+    
+    List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatus(Integer employeeId, ApprovalStatus approvalStatus);
+    
+    @Query("select leaves from LeaveApplication leaves where leaves.employee.employeeId = :employeeId "
+    		+ "and leaves.approvalStatus = :approvalStatus "
+    		+ "and leaves.fromDate = :inputDate or leaves.fromDate > :inputDate")
+    List<LeaveApplication> findUpcomingLeaves(@Param("employeeId") Integer employeeId, @Param("approvalStatus") ApprovalStatus approvalStatus, @Param("inputDate") Date inputDate);
 }
