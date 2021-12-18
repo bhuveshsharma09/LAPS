@@ -44,6 +44,7 @@ public class StaffController {
 			return "leavehistory";
 		}
 		return "login";
+	}
 
 
 
