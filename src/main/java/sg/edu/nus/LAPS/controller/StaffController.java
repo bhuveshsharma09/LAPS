@@ -49,7 +49,7 @@ public class StaffController {
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
         Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
-        return "forward:/employee/leaveList/"+id;
+        return "home";
     }
 
 @RequestMapping(value = "/claim")

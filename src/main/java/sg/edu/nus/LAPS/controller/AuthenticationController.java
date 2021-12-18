@@ -83,18 +83,18 @@ public class AuthenticationController {
 
 
             //---> this needs to be worked on. for now the results are null<-----
-            ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository
-                    .findEmployeesByManagerId
-                            (userCredentials1
-                                    .getEmployee()
-                                    .getEmployeeId());
+            // ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository
+            //         .findEmployeesByManagerId
+            //                 (userCredentials1
+            //                         .getEmployee()
+            //                         .getEmployeeId());
 
             sessionController.setUserCredentials(userCredentials1);
             sessionController.setEmployee(userCredentials1.getEmployee());
-			if (subordinates != null) {
-				sessionController.setSubordinates(subordinates);
-
-			}
+            ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository.findEmployeesByManager_EmployeeId(userCredentials1.getEmployee().getEmployeeId());
+            if (subordinates != null) {
+                sessionController.setSubordinates(subordinates);
+            }
             System.out.println("printing subordinate names");
             subordinates.forEach(games -> System.out.println(games.getName()));
 
@@ -113,7 +113,7 @@ public class AuthenticationController {
             // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
             model.addAttribute("subordinates",subordinates);
             model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
-            model.addAttribute("id", userCredentials1.getEmployeeId());
+            model.addAttribute("id", u.getEmployeeId());
 
             // start the Home page
             return "home";
