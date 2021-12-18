@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+	
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-<h1>Welcome <span th:text="${username}"></span></h1>
 
-<h2>Services available for : <span th:text="${roletitle}"></span> are </h2>
+<h1>Welcome <span th:text="${session.userSession.userCredentials.username}"></span></h1>
+
+<h2>Services available for: <span th:each="role:${session.userSession.userCredentials.roles}" th:text="${role.roleDesc} + ' '"></span></h2>
 
 
 
-<h2>sub ordinates</h2>
+<h2>Subordinates</h2>
 
 <table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
     <thead>
     <tr>
-        <th >Emp Id</th>
+        <th>Employee Id</th>
         <th>Employee name</th>
-        <th>Anaual leave count</th>
-        <th>mdeical leave count</th>
-        <th>comp leave count</th>
-        <th>job title</th>
+        <th>Annual leave count</th>
+        <th>Medical leave count</th>
+        <th>Compensation leave count</th>
+        <th>Job Title</th>
 
 
     </tr>
     </thead>
 <tbody>
-<tr th:each="subordinate: ${subordinates}">
+<tr th:each="subordinate: ${session.userSession.subordinates}">
     <td th:text="${subordinate.employeeId}" />
     <td th:text="${subordinate.name}" />
     <td th:text="${subordinate.annualLeaveCount}" />
@@ -40,7 +42,7 @@
     <td> <a href="/employee/leaveList/+${subordinate.employeeId}" >Manage Leave entitlement</a><td  />
 -->
 
-    <td><a th:href="@{/employee/leaveList/{id}(id=${subordinate.employeeId})}">view</a></td>
+    <td><a th:href="@{/manager/leavelist/{id}(id=${subordinate.employeeId})}">view</a></td>
 
 
 </tr>
@@ -49,10 +51,10 @@
 
 
 
-<h3>-- services --</h3>
-
-
-<div th:if="${roletitle} == ADMIN">
+<h3>-- Services --</h3>
+ 
+<div th:each="role:${session.userSession.userCredentials.roles}">
+<div th:if="${role.roleDesc == 'ADMIN'}">
     <br>
     <a href="/onLeave" >Employees on leave (Movement Register)</a>
     <br>
@@ -67,22 +69,7 @@
 </div>
 
 
-<div th:if="${roletitle} == MANAGER">
-    <h3>STAFF services</h3>
-    <br>
-    <a href="/onLeave" >Employees on leave (Movement Register)</a>
-    <br>
-    <a href="/onLeave" >Submit leave application</a>
-    <br>
-    <a href="/onLeave" >Manage leave application</a>
-    <br>
-    <a href="/employee/claim" >submit Claim compensation</a>
-    <br>
-
-    <a href="/onLeave" >manage Claim compensation</a>
-    <br>
-    <a th:href="@{/employee/leaveList/}+${id}" >View personal leave history </a>
-    <br>
+<div th:if="${role.roleDesc == 'MANAGER'}">
     <h3>Manager services</h3>
     <a href="/onLeave" >View Applications from approval </a>
     <br>
@@ -94,22 +81,21 @@
     <br>
 </div>
 
-<div th:if="${roletitle} == STAFF">
-    <br>
+<div th:if="${role.roleDesc == 'STAFF'}">
+	<h3>Staff services</h3>
     <a href="/onLeave" >Employees on leave (Movement Register)</a>
     <br>
     <a href="/onLeave" >Submit leave application</a>
     <br>
     <a href="/onLeave" >Manage leave application</a>
     <br>
-    <a href="/employee/claim" >submit Claim compensation</a>
+    <a href="/onLeave" >Submit Claim compensation</a>
     <br>
-    <a href="/onLeave" >manage Claim compensation</a>
+    <a href="/onLeave" >Manage Claim compensation</a>
     <br>
-    <a th:href="@{/employee/leaveList/}+${id}" >View personal leave history </a>
+    <a th:href="@{/employee/leaveList/}+${session.userSession.employee.employeeId}" >View personal leave history </a>
     <br>
-    <a href="/employee/history" >View Leave History</a>
-    <br>
+</div>
 </div>
 
 

@@ -105,17 +105,18 @@ public class AuthenticationController {
 
             // to understand the role of user who just logged in
             // the role can help to allow certain services
-            UserCredentials u = userCredentialsService.findByUserId(userCredentials1.getUserId());
-            List<Role> rolesList= u.getRoles();
+//            UserCredentials u = userCredentialsService.findByUserId(userCredentials1.getUserId());
+//            List<Role> rolesList= u.getRoles();
 
             // prepare data to send to front end
-            model.addAttribute("username",userCredentials1.getUsername());
+//            model.addAttribute("username",userCredentials1.getUsername());
             // rolesList.forEach(games -> System.out.println(games.getRoleTitle()));
-            model.addAttribute("subordinates",subordinates);
-            model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
-            model.addAttribute("id", userCredentials1.getEmployeeId());
+//            model.addAttribute("subordinates",subordinates);
+//            model.addAttribute("roletitle",rolesList.get(0).getRoleDesc());
+//            model.addAttribute("id", userCredentials1.getEmployeeId());
 
             // start the Home page
+            // return
             return "home";
 
         }
