@@ -11,17 +11,11 @@
 
 <h1>Welcome <span th:text="${session.userSession.userCredentials.username}"></span></h1>
 
-<<<<<<< HEAD
-<h1 th:text="${session.userSession.employee.employeeId}"></h1>
-<h1 th:text="${id}"></h1>
-<h2>sub ordinates</h2>
-=======
 <h2>Services available for: <span th:each="role:${session.userSession.userCredentials.roles}" th:text="${role.roleDesc} + ' '"></span></h2>
 
 
 
 <h2>Subordinates</h2>
->>>>>>> master
 
 <table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
     <thead>
@@ -81,7 +75,7 @@
     <br>
     <a href="/onLeave" >View subordinate leave history</a>
     <br>
-    <a th:href="@{/manager/request/}+${id}" >Approve or reject application request </a>
+    <a th:href="@{/manager/request/}+${session.userSession.employee.employeeId}" >Approve or reject application request </a>
     <br>
     <a href="/onLeave" >Approve or reject claim request </a>
     <br>
@@ -91,7 +85,7 @@
 	<h3>Staff services</h3>
     <a href="/onLeave" >Employees on leave (Movement Register)</a>
     <br>
-    <a th:href="@{/employee/addLeave/}+${id}" >Submit leave application</a>
+    <a th:href="@{/employee/addLeave/}+${session.userSession.employee.employeeId}" >Submit leave application</a>
     <br>
     <a href="/onLeave" >Manage leave application</a>
     <br>

@@ -1,9 +1,8 @@
 package sg.edu.nus.LAPS.services;
 
-import sg.edu.nus.LAPS.model.Claim;
-import sg.edu.nus.LAPS.model.Employee;
-
 import java.util.List;
+
+import sg.edu.nus.LAPS.model.Claim;
 
 public interface ClaimService {
 

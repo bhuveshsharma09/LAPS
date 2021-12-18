@@ -49,9 +49,9 @@ public class StaffController {
     public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
         LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
-        Integer id = employee.getEmployeeId();
+        // Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
-        return "forward:/employee/leaveList/"+id;
+        return "home";
     }
 
 	@RequestMapping(value = "/claim")
