@@ -31,8 +31,8 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     }
 
     @Override
-    public List<LeaveApplication> findAllLeavesOfEmployeeByManagerId(Integer mid) {
+    public List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,String status) {
         
-        return leaveApplicationRepository.findAllLeavesOfEmployeeByManagerId(mid);
+        return leaveApplicationRepository.findAllLeavesOfEmployeeByManagerIdWithStatus(mid,status);
     }
 }
