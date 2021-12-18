@@ -74,8 +74,8 @@ public class AuthenticationController {
                 return "login";
             }
 
-           // System.out.println("Will render the home page now");
-           // System.out.println(userCredentials1.getEmployeeId());
+            // System.out.println("Will render the home page now");
+            // System.out.println(userCredentials1.getEmployeeId());
 
             // adding data in the session
 

@@ -16,8 +16,8 @@
 <!-- Add Hyperlink -->
 <a href="employee-form.html" th:href="@{/claims/add}">Add claim</a>
 
-<h2 th:if="${not #lists.isEmpty(claims)}">claim List</h2>
-<table th:if="${not #lists.isEmpty(claims)}" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+<h2 th:if="${not #lists.isEmpty(claimList)}">claim List</h2>
+<table th:if="${not #lists.isEmpty(claimList)}" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
     <tr >
         <th >claim ID</th>
         <th >approval status</th>
@@ -29,7 +29,7 @@
         <th >Edit claim</th>
         <th >Delete claim</th>
     </tr>
-    <tr th:each="claim:${claims}" class="table-row">
+    <tr th:each="claim:${claimList}" class="table-row">
         <td th:text="${claim.claimId}">ID</td>
         <td th:text="${claim.approvalStatus}">Name</td>
         <td th:text="${claim.eligibleClaim}">ID</td>
