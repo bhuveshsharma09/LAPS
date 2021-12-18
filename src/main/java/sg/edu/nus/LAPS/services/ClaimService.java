@@ -11,6 +11,8 @@ public interface ClaimService {
 
     public List<Claim> findAllClaims();
 
+    public Claim findClaimById(Integer id);
+
     public List<Claim> findClaimByEmployeeId(Integer employeeId);
 
     public Claim createClaim(Claim claim);

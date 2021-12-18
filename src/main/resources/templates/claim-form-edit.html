@@ -6,7 +6,7 @@
 </head>
 <body>
 <H1>Make a claim</H1>
-<form action="#" th:object="${claim}" th:action="@{/Claim/save}">
+<form action="#" th:object="${claim}"   th:action="@{/Claim/edit/}+${claim.claimId}" method="post">
 
 
     <fieldset>

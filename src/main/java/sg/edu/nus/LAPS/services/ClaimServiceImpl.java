@@ -27,6 +27,12 @@ public class ClaimServiceImpl implements ClaimService{
         return claimRepository.findAll();
     }
 
+    @Override
+    public Claim findClaimById(Integer id) {
+       // return claimRepository.findClaimById(id);
+        return claimRepository.findById(id).orElse(null);
+    }
+
     // filter claims, based on Employee Id
     @Override
     public List<Claim> findClaimByEmployeeId(Integer employeeId) {
@@ -45,6 +51,9 @@ public class ClaimServiceImpl implements ClaimService{
     @Override
     public Claim changeClaim(Claim claim) {
         return claimRepository.saveAndFlush(claim);
+
+
+        //return null;
     }
 
     // remove a row from Claim table

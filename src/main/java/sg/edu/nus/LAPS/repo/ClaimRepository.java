@@ -24,4 +24,12 @@ public interface ClaimRepository extends JpaRepository<Claim, Integer> {
     @Query("SELECT claims from Claim claims WHERE claims.employee.employeeId =: employeeId " +
             "AND (claims.approvalStatus ='APPLIED' OR claims.approvalStatus = 'UPDATED')")
     public List<Claim> findPendingClaimsByEmployeeEmployeeId(@Param("employeeId") Integer employeeId);
+
+    @Query("SELECT c from Claim c where c.claimId =: id")
+    public Claim findClaimById(@Param("id") Integer id);
+
+    @Query("SELECT e FROM Employee e where e.employeeId = :id")
+    Employee findEmployeeById(@Param("id") String id);
+
+
 }

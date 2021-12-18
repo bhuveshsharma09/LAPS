@@ -14,7 +14,7 @@
 -->
 <h1>claim List</h1>
 <!-- Add Hyperlink -->
-<a href="employee-form.html" th:href="@{/claims/add}">Add claim</a>
+<!--<a href="employee-form.html" th:href="@{/claims/add}">Add claim</a>-->
 
 <h2 th:if="${not #lists.isEmpty(claimList)}">claim List</h2>
 <table th:if="${not #lists.isEmpty(claimList)}" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
@@ -31,11 +31,37 @@
     </tr>
     <tr th:each="claim:${claimList}" class="table-row">
         <td th:text="${claim.claimId}">ID</td>
+
+
+
+
         <td th:text="${claim.approvalStatus}">Name</td>
         <td th:text="${claim.eligibleClaim}">ID</td>
         <td th:text="${claim.hoursWorked}">Name</td>
         <td th:text="${claim.overtimeDate}">ID</td>
         <td th:text="${claim.remarks}">Name</td>
+
+
+<!--
+        <td><a th:href="@{/Claim/edit/}+${claim.claimId}" >
+                update</a></td>-->
+
+        <td>
+            <span th:if="${claim.approvalStatus == 'DELETED'}"> No actions  </span>
+            <span th:unless="${claim.approvalStatus == 'DELETED'}"><a th:href="@{/Claim/edit/}+${claim.claimId}" >
+                update</a></span>
+        </td>
+        <td>
+            <span th:if="${claim.approvalStatus == 'DELETED'}">  No actions </span>
+            <span th:unless="${claim.approvalStatus == 'DELETED'}"><a th:href="@{/Claim/delete/}+${claim.claimId}" >
+            delete</a></span>
+        </td>
+
+<!--
+
+        <td><a th:href="@{/Claim/delete/}+${claim.claimId}" >
+            delete</a></td>
+-->
 
 
     </tr>
@@ -47,6 +73,7 @@
 </table>
 <br/>
 <!--	<div th:replace="fragments/general.html :: footer"></div>-->
+<a th:href="@{/authenticate}">Back</a>
 
 </body>
 </html>
