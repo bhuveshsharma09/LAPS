@@ -11,4 +11,6 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findAllById(Integer id);
 
     LeaveApplication saveLeaveApplication(LeaveApplication LA);
+
+    List<LeaveApplication> findAllLeavesOfEmployeeByManagerId(Integer mid);
 }

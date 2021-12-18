@@ -29,4 +29,10 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     public LeaveApplication saveLeaveApplication(LeaveApplication LA) {
         return leaveApplicationRepository.saveAndFlush(LA);
     }
+
+    @Override
+    public List<LeaveApplication> findAllLeavesOfEmployeeByManagerId(Integer mid) {
+        
+        return leaveApplicationRepository.findAllLeavesOfEmployeeByManagerId(mid);
+    }
 }
