@@ -18,6 +18,8 @@
             <th>To Date</th>
             <th>Employee Id</th>
             <th>Leave Type</th>
+            <th>Approve</th>
+        	<th>Reject</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +33,8 @@
         <td th:text="${applied.toDate}"></td>
         <td th:text="${applied.employee.employeeId}"></td>
         <td th:text="${applied.leaveType.leaveName}"></td>
+        <td><a th:href="@{/manager/approveLeave/}+${applied.leaveId}">Approve</a> </td>
+		<td><a th:href="@{/manager/rejectLeave/}+${applied.leaveId}">Reject</a></td>
     </tr>
         </tbody>
     

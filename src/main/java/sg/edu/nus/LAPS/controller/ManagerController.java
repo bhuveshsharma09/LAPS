@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -60,5 +61,23 @@ public class ManagerController {
 		historicalLeaveList.removeAll(upcomingLeaveList);
 		model.addAttribute("historicalLeaveList", historicalLeaveList);
 		return "manager-leavelist";
+	}
+	
+	@RequestMapping("/approveLeave/{id}")
+	public String approveLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
+    	
+    	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+    	leaveAppToChange.setApprovalStatus(ApprovalStatus.APPROVED);
+    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+		return "home";
+	}
+	
+	@RequestMapping("/rejectLeave/{id}")
+	public String rejectLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
+    	
+    	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+    	leaveAppToChange.setApprovalStatus(ApprovalStatus.REJECTED);
+    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+		return "home";
 	}
 }
