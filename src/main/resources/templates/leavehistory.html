@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
 	<h2>Employee Leave History</h2>
 		<table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
@@ -25,7 +30,7 @@
     <td th:text="${leave.leaveType.leaveCode}" />
     <td th:text="${leave.remarks}" />
     <td th:text="${leave.contactDetails}" />
-    <td th:text="${leave.approvalStatus}" />-->
+    <td th:text="${leave.approvalStatus}" />
 
 </tr>
     </tbody>
