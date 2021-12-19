@@ -1,36 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+
     <title>make a claim</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+    </style>
+
 </head>
 <body>
-<H1>Make a claim</H1>
+<h1><span th:text="#{Site.SubmitClaimTitle}"></h1>
 <form action="#" th:object="${claim}" th:action="@{/Claim/save}">
 
+<table>
+    <tbody>
+    <tr>
+        <td><span th:text="#{Label.claimOverTimeDate}"></span></td>
+        <td>
+                <input  class="w3-input w3-padding-16"  type="text" th:field="*{overtimeDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(claim.overtimeDate,'dd-MM-yyyy')}">
+        </td>
+        <td th:if="${#fields.hasErrors('overtimeDate')}" th:errors="*{overtimeDate}"></td>
+    </tr>
 
-    <fieldset>
-        Overtime Date: <input type="text" th:field="*{overtimeDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(claim.overtimeDate,'dd-MM-yyyy')}">
-    </fieldset>
-
-    <fieldset>
-        Over time hours: <input type="number" th:field="*{hoursWorked}">
-    </fieldset>
-
-    <fieldset>
-        Eligible claim: <input type="number" th:field="*{eligibleClaim}">
-    </fieldset>
-
-    <fieldset>
-        Remarks: <input type="text" th:field="*{remarks}">
-    </fieldset>
+ <tr>
+     <td><span th:text="#{Label.claimHoursWorked}"></span></td>
+     <td>
+         <input  class="w3-input w3-padding-16"  type="number" th:field="*{hoursWorked}">
+     </td>
+     <td th:if="${#fields.hasErrors('hoursWorked')}" th:errors="*{hoursWorked}"></td>
+ </tr>
 
 
-    <fieldset>
-        <input type="submit" value="Save" /> &nbsp; &nbsp; <input
-            type="reset" value="Reset" />
-    </fieldset>
+    <tr>
+        <td><span th:text="#{Label.claimEligibleClaim}"></span></td>
+        <td>
+            <input  class="w3-input w3-padding-16"  type="number" th:field="*{eligibleClaim}">
+        </td>
+        <td th:if="${#fields.hasErrors('eligibleClaim')}" th:errors="*{eligibleClaim}"></td>
+    </tr>
 
+
+    <tr>
+        <td><span th:text="#{Label.claimRemark}"></span></td>
+        <td>
+             <input  class="w3-input w3-padding-16"  type="text" th:field="*{remarks}">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td><span th:text="#{Label.addEntry}"></span></td>
+        <td>
+            <input class="w3-button w3-light-grey w3-section"  type="submit" value="Save" /> &nbsp; &nbsp;
+        </td>
+    </tr>
+
+    </tbody>
+</table>
 
 </form>
 </body>
