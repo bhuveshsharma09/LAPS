@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
 
@@ -31,7 +32,7 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     }
 
     @Override
-    public List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,String status) {
+    public List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,ApprovalStatus status) {
         
         return leaveApplicationRepository.findAllLeavesOfEmployeeByManagerIdWithStatus(mid,status);
     }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table th:if="${not #lists.isEmpty(appliedStatusList)}" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+        <thead>
+        <tr>
+            <th >Leave Id</th>
+            <th>Approval Status</th>
+            <th>Contact details</th>
+            <th>Covering Employee</th>
+            <th>From Date</th>
+            <th>Remarks</th>
+            <th>To Date</th>
+            <th>Employee Id</th>
+            <th>Leave Type</th>
+        </tr>
+        </thead>
+        <tbody>
+    <tr th:each="applied: ${appliedStatusList}">
+        <td th:text="${applied.leaveId}"></td>
+        <td th:text="${applied.approvalStatus}"></td>
+        <td th:text="${applied.coveringEmp}"></td>
+        <td th:text="${applied.fromDate}"></td>
+        <td th:text="${applied.remarks}"></td>
+        <td th:text="${applied.toDate}"></td>
+        <td th:text="${applied.employee.employeeId}"></td>
+        <td th:text="${applied.leaveType.leaveName}"></td>
+    </tr>
+        </tbody>
+    
+    </table>
+</body>
+</html>

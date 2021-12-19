@@ -26,10 +26,10 @@ public class ManagerController {
 
     @RequestMapping("/request/{id}")
     public String getEmployeeLeaves(Model model,@PathVariable Integer id){
-        String status = "APPLIED";
+        ApprovalStatus status = ApprovalStatus.APPLIED;
         model.addAttribute("appliedStatusList", leaveApplicationService.findAllLeavesOfEmployeeByManagerIdWithStatus(id,status));
         
-        return "approval-form";
+        return "approval-list";
     }
     
 	@RequestMapping("/leavelist/{id}")

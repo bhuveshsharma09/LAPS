@@ -2,6 +2,7 @@ package sg.edu.nus.LAPS.services;
 
 import java.util.List;
 
+import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 
 public interface LeaveApplicationService {
@@ -12,7 +13,7 @@ public interface LeaveApplicationService {
 
     LeaveApplication saveLeaveApplication(LeaveApplication LA);
 
-    List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,String status);
+    List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,ApprovalStatus status);
     
     List<LeaveApplication> findPastLeavesByEmployeeId(Integer id);
 }
