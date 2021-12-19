@@ -14,8 +14,8 @@
             <th>Contact details</th>
             <th>Covering Employee</th>
             <th>From Date</th>
-            <th>Remarks</th>
             <th>To Date</th>
+            <th>Remarks</th>
             <th>Employee Id</th>
             <th>Leave Type</th>
             <th>Approve</th>
@@ -24,16 +24,16 @@
         </thead>
         <tbody>
     <tr th:each="applied: ${appliedStatusList}">
-        <td th:text="${applied.leaveId}"></td>
-        <td th:text="${applied.contactDetails}"></td>
+        <td><a th:href="@{/manager/viewLeaveDetails/}+${applied.leaveId}"><span th:text="${applied.leaveId}">View Details</span></a></td>
         <td th:text="${applied.approvalStatus}"></td>
+        <td th:text="${applied.contactDetails}"></td>
         <td th:text="${applied.coveringEmp}"></td>
         <td th:text="${applied.fromDate}"></td>
-        <td th:text="${applied.remarks}"></td>
         <td th:text="${applied.toDate}"></td>
+        <td th:text="${applied.remarks}"></td>
         <td th:text="${applied.employee.employeeId}"></td>
         <td th:text="${applied.leaveType.leaveName}"></td>
-        <td><a th:href="@{/manager/approveLeave/}+${applied.leaveId}">Approve</a> </td>
+        <td><a th:href="@{/manager/approveLeave/}+${applied.leaveId}">Approve</a></td>
 		<td><a th:href="@{/manager/rejectLeave/}+${applied.leaveId}">Reject</a></td>
     </tr>
         </tbody>

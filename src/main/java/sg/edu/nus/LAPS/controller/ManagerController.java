@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
+import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
+import sg.edu.nus.LAPS.services.EmployeeService;
 import sg.edu.nus.LAPS.services.LeaveApplicationService;
 
 @Controller
@@ -61,6 +63,18 @@ public class ManagerController {
 		historicalLeaveList.removeAll(upcomingLeaveList);
 		model.addAttribute("historicalLeaveList", historicalLeaveList);
 		return "manager-leavelist";
+	}
+	
+	@RequestMapping("/viewLeaveDetails/{id}")
+	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+    	
+    	LeaveApplication selectedLeave = leaveApplicationService.findSingleLeaveById(id);
+    	Employee selectedEmp = selectedLeave.getEmployee();
+    	
+    	model.addAttribute("selectedLeave", selectedLeave);
+    	model.addAttribute("employee", selectedEmp);
+    	
+		return "leaveDetailsForApproval";
 	}
 	
 	@RequestMapping("/approveLeave/{id}")
