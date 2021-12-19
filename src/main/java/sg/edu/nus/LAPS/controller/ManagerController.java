@@ -1,5 +1,7 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +32,15 @@ public class ManagerController {
 		ApprovalStatus updated = ApprovalStatus.UPDATED;
 		List<LeaveApplication> list = leaveApplicationService.findAllLeavesOfEmployeeByManagerIdWithStatus(id, applied);
 		list.addAll(leaveApplicationService.findAllLeavesOfEmployeeByManagerIdWithStatus(id, updated));
+		
+		// sort by employeeId
+		Collections.sort(list, new Comparator<LeaveApplication>() {
+			@Override
+			public int compare(LeaveApplication l1, LeaveApplication l2) {
+				return l1.getEmployee().getEmployeeId().compareTo(l2.getEmployee().getEmployeeId());
+			}
+		});
+		
         model.addAttribute("appliedStatusList", list);
         
 		
