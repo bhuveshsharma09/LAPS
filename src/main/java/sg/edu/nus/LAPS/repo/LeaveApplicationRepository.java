@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
+import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 
 public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication, Integer> {
@@ -34,4 +35,14 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     		+ "and leaves.approvalStatus = :approvalStatus "
     		+ "and leaves.fromDate = :inputDate or leaves.fromDate > :inputDate")
     List<LeaveApplication> findUpcomingLeaves(@Param("employeeId") Integer employeeId, @Param("approvalStatus") ApprovalStatus approvalStatus, @Param("inputDate") Date inputDate);
+
+    // find leave by leaveId
+    // required to send email for a particular levae id
+   // @Query("SELECT l from LeaveApplication l WHERE l.leaveId =: id")
+    //public LeaveApplication findLeaveApplicationByLeaveId(@Param("id") Integer id);
+
+    @Query("SELECT l FROM LeaveApplication l where l.leaveId = :id")
+    LeaveApplication findLeaveApplicationById(@Param("id") Integer id);
+
+
 }

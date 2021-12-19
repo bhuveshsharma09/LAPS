@@ -4,6 +4,8 @@ import java.util.List;
 
 import sg.edu.nus.LAPS.model.LeaveApplication;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 public interface LeaveApplicationService {
 
     List<LeaveApplication> findAllLeaves(Integer eid);
@@ -15,4 +17,6 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,String status);
     
     List<LeaveApplication> findPastLeavesByEmployeeId(Integer id);
+
+    LeaveApplication findLeaveByLeaveId(Integer id);
 }
