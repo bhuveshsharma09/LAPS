@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
@@ -11,6 +12,7 @@ import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.repo.ClaimRepository;
 import sg.edu.nus.LAPS.services.ClaimService;
+import sg.edu.nus.LAPS.validators.ClaimValidator;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
@@ -22,15 +24,29 @@ import java.util.List;
 @RequestMapping(value = "/Claim")
 @SessionAttributes(value = {"userSession"}, types = {SessionController.class}) //Session
 public class ClaimController {
-
     @Autowired
     EmailController emailController;
+
     @Autowired
     ClaimService claimService;
 
     @Autowired
     ClaimRepository claimRepository;
 
+    @Autowired
+    ClaimValidator claimValidator;
+
+    @InitBinder("claim")
+    private void initEmployeeBinder(WebDataBinder binder) {
+        binder.addValidators(claimValidator);
+    }
+
+
+    /*
+    * CRUD operations for Claim object
+    */
+
+    // add a new Claim object in
     @RequestMapping(value = "/new")
     public String getClaimForm(Model model)
     {
