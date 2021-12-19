@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
-import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.services.EmployeeService;
@@ -52,13 +53,8 @@ public class StaffController {
     public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
     	
     	LA.setEmployee(employee);
-        if (LA.getApprovalStatus() == null) {
-        	LA.setApprovalStatus(ApprovalStatus.APPLIED);
-        }
-        else {
-        	LA.setApprovalStatus(ApprovalStatus.UPDATED);
-        }
-        
+        LA.setApprovalStatus(ApprovalStatus.APPLIED);
+
         // Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
         return "home";
@@ -75,12 +71,36 @@ public class StaffController {
     }
     
     @RequestMapping(value = "/editLeave/{id}", method = RequestMethod.GET)
-	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute("employee") Employee employee) {
+	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	//model.addAttribute("leave", leaveAppToChange);
     	model.addAttribute("newLeave", leaveAppToChange);
 		
-		return "leaveForm";
+		return "leaveForm-edit";
+	}
+    
+    @RequestMapping(value = "/updateLeave/{id}")
+	public String updateLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute @Valid LeaveApplication LA, BindingResult bdgresult) {
+    	if(bdgresult.hasErrors())
+        {
+            return "leaveForm-edit";
+        }
+    	
+    	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+    	
+    	// update object attributes
+    	leaveAppToChange.setFromDate(LA.getFromDate());
+    	leaveAppToChange.setToDate(LA.getToDate());
+    	leaveAppToChange.setRemarks(LA.getRemarks());
+    	leaveAppToChange.setCoveringEmp(LA.getCoveringEmp());
+    	leaveAppToChange.setLeaveType(LA.getLeaveType());
+    	leaveAppToChange.setApprovalStatus(ApprovalStatus.UPDATED);
+    	// save changes
+    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+    	
+    	model.addAttribute("newLeave", leaveAppToChange);
+		
+		return "home";
 	}
     
     @RequestMapping("/deleteLeave/{id}")
