@@ -89,7 +89,7 @@ public class AuthenticationController {
 
             sessionController.setUserCredentials(userCredentials1);
             sessionController.setEmployee(userCredentials1.getEmployee());
-            ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository.findEmployeesByManager_EmployeeId(userCredentials1.getEmployee().getEmployeeId());
+            ArrayList<Employee> subordinates = (ArrayList<Employee>)employeeRepository.findEmployeesByManagerId(userCredentials1.getEmployee().getEmployeeId());
             if (subordinates != null) {
                 sessionController.setSubordinates(subordinates);
             }
