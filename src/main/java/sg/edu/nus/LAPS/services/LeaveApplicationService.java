@@ -10,10 +10,14 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findAllLeaves(Integer eid);
 
     List<LeaveApplication> findAllById(Integer id);
+    
+    LeaveApplication findSingleLeaveById(Integer leaveId);
 
     LeaveApplication saveLeaveApplication(LeaveApplication LA);
 
     List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,ApprovalStatus status);
     
     List<LeaveApplication> findPastLeavesByEmployeeId(Integer id);
+    
+    LeaveApplication deleteLeave(Integer id);
 }

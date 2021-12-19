@@ -89,7 +89,7 @@
     <a th:href="@{/employee/addLeave/}+${session.userSession.employee.employeeId}" >Submit leave application</a>
     <br>
     <br>
-    <a href="/onLeave" >Manage leave application</a>
+    <a th:href="@{/employee/manageLeave/}+${session.userSession.employee.employeeId}" >Manage leave application</a>
     <br>
     <br>
     <a href="/Claim/new" >Submit Claim compensation</a>

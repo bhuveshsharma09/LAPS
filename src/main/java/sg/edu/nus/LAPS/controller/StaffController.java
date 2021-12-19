@@ -39,6 +39,7 @@ public class StaffController {
         model.addAttribute("leaveList", list);
         return "leaveList";
     }
+    
     @RequestMapping("/addLeave/{id}")
     public String addLeave(Model model,@PathVariable("id") Integer id){
         LeaveApplication leaveApplication = new LeaveApplication();
@@ -46,14 +47,48 @@ public class StaffController {
         model.addAttribute("newLeave", leaveApplication);
         return "leaveForm";
     }
+    
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
     public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
-        LA.setEmployee(employee);
-        LA.setApprovalStatus(ApprovalStatus.APPLIED);
+    	
+    	LA.setEmployee(employee);
+        if (LA.getApprovalStatus() == null) {
+        	LA.setApprovalStatus(ApprovalStatus.APPLIED);
+        }
+        else {
+        	LA.setApprovalStatus(ApprovalStatus.UPDATED);
+        }
+        
         // Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
         return "home";
     }
+    
+    @RequestMapping("/manageLeave/{id}")
+    public String manageLeave(@PathVariable("id") Integer id, Model model){
+        List<LeaveApplication> list = new ArrayList<LeaveApplication>();
+        list.addAll(leaveApplicationService.findAllLeaves(id));
+        model.addAttribute("leaveList", list);
+        model.addAttribute("employee", employeeService.findEmployeeById(id));
+        
+        return "leaveManager";
+    }
+    
+    @RequestMapping(value = "/editLeave/{id}", method = RequestMethod.GET)
+	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute("employee") Employee employee) {
+    	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+    	//model.addAttribute("leave", leaveAppToChange);
+    	model.addAttribute("newLeave", leaveAppToChange);
+		
+		return "leaveForm";
+	}
+    
+    @RequestMapping("/deleteLeave/{id}")
+	public String deleteLeave(@PathVariable("id") Integer id, Model model) {
+		leaveApplicationService.deleteLeave(id);
+
+		return "home";
+	}
 
 
 	@RequestMapping(value = "/history")
