@@ -40,4 +40,12 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
         List<LeaveApplication> leaveApplication= leaveApplicationRepository.findPastLeavesByEmployeeId(id);
         return leaveApplication;
     }
+
+    @Override
+    public LeaveApplication findLeaveByLeaveId(Integer id) {
+        return leaveApplicationRepository.findLeaveApplicationById(id);
+    }
+
+
+
 }
