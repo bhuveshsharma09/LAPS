@@ -106,7 +106,15 @@ public class StaffController {
     @RequestMapping("/deleteLeave/{id}")
 	public String deleteLeave(@PathVariable("id") Integer id, Model model) {
 		leaveApplicationService.deleteLeave(id);
-
+		return "home";
+	}
+    
+    @RequestMapping("/cancelLeave/{id}")
+	public String cancelLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
+    	
+    	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+    	leaveAppToChange.setApprovalStatus(ApprovalStatus.CANCELLED);
+    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
 		return "home";
 	}
 
