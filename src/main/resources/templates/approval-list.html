@@ -23,6 +23,7 @@
         <tbody>
     <tr th:each="applied: ${appliedStatusList}">
         <td th:text="${applied.leaveId}"></td>
+        <td th:text="${applied.contactDetails}"></td>
         <td th:text="${applied.approvalStatus}"></td>
         <td th:text="${applied.coveringEmp}"></td>
         <td th:text="${applied.fromDate}"></td>
