@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
-import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.services.EmployeeService;
@@ -42,8 +41,11 @@ public class StaffController {
     @RequestMapping("/addLeave/{id}")
     public String addLeave(Model model,@PathVariable("id") Integer id){
         LeaveApplication leaveApplication = new LeaveApplication();
+        List<String> leaveType = leaveTypeService.findAllLeaveType();
         model.addAttribute("employee", employeeService.findEmployeeById(id));
         model.addAttribute("newLeave", leaveApplication);
+        model.addAttribute("leaveTypeValue", leaveType);
+        System.out.println(leaveType);
         return "leaveForm";
     }
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
