@@ -54,18 +54,16 @@ public class ManagerController {
         return "approval-list";
     }
     
-	@RequestMapping("/leavelist/{id}")
-	public String getAllLeaves(@PathVariable("id") Integer id, Model model) {
-		List<LeaveApplication> pendingLeaveList = leaveApplicationRepository.findLeavesByEmployee_employeeIdAndApprovalStatus(id, ApprovalStatus.APPLIED);
-		pendingLeaveList.addAll(leaveApplicationRepository.findLeavesByEmployee_employeeIdAndApprovalStatus(id, ApprovalStatus.UPDATED));
-		model.addAttribute("pendingLeaveList", pendingLeaveList);
+    @RequestMapping("/leavelist/{id}")
+	public String getAllLeaves(@PathVariable("id") Integer id, Model model,
+			@RequestParam(value="pageNumber", required=false, defaultValue="1") int pageNumber,
+			@RequestParam(value="size", required=false, defaultValue="5") int size) {
+		model.addAttribute("pendingLeaveList", leaveApplicationService.findLeavesByEmployee_employeeIdAndApprovalStatusIn(id, List.of(ApprovalStatus.APPLIED, ApprovalStatus.UPDATED)));
 		Date current = new Date();
-		List<LeaveApplication> upcomingLeaveList = leaveApplicationRepository.findUpcomingLeaves(id, ApprovalStatus.APPROVED, current);
+		List<LeaveApplication> upcomingLeaveList = leaveApplicationService.findUpcomingLeavesForEmployee(id, current);
 		model.addAttribute("upcomingLeaveList", upcomingLeaveList);
-		List<LeaveApplication> historicalLeaveList = leaveApplicationService.findAllLeaves(id);
-		historicalLeaveList.removeAll(pendingLeaveList);
-		historicalLeaveList.removeAll(upcomingLeaveList);
-		model.addAttribute("historicalLeaveList", historicalLeaveList);
+		model.addAttribute("historicalLeaveList", leaveApplicationService.findAllLeavesByEmployeeIdWithPage(id, pageNumber, size));
+		model.addAttribute("id", id);
 		return "manager-leavelist";
 	}
 	
