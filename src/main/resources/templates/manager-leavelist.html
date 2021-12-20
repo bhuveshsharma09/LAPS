@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+	<div class="container">
+    <div class="row">
+    <div class="col-lg-10 mt-5 mb-5">
+	<h3>Pending Leave Applications</h3>
+    <table id="posts" class="table table-bordered table-responsive-sm">
+        <thead>
+        <tr>
+            <th >Leave Id</th>
+            <th>Employee Id</th>
+            <th>from date</th>
+            <th>to date</th>
+            <th>leave type</th>
+            <th>remark</th>
+            <th>contact detail</th>
+            <th>Status</th>
+    
+        </tr>
+        </thead>
+        <tbody>
+    <tr th:each="leave: ${pendingLeaveList}">
+        <td th:text="${leave.leaveId}" />
+        <td th:text="${leave.employee.name}" />
+        <td th:text="${leave.fromDate}" />
+        <td th:text="${leave.toDate}" />
+        <td th:text="${leave.leaveType.leaveCode}" />
+        <td th:text="${leave.remarks}" />
+        <td th:text="${leave.contactDetails}" />
+        <td th:text="${leave.approvalStatus}" />
+    </tr>
+        </tbody>
+    
+    </table>
+    <h3>Upcoming Approved Leave Dates</h3>
+    <table id="posts" class="table table-bordered table-responsive-sm">
+        <thead>
+        <tr>
+            <th >Leave Id</th>
+            <th>Employee Id</th>
+            <th>from date</th>
+            <th>to date</th>
+            <th>leave type</th>
+            <th>remark</th>
+            <th>contact detail</th>
+            <th>Status</th>
+    
+        </tr>
+        </thead>
+        <tbody>
+    <tr th:each="leave: ${upcomingLeaveList}">
+        <td th:text="${leave.leaveId}" />
+        <td th:text="${leave.employee.name}" />
+        <td th:text="${leave.fromDate}" />
+        <td th:text="${leave.toDate}" />
+        <td th:text="${leave.leaveType.leaveCode}" />
+        <td th:text="${leave.remarks}" />
+        <td th:text="${leave.contactDetails}" />
+        <td th:text="${leave.approvalStatus}" />
+    </tr>
+        </tbody>
+    
+    </table>
+    
+    <h3>Application History</h3>
+
+    <table id="posts" class="table table-bordered table-responsive-sm">
+        <thead>
+        <tr>
+            <th>Leave Id</th>
+            <th>Employee Id</th>
+            <th>from date</th>
+            <th>to date</th>
+            <th>leave type</th>
+            <th>remark</th>
+            <th>contact detail</th>
+            <th>Status</th>
+    
+        </tr>
+        </thead>
+        <tbody>
+    <tr th:each="leave: ${historicalLeaveList.page}">
+        <td th:text="${leave.leaveId}" />
+        <td th:text="${leave.employee.name}" />
+        <td th:text="${leave.fromDate}" />
+        <td th:text="${leave.toDate}" />
+        <td th:text="${leave.leaveType.leaveCode}" />
+        <td th:text="${leave.remarks}" />
+        <td th:text="${leave.contactDetails}" />
+        <td th:text="${leave.approvalStatus}" />
+    </tr>
+        </tbody>
+    
+    </table>
+
+    <nav aria-label="Page navigation" class="paging">
+    	<ul class="pagination" th:if="${historicalLeaveList.page.totalPages > 1}">
+    		<li class="page-item" th:classappend="${!historicalLeaveList.paging.isPrevEnabled()? 'disabled' : ''}">
+    			<a class="page-link" th:href="@{${id} + '?pageNumber=' + ${historicalLeaveList.paging.pageNumber - 1}}"
+                           tabindex="-1">Previous</a>
+            </li>
+    		<th:block th:each="item : ${historicalLeaveList.paging.getItems()}">
+    			<li class="page-item" th:classappend="${item.index == historicalLeaveList.paging.pageNumber? 'active' : ''}" 
+    			th:if="${item.pageItemType.name() == 'PAGE'}">
+    				<a class="page-link" th:href="@{${id} + '?pageNumber=' + ${item.index}}"
+                               th:text="${item.index}"></a>
+    			</li>
+    			<li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+    				<a class="page-link" href="#">...</a>
+    			</li>
+    		</th:block>   
+    			<li class="page-item" th:classappend="${!historicalLeaveList.paging.isNextEnabled()? 'disabled' : ''}">
+    				<a class="page-link" th:href="@{${id} + '?pageNumber=' + ${historicalLeaveList.paging.pageNumber + 1}}">Next</a>
+    			</li>       
+    	</ul>
+    </nav>
+    </div>
+    </div>
+    </div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>   
+</body>
+</html>
