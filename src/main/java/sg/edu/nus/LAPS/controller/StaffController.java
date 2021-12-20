@@ -87,11 +87,24 @@ public class StaffController {
         return "leaveManager";
     }
     
+    @RequestMapping("/viewLeaveDetails/{id}")
+	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+    	
+    	LeaveApplication selectedLeave = leaveApplicationService.findSingleLeaveById(id);
+    	Employee selectedEmp = selectedLeave.getEmployee();
+    	List<Object> leaveType = leaveTypeService.findAllLeaveType();
+    	
+    	model.addAttribute("newLeave", selectedLeave);
+    	model.addAttribute("employee", selectedEmp);
+    	model.addAttribute("leaveTypeValue", leaveType);
+    	
+		return "leaveForm-edit";
+	}
+    
     @RequestMapping(value = "/editLeave/{id}", method = RequestMethod.GET)
 	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	List<Object> leaveType = leaveTypeService.findAllLeaveType();
-    	//model.addAttribute("leave", leaveAppToChange);
     	model.addAttribute("newLeave", leaveAppToChange);
     	model.addAttribute("leaveTypeValue", leaveType);
 		
@@ -105,6 +118,7 @@ public class StaffController {
             return "leaveForm-edit";
         }
     	
+    	// find the leave to change
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	
     	// update object attributes
@@ -122,19 +136,20 @@ public class StaffController {
 		
 		return "home";
 	}
-    
+    	
     @RequestMapping("/deleteLeave/{id}")
-	public String deleteLeave(@PathVariable("id") Integer id, Model model) {
-		leaveApplicationService.deleteLeave(id);
+	public String deleteLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
+		//leaveApplicationService.deleteLeave(id);
 		
-//		LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
-//    	leaveAppToChange.setApprovalStatus(ApprovalStatus.DELETED);
-//    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+		LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+    	leaveAppToChange.setApprovalStatus(ApprovalStatus.DELETED);
+    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+    	
 		return "home";
 	}
     
     @RequestMapping("/cancelLeave/{id}")
-	public String cancelLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
+	public String cancelLeave(@PathVariable("id") Integer id, Model model) {
     	
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.CANCELLED);

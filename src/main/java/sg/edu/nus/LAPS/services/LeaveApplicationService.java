@@ -1,9 +1,11 @@
 package sg.edu.nus.LAPS.services;
 
+import java.util.Date;
 import java.util.List;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.LeaveApplication;
+import sg.edu.nus.LAPS.model.paging.Paged;
 
 public interface LeaveApplicationService {
 
@@ -20,4 +22,10 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findPastLeavesByEmployeeId(Integer id);
     
     LeaveApplication deleteLeave(Integer id);
+    
+    Paged<LeaveApplication> findAllLeavesByEmployeeIdWithPage(Integer employeeId, int pageNumber, int size);
+    
+    List<LeaveApplication> findUpcomingLeavesForEmployee(Integer employeeId, Date inputDate);
+    
+    List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatusIn(Integer employeeId, List<ApprovalStatus> approvalStatus);
 }

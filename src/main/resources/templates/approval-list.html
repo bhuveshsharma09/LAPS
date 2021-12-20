@@ -17,12 +17,14 @@
             <th>To Date</th>
             <th>Remarks</th>
             <th>Employee Id</th>
+            <th>Employee Name</th>
             <th>Leave Type</th>
+            <th>View Details</th>
         </tr>
         </thead>
         <tbody>
     <tr th:each="applied: ${appliedStatusList}">
-        <td><a th:href="@{/manager/viewLeaveDetails/}+${applied.leaveId}"><span th:text="${applied.leaveId}">View Details</span></a></td>
+        <td th:text="${applied.leaveId}"></td >
         <td th:text="${applied.approvalStatus}"></td>
         <td th:text="${applied.contactDetails}"></td>
         <td th:text="${applied.coveringEmp}"></td>
@@ -30,7 +32,9 @@
         <td th:text="${applied.toDate}"></td>
         <td th:text="${applied.remarks}"></td>
         <td th:text="${applied.employee.employeeId}"></td>
+        <td th:text="${applied.employee.name}"></td>
         <td th:text="${applied.leaveType.leaveName}"></td>
+        <td><a th:href="@{/manager/viewLeaveDetails/}+${applied.leaveId}">View Details</a></td>
     </tr>
         </tbody>
     
