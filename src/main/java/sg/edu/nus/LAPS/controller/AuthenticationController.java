@@ -128,4 +128,16 @@ public class AuthenticationController {
         return "welcome";
 
     }
+
+    @RequestMapping("/back")
+    public String back(HttpSession httpSession) {
+
+        SessionController sessionController = (SessionController)  httpSession.getAttribute("userSession");
+        httpSession.setAttribute("userSession", sessionController);
+        return "home";
+
+    }
+
+
+
 }

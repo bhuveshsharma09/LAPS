@@ -77,7 +77,7 @@
     <br>
     <a th:href="@{/manager/request/}+${session.userSession.employee.employeeId}" >Approve or reject application request </a>
     <br>
-    <a href="/onLeave" >Approve or reject claim request </a>
+    <a th:href="@{/manager/claimRequest/}+${session.userSession.employee.employeeId}" >Approve or reject claim request </a>
     <br>
 </div>
 

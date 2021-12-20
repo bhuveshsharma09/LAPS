@@ -1,5 +1,6 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -17,21 +18,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
+import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
+import sg.edu.nus.LAPS.repo.ClaimRepository;
 import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
+import sg.edu.nus.LAPS.services.ClaimService;
 import sg.edu.nus.LAPS.services.EmployeeService;
 import sg.edu.nus.LAPS.services.LeaveApplicationService;
+
+import javax.mail.MessagingException;
 
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
+	@Autowired
+	EmailController emailController;
+
+	@Autowired
+	EmployeeService employeeService;
 
     @Autowired
     LeaveApplicationService leaveApplicationService;
+
+	@Autowired
+	ClaimService claimService;
     
 	@Autowired
 	LeaveApplicationRepository leaveApplicationRepository;
+
+	@Autowired
+	ClaimRepository claimRepository;
 
     @RequestMapping("/request/{id}")
     public String getEmployeeLeaves(Model model,@PathVariable Integer id){
@@ -53,6 +70,31 @@ public class ManagerController {
 		
         return "approval-list";
     }
+
+	// adding function to approve or reject the claims made by subordinate
+	@RequestMapping("/claimRequest/{id}")
+	public String getEmployeeClaims(Model model,@PathVariable Integer id){
+		ApprovalStatus applied = ApprovalStatus.APPLIED;
+		ApprovalStatus updated = ApprovalStatus.UPDATED;
+
+		List<Claim> claims = claimRepository.findAllClaimsOfEmployeeByManagerIdWithStatus(id, applied);
+		claims.addAll(claimRepository.findAllClaimsOfEmployeeByManagerIdWithStatus(id, updated));
+
+		// sort by employeeId
+		Collections.sort(claims, new Comparator<Claim>() {
+			@Override
+			public int compare(Claim c1, Claim c2) {
+				return c1.getEmployee().getEmployeeId().compareTo(c2.getEmployee().getEmployeeId());
+			}
+		});
+
+		model.addAttribute("appliedStatusList", claims);
+
+
+		return "approval-claim-list";
+	}
+
+
     
     @RequestMapping("/leavelist/{id}")
 	public String getAllLeaves(@PathVariable("id") Integer id, Model model,
@@ -78,6 +120,23 @@ public class ManagerController {
     	
 		return "leaveDetailsForApproval";
 	}
+
+	// function for manager to view the claim details
+	@RequestMapping("/viewClaimDetails/{id}")
+	public String viewClaimDetails(@PathVariable("id") Integer id, Model model) {
+
+		Claim selectedClaim = claimService.findClaimById(id);
+		Employee selectedEmp = selectedClaim.getEmployee();
+
+		model.addAttribute("selectedClaim", selectedClaim);
+		model.addAttribute("employee", selectedEmp);
+
+		return "claimDetailsForApproval";
+	}
+
+
+
+
 	
 	@RequestMapping(value = "/approveLeave/{id}", method = RequestMethod.POST)
 	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, @RequestParam("manager-remarks") String managerComment, Model model) {
@@ -94,6 +153,39 @@ public class ManagerController {
     	
     	leaveApplicationService.saveLeaveApplication(leaveAppToApprove);
     	
+		return "home";
+	}
+
+	// approve claim
+	@RequestMapping(value = "/approveClaim/{id}", method = RequestMethod.POST)
+	public String approveClaim(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, @RequestParam("manager-remarks") String managerComment, Model model) throws MessagingException, IOException {
+
+		ApprovalStatus approvalStatus1 = null;
+		Claim claimToApprove = claimService.findClaimById(id);
+
+		if (approvalResult.equalsIgnoreCase("Approve")) {
+			claimToApprove.setManagerComment(managerComment);
+			claimToApprove.setApprovalStatus(ApprovalStatus.APPROVED);
+			approvalStatus1 = ApprovalStatus.APPROVED;
+
+			Employee employee=claimService.findClaimById(id).getEmployee();
+			employee.setCompensationLeaveCount(employee.getCompensationLeaveCount()+0.5);
+			employeeService.saveEmployee(employee);
+
+
+
+		}
+		else if (approvalResult.equalsIgnoreCase("Reject")) {
+			claimToApprove.setManagerComment(managerComment);
+			claimToApprove.setApprovalStatus(ApprovalStatus.REJECTED);
+			approvalStatus1 = ApprovalStatus.REJECTED;
+		}
+
+		claimService.saveClaimRequest(claimToApprove);
+		emailController.sendTheEmailToEmp(1,claimToApprove.getClaimId(),approvalStatus1);
+		// add +1 in CL of Employee
+
+
 		return "home";
 	}
 }

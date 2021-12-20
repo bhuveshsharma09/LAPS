@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
+import sg.edu.nus.LAPS.model.LeaveApplication;
 
 import java.awt.print.Pageable;
 import java.util.List;
@@ -33,13 +35,12 @@ public interface ClaimRepository extends JpaRepository<Claim, Integer> {
     @Query("SELECT e FROM Employee e where e.employeeId = :id")
     Employee findEmployeeById(@Param("id") String id);
 
-   // @Query("FROM Claim c WHERE c.claimId = (SELECT max(cl.claimId) FROM Claim cl)")
-    //FROM Claim c WHERE c.id = (SELECT max(cl.id) FROM Claim cl)
-  /*  @Query("SELECT max(c.claimId) FROM Claim c")
-    Claim findLastClaim();*/
 
     @Query("SELECT c from Claim c order by c.claimId desc")
     List<Claim> findAllClaimsSorted();
+
+    @Query("SELECT claims FROM Claim claims JOIN claims.employee e WHERE e.managerId = :mid AND claims.approvalStatus = :status")
+    List<Claim> findAllClaimsOfEmployeeByManagerIdWithStatus(@Param("mid") int mid, @Param("status") ApprovalStatus approval);
 
 
 }

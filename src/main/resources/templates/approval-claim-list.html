@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>claim Document</title>
+</head>
+<body>
+    <table th:if="${not #lists.isEmpty(appliedStatusList)}" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+        <thead>
+        <tr>
+            <th >Claim Id</th>
+            <th>Approval Status</th>
+            <th>Over time Date</th>
+            <th>Hours Worked</th>
+            <th>Eligible Claim</th>
+            <th>Remarks</th>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>View Details</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+    <tr th:each="applied: ${appliedStatusList}">
+        <td th:text="${applied.claimId}"></td >
+        <td th:text="${applied.approvalStatus}"></td>
+        <td th:text="${applied.overtimeDate}"></td>
+        <td th:text="${applied.hoursWorked}"></td>
+        <td th:text="${applied.eligibleClaim}"></td>
+        <td th:text="${applied.remarks}"></td>
+        <td th:text="${applied.remarks}"></td>
+        <td th:text="${applied.employee.employeeId}"></td>
+        <td th:text="${applied.employee.name}"></td>
+
+        <td><a th:href="@{/manager/viewClaimDetails/}+${applied.claimId}">View Details</a></td>
+    </tr>
+        </tbody>
+    
+    </table>
+    <h3><a th:href="@{/back}">Go Back</a> </h3>
+</body>
+</html>

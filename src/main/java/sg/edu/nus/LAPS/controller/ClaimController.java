@@ -11,6 +11,7 @@ import sg.edu.nus.LAPS.exceptions.ClaimNotFound;
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
+import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.repo.ClaimRepository;
 import sg.edu.nus.LAPS.services.ClaimService;
 import sg.edu.nus.LAPS.validators.ClaimValidator;
@@ -19,6 +20,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -163,6 +166,20 @@ public class ClaimController {
         return "all-claims";
     }
 
+
+    @RequestMapping("/viewClaimDetails/{id}")
+    public String viewClaimDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+
+        Claim selectedClaim= claimService.findClaimById(id);
+        Employee selectedEmp = selectedClaim.getEmployee();
+        //List<Object> leaveType = claimService.findAllLeaveType();
+        List<Claim> claimList = new ArrayList<Claim>(Arrays. asList(selectedClaim));
+        model.addAttribute("newClaim", claimList);
+        model.addAttribute("employee", selectedEmp);
+       // model.addAttribute("leaveTypeValue", leaveType);
+
+        return "claim-view";
+    }
 
 
 
