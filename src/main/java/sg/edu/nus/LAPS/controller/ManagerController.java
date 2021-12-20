@@ -87,6 +87,7 @@ public class ManagerController {
     	LeaveApplication leaveAppToApprove = leaveApplicationService.findSingleLeaveById(id);
     	
     	if (approvalResult.equalsIgnoreCase("Approve")) {
+    		leaveAppToApprove.setManagerComment(managerComment);
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.APPROVED);
     	}
     	else if (approvalResult.equalsIgnoreCase("Reject")) {
