@@ -112,7 +112,7 @@ public class EmailController {
         {
             // 2 - leave application
             // get leave app by id
-            LeaveApplication leaveApplication = leaveApplicationService.findLeaveByLeaveId(id);
+            LeaveApplication leaveApplication = leaveApplicationService.findSingleLeaveById(id);
 
             // compose message
             String employeeName = leaveApplication.getEmployee().getName();

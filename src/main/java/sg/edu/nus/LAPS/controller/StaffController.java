@@ -44,7 +44,7 @@ public class StaffController {
     @RequestMapping("/addLeave/{id}")
     public String addLeave(Model model,@PathVariable("id") Integer id){
         LeaveApplication leaveApplication = new LeaveApplication();
-        List<String> leaveType = leaveTypeService.findAllLeaveType();
+        List<Object> leaveType = leaveTypeService.findAllLeaveType();
         model.addAttribute("employee", employeeService.findEmployeeById(id));
         model.addAttribute("newLeave", leaveApplication);
         model.addAttribute("leaveTypeValue", leaveType);
@@ -95,6 +95,7 @@ public class StaffController {
     	leaveAppToChange.setFromDate(LA.getFromDate());
     	leaveAppToChange.setToDate(LA.getToDate());
     	leaveAppToChange.setRemarks(LA.getRemarks());
+    	leaveAppToChange.setContactDetails(LA.getContactDetails());
     	leaveAppToChange.setCoveringEmp(LA.getCoveringEmp());
     	leaveAppToChange.setLeaveType(LA.getLeaveType());
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.UPDATED);
@@ -109,6 +110,10 @@ public class StaffController {
     @RequestMapping("/deleteLeave/{id}")
 	public String deleteLeave(@PathVariable("id") Integer id, Model model) {
 		leaveApplicationService.deleteLeave(id);
+		
+//		LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+//    	leaveAppToChange.setApprovalStatus(ApprovalStatus.DELETED);
+//    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
 		return "home";
 	}
     

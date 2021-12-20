@@ -34,7 +34,7 @@
         <td th:text="${leave.approvalStatus}" />
         <td><a href="leaveForm.html" th:href="@{/employee/editLeave/}+${leave.leaveId}">Edit</a></td>
 		<td><a href="leaveForm.html" th:href="@{/employee/deleteLeave/}+${leave.leaveId}">Delete</a></td>
-		<td><a href="leaveForm.html" th:href="@{/employee/cancelLeave/}+${leave.leaveId}">Cancel</a></td>
+		<td><a href="leaveForm.html" th:if="${leave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:href="@{/employee/cancelLeave/}+${leave.leaveId}">Cancel</a></td >
     </tr>
         </tbody>
     
