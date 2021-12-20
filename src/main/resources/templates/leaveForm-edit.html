@@ -35,7 +35,9 @@
         </fieldset>
         <fieldset>
             <label for="leaveName">Leave Type: </label>
-            <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}">
+            <select name="leaveType" id="leaveName" th:field="*{leaveType.leaveName}">
+                <option th:each="type:${leaveTypeValue}" th:value="${type[0]}" th:text="${type[1]}"></option>
+            </select>
         </fieldset>
         <fieldset>
             <input type="submit" value="Submit">

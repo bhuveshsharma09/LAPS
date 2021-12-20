@@ -1,15 +1,23 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import com.lowagie.text.DocumentException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +29,7 @@ import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.services.EmployeeService;
 import sg.edu.nus.LAPS.services.LeaveApplicationService;
 import sg.edu.nus.LAPS.services.LeaveTypeService;
+import sg.edu.nus.LAPS.services.PDFGenerateService;
 
 @Controller
 @RequestMapping("/employee")
@@ -32,7 +41,9 @@ public class StaffController {
     EmployeeService employeeService;
     @Autowired
     LeaveTypeService leaveTypeService;
-
+	@Autowired
+	PDFGenerateService pdfGenerateService;
+	
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
@@ -44,11 +55,11 @@ public class StaffController {
     @RequestMapping("/addLeave/{id}")
     public String addLeave(Model model,@PathVariable("id") Integer id){
         LeaveApplication leaveApplication = new LeaveApplication();
-        List<String> leaveType = leaveTypeService.findAllLeaveType();
+        List<Object> leaveType = leaveTypeService.findAllLeaveType();
         model.addAttribute("employee", employeeService.findEmployeeById(id));
         model.addAttribute("newLeave", leaveApplication);
         model.addAttribute("leaveTypeValue", leaveType);
-        System.out.println(leaveType);
+        // System.out.println(leaveType);
         return "leaveForm";
     }
     
@@ -135,5 +146,18 @@ public class StaffController {
 			return "leavehistory";
 		}
 		return "login";
+	}
+
+	@GetMapping("/download/{id}")
+	public void downloadList(HttpServletResponse response,@ModelAttribute("id") Integer eid) throws DocumentException, IOException{
+		List<LeaveApplication> list = leaveApplicationService.findAllLeaves(eid);
+		response.setContentType("test/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+		pdfGenerateService.export(response,(ArrayList<LeaveApplication>) list);
 	}
 }

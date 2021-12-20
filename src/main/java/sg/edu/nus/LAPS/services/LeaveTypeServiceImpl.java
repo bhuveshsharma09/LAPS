@@ -21,7 +21,7 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
     }
 
     @Override
-    public List<String> findAllLeaveType() {
+    public List<Object> findAllLeaveType() {
         return leaveTypeRepository.findAllLeaveTypes();
     }
     

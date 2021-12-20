@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import sg.edu.nus.LAPS.model.LeaveType;
 
 public interface LeaveTypeRepository extends JpaRepository<LeaveType,Integer> {
-    @Query(nativeQuery = true,value="Select leave_code From leave_type")
-    List<String> findAllLeaveTypes();
+    @Query(nativeQuery = true,value="Select lt.leave_name,lt.leave_code From leave_type lt")
+    List<Object> findAllLeaveTypes();
 }
