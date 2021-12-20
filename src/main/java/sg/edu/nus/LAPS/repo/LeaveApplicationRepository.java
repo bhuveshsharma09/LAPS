@@ -13,7 +13,6 @@ import sg.edu.nus.LAPS.model.LeaveApplication;
 
 public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication, Integer> {
 
-
     //Use case: Find all leaves
     @Query("SELECT leaves from LeaveApplication leaves where leaves.leaveId >:leaveId")
     List<LeaveApplication> findAllById(@Param("leaveId") int leaveId);
@@ -48,6 +47,9 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 
     @Query("SELECT l FROM LeaveApplication l where l.leaveId = :id")
     LeaveApplication findLeaveApplicationById(@Param("id") Integer id);
+    
+    @Query(value = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'leave_application'", nativeQuery = true)
+    Integer countColumns();
 
 
 }
