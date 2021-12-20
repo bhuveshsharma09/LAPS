@@ -95,10 +95,10 @@ public class StaffController {
     	model.addAttribute("employee", selectedEmp);
     	model.addAttribute("leaveTypeValue", leaveType);
     	
-		return "leaveForm-edit";
+		return "leaveDetails";
 	}
     
-    @RequestMapping(value = "/editLeave/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/editLeave/{id}")
 	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	List<Object> leaveType = leaveTypeService.findAllLeaveType();
@@ -131,7 +131,7 @@ public class StaffController {
     	
     	model.addAttribute("newLeave", leaveAppToChange);
 		
-		return "home";
+		return "redirect:/employee/manageLeave/" + leaveAppToChange.getEmployee().getEmployeeId();
 	}
     	
     @RequestMapping("/deleteLeave/{id}")
@@ -142,7 +142,7 @@ public class StaffController {
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.DELETED);
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
     	
-		return "home";
+    	return "redirect:/employee/manageLeave/" + leaveAppToChange.getEmployee().getEmployeeId();
 	}
     
     @RequestMapping("/cancelLeave/{id}")
@@ -151,7 +151,7 @@ public class StaffController {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.CANCELLED);
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
-		return "home";
+		return "redirect:/employee/manageLeave/" + leaveAppToChange.getEmployee().getEmployeeId();
 	}
 
 
