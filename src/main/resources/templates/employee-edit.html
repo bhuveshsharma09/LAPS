@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee</title>
+</head>
+
+<body>
+
+<h1>Update Employee Details</h1>
+
+	<form action="#" th:object="${employee}" th:action="@{/employee/editsuccess/}+${employee.employeeId}"method="POST">
+	
+		<input type="hidden" th:field="*{employeeId}"/>
+		
+		<fieldset>
+			Full Name: <input type="text" th:field="*{name}">
+			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+		</fieldset>
+		
+		
+		<fieldset> 
+			Position: 
+        	<input type="radio" name="staff" th:field="*{jobTitle}" value="Staff"> Staff 
+        	<input type="radio" name="manager" th:field="*{jobTitle}" value="Manager"> Manager 
+        	<input type="radio" name="admin" th:field="*{jobTitle}" value="Admin"> Admin 
+        </fieldset>
+		
+		
+		<fieldset> 
+			Manager:
+             <select th:field="*{managerId}" name="managerId" <!--size="1" id="managerId"-->>
+            	<option value="">Select Manager</option>
+                <option th:each="employee: ${employees}" th:value="${employee.employeeId}" 
+                	th:text="${employee.name}"> 
+                	</option>
+            </select>    
+			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
+		</fieldset>
+
+		
+		<fieldset>
+			Email:<input type="email" th:field="*{emailId}">
+			<p th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></p>
+		</fieldset>
+		
+		
+		<fieldset>
+			<input type="submit" value="Update" /> &nbsp; &nbsp; 
+			<input type="button" value="Back" onclick="window.location.href='/employee/all'; return false"/>
+		</fieldset>
+		
+		
+			<input type="hidden" th:field="*{annualLeaveCount}">
+			<input type="hidden" th:field="*{medicalLeaveCount}">
+			<input type="hidden" th:field="*{compensationLeaveCount}">
+			
+	</form>
+	
+	
+</body>
+
+</html>
