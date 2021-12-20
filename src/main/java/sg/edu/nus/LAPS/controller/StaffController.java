@@ -76,8 +76,10 @@ public class StaffController {
     @RequestMapping(value = "/editLeave/{id}", method = RequestMethod.GET)
 	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+    	List<Object> leaveType = leaveTypeService.findAllLeaveType();
     	//model.addAttribute("leave", leaveAppToChange);
     	model.addAttribute("newLeave", leaveAppToChange);
+    	model.addAttribute("leaveTypeValue", leaveType);
 		
 		return "leaveForm-edit";
 	}

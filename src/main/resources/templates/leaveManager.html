@@ -17,6 +17,7 @@
             <th>remark</th>
             <th>contact detail</th>
             <th>Status</th>
+            <th>Manager's Comment</th>
             <th>Edit</th>
             <th>Delete</th>
             <th>Cancel</th>
@@ -32,6 +33,7 @@
         <td th:text="${leave.remarks}" />
         <td th:text="${leave.contactDetails}" />
         <td th:text="${leave.approvalStatus}" />
+        <td th:text="${leave.managerComment}" />
         <td><a href="leaveForm.html" th:href="@{/employee/editLeave/}+${leave.leaveId}">Edit</a></td>
 		<td><a href="leaveForm.html" th:href="@{/employee/deleteLeave/}+${leave.leaveId}">Delete</a></td>
 		<td><a href="leaveForm.html" th:if="${leave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:href="@{/employee/cancelLeave/}+${leave.leaveId}">Cancel</a></td >

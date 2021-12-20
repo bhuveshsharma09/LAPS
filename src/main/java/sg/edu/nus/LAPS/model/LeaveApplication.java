@@ -50,6 +50,7 @@ public class LeaveApplication {
 	@Column(name="approvalStatus",columnDefinition = "ENUM('APPLIED', 'UPDATED', 'CANCELLED', 'APPROVED', 'DELETED', 'REJECTED')")
 	@Enumerated(EnumType.STRING)
 	private ApprovalStatus approvalStatus; //7
+	private String managerComment;
 
 	
 	//Relations
@@ -65,7 +66,7 @@ public class LeaveApplication {
 	private LeaveType leaveType;
 
 
-	public LeaveApplication(Integer leaveId, Date fromDate, Date toDate, String remarks, String coveringEmp, String contactDetails, ApprovalStatus approvalStatus, Employee employee) {
+	public LeaveApplication(Integer leaveId, Date fromDate, Date toDate, String remarks, String coveringEmp, String contactDetails, ApprovalStatus approvalStatus, Employee employee, String managerComment) {
 		this.leaveId = leaveId;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
@@ -74,5 +75,6 @@ public class LeaveApplication {
 		this.contactDetails = contactDetails;
 		this.approvalStatus = approvalStatus;
 		this.employee = employee;
+		this.managerComment = managerComment;
 	}
 }
