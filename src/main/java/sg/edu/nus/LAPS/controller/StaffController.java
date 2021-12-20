@@ -44,8 +44,11 @@ public class StaffController {
     @RequestMapping("/addLeave/{id}")
     public String addLeave(Model model,@PathVariable("id") Integer id){
         LeaveApplication leaveApplication = new LeaveApplication();
+        List<String> leaveType = leaveTypeService.findAllLeaveType();
         model.addAttribute("employee", employeeService.findEmployeeById(id));
         model.addAttribute("newLeave", leaveApplication);
+        model.addAttribute("leaveTypeValue", leaveType);
+        System.out.println(leaveType);
         return "leaveForm";
     }
     

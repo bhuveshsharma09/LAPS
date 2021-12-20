@@ -1,5 +1,7 @@
 package sg.edu.nus.LAPS.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
     public LeaveType saveLeaveType(LeaveType leaveType) {
         return leaveTypeRepository.saveAndFlush(leaveType);
         
+    }
+
+    @Override
+    public List<String> findAllLeaveType() {
+        return leaveTypeRepository.findAllLeaveTypes();
     }
     
 }
