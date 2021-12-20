@@ -84,6 +84,20 @@ public class StaffController {
         return "leaveManager";
     }
     
+    @RequestMapping("/viewLeaveDetails/{id}")
+	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+    	
+    	LeaveApplication selectedLeave = leaveApplicationService.findSingleLeaveById(id);
+    	Employee selectedEmp = selectedLeave.getEmployee();
+    	List<Object> leaveType = leaveTypeService.findAllLeaveType();
+    	
+    	model.addAttribute("newLeave", selectedLeave);
+    	model.addAttribute("employee", selectedEmp);
+    	model.addAttribute("leaveTypeValue", leaveType);
+    	
+		return "leaveForm-edit";
+	}
+    
     @RequestMapping(value = "/editLeave/{id}", method = RequestMethod.GET)
 	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
