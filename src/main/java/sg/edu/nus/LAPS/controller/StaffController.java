@@ -108,7 +108,7 @@ public class StaffController {
 		
 		return "home";
 	}
-    
+    	
     @RequestMapping("/deleteLeave/{id}")
 	public String deleteLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
 		//leaveApplicationService.deleteLeave(id);
