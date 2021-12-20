@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit form</title>
+</head>
+
+<body>
+    <h1>Welcome admin! Please edit!</h1>
+
+    <form th:object="${user}" th:action="@{/adminuser/edit/}+${uc.userId}" method="POST">
+        <fieldset>
+            USER ID : <input type="hidden" th:field="*{userId}" />
+
+        </fieldset>
+
+        <fieldset>
+            USER NAME : <input type="text" th:field="*{username}" />
+
+        </fieldset>
+
+        <fieldset>
+            PASSWORD : <input type="password" th:field="*{password}" />
+
+        </fieldset>
+
+        <fieldset>
+            EMPLOYEE NAME: <input type="text" th:field="*{employeeId}" />
+
+        </fieldset>
+
+        <fieldset>
+            ROLE:
+            <select name="roles">
+                <option th:each="role : ${roles}" th:value="${role.roleDesc}" th:text="${role.roleDesc}">
+                </option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <input type="submit" value="UPDATE" />
+            &nbsp;&nbsp;&nbsp;
+            <input type="reset" value="RESET" />
+        </fieldset>
+    </form>
+</body>
+
+</html>
