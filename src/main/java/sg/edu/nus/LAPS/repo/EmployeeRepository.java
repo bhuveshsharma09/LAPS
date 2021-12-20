@@ -1,5 +1,6 @@
 package sg.edu.nus.LAPS.repo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +18,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 @Query("Select m from Employee m where m.name LIKE :name")
 	 List<Employee> findMemberByFirstName(@Param("name") String name);
 	 
+	 //Bowen add
+	 @Query("SELECT DISTINCT e.name FROM Employee e")
+	 ArrayList<String> findAllEmployeeNames();
+	 
+	@Query("SELECT e from Employee e where e.name = :name")
+	public Employee findEmployeeByName(@Param("name") String name);
 	 
 	 
 	 

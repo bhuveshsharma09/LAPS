@@ -15,7 +15,10 @@ public interface EmployeeService {
 
 	public void deleteEmployee(Employee employee); //delete employee
 
-    
+    //Bowen add
+	public ArrayList<String> findAllEmployeeNames();
+	
+	public Employee findEmployeeByName(String name);
 
 
 }

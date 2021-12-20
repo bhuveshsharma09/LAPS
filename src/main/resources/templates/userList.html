@@ -30,7 +30,7 @@
             <td th:text="${user.userId}">USER ID</td>
             <td th:text="${user.username}">USER NAME</td>
             <td th:text="${user.password}">PASSWORD</td>
-            <td th:text="${user.employeeId}">EMPLOYEE ID</td>
+            <td th:text="${user.employee.employeeId}">EMPLOYEE ID</td>
             <!--<td th:text="${user.roles}">ROLE</td>-->
 
             <td><a href="userEdit.html" th:href="@{/adminuser/edit/}+${user.userId}">Edit</a></td> >

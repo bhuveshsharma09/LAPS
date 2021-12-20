@@ -11,33 +11,37 @@
 <body>
     <h1>Welcome admin! Please edit!</h1>
 
-    <form th:object="${user}" th:action="@{/adminuser/edit/}+${uc.userId}" method="POST">
+    <form th:object="${user}" th:action="@{/adminuser/edit/}+${user.userId}" method="POST">
         <fieldset>
-            USER ID : <input type="hidden" th:field="*{userId}" />
-
+           <input type="hidden" th:field="*{userId}" />
+        </fieldset>
+        
+        <fieldset>
+            EMPLOYEE ID: <input type="text" th:field="*{employee.employeeId}" readonly="readonly"/>
+			
         </fieldset>
 
         <fieldset>
             USER NAME : <input type="text" th:field="*{username}" />
-
+			<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
         </fieldset>
 
         <fieldset>
             PASSWORD : <input type="password" th:field="*{password}" />
-
+			<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
         </fieldset>
 
-        <fieldset>
-            EMPLOYEE NAME: <input type="text" th:field="*{employeeId}" />
-
-        </fieldset>
+        
 
         <fieldset>
-            ROLE:
-            <select name="roles">
-                <option th:each="role : ${roles}" th:value="${role.roleDesc}" th:text="${role.roleDesc}">
-                </option>
+             ROLE: 
+            <select name="roles" <!--multiple="multiple" id="roles"-->>
+            	<option value="">=Please choose=</option>
+                <option th:each="role : ${rolesall}" th:value="${role.roleId}"
+								th:text="${role.roleDesc}">
+				</option>
             </select>
+           
         </fieldset>
 
         <fieldset>

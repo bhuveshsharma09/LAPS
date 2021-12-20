@@ -45,7 +45,7 @@ public class AdminUserController {
 		UserCredentials uc = new UserCredentials();
 		model.addAttribute("user", uc);
 		ArrayList<Role> roles = rService.findAllRoles();
-		model.addAttribute("roles", roles);
+		model.addAttribute("rolesall", roles);
 		ArrayList<Employee> allEmployees = employeeService.findAllEmployees();
 		model.addAttribute("allEmployees", allEmployees);
 		return "userForm";
@@ -60,8 +60,12 @@ public class AdminUserController {
 				newRoles.add(newRole);				
 		 }
 		user.setRoles(newRoles);
-		ucService.createUser(user);
 		
+		Employee employee = employeeService.findEmployeeByName(user.getEmployee().getName());
+		employeeService.saveEmployee(employee);
+		user.setEmployee(employee);
+		
+		ucService.createUser(user);
 		return "forward:/adminuser/all";
 				 
 	}
@@ -69,9 +73,14 @@ public class AdminUserController {
 	@RequestMapping("/edit/{id}")
 	public String editUser(@PathVariable("id") Integer id, Model model) {
 		UserCredentials uc = ucService.findByUserId(id);
-		model.addAttribute("uc", uc);
+		model.addAttribute("user", uc);
 		ArrayList<Role> roles = rService.findAllRoles();
-		model.addAttribute("roles", roles);
+		model.addAttribute("rolesall", roles);
+		
+//		ArrayList<Employee> allEmployees = employeeService.findAllEmployees();
+//		model.addAttribute("allEmployees", allEmployees);
+//		return "userForm";
+		
 		return "userEdit";
 	}
 	

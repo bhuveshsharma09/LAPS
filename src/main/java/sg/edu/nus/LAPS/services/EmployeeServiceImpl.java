@@ -40,5 +40,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		emprepo.delete(employee);
 	}
 	
+	
+	//Bowen add
+
+	@Transactional
+	public ArrayList<String> findAllEmployeeNames() {
+		return (ArrayList<String>) emprepo.findAllEmployeeNames();
+	}
+
+	@Transactional
+	public Employee findEmployeeByName(String name) {
+		
+		return emprepo.findEmployeeByName(name);
+	}
+	
     
 }
