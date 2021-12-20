@@ -15,23 +15,28 @@
         <fieldset>
             <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
             <label for="fromDate">From Date: </label>
-            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}"/>
+            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}" required/>
+            <p th:if="${#fields.hasErrors('fromDate')}" th:errors="*{fromDate}"></p>
         </fieldset>
         <fieldset>
             <label for="toDate">To Date: </label>
-            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"/>
+            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"required/>
+            <p th:if="${#fields.hasErrors('toDate')}" th:errors="*{toDate}"></p>
         </fieldset>
         <fieldset>
             <label for="remarks">Remarks: </label>
-            <input type="text" name="remarks" id="remarks" th:field="*{remarks}">
+            <input type="text" name="remarks" id="remarks" th:field="*{remarks}"required>
+            <p th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></p>
         </fieldset>
         <fieldset>
             <label for="coveringEmp">Covering Employee: </label>
-            <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}">
+            <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}"required>
+            <p th:if="${#fields.hasErrors('coveringEmp')}" th:errors="*{coveringEmp}"></p>
         </fieldset>
         <fieldset>
             <label for="contactDetails">Contact Details: </label>
-            <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}">
+            <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}"required>
+            <p th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></p>
         </fieldset>
         <fieldset>
             <label for="leaveName">Leave Type: </label>
@@ -43,6 +48,7 @@
                 <option th:each="type:${leaveTypeValue}" th:value="${type[0]}" th:text="${type[1]}"></option>
 
             </select>
+            <p th:if="${#fields.hasErrors('leaveType')}" th:errors="*{leaveType}"></p>
         </fieldset>
         <fieldset>
             <input type="submit" value="Submit">

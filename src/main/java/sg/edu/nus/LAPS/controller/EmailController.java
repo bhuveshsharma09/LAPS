@@ -1,24 +1,29 @@
 package sg.edu.nus.LAPS.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
-import sg.edu.nus.LAPS.model.*;
-import sg.edu.nus.LAPS.services.ClaimService;
-import sg.edu.nus.LAPS.services.EmployeeService;
-import sg.edu.nus.LAPS.services.EmployeeServiceImpl;
-import sg.edu.nus.LAPS.services.LeaveApplicationService;
-
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import sg.edu.nus.LAPS.model.ApprovalStatus;
+import sg.edu.nus.LAPS.model.Claim;
+import sg.edu.nus.LAPS.model.LeaveApplication;
+import sg.edu.nus.LAPS.services.ClaimService;
+import sg.edu.nus.LAPS.services.EmployeeService;
+import sg.edu.nus.LAPS.services.LeaveApplicationService;
 
 @RestController
 public class EmailController {

@@ -64,8 +64,11 @@ public class StaffController {
     }
     
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
-    public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
-    	
+    public String saveLeave(@ModelAttribute("newLeave") @Valid LeaveApplication LA,BindingResult bdResult, @ModelAttribute("employee") @Valid Employee employee){
+    	if(bdResult.hasErrors()){
+			return "leaveForm";
+		}
+		
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
 
