@@ -17,13 +17,23 @@
 			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 		</fieldset>
 		
-		<fieldset>
-			Position: <input type="text" th:field="*{jobTitle}">
-			<p th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></p>
-		</fieldset>
+		
+		<fieldset> 
+			Position: 
+        	<input type="radio" name="staff" th:field="*{jobTitle}" value="Staff"> Staff 
+        	<input type="radio" name="manager" th:field="*{jobTitle}" value="Manager"> Manager 
+        	<input type="radio" name="admin" th:field="*{jobTitle}" value="Admin"> Admin 
+        </fieldset>
+	
 		
 		<fieldset>
-			Manager ID: <input type="number" th:field="*{managerId}">
+			Manager Name: 
+             <select name="managerId" <!--size="1" id="managerId"-->>
+            	<option value="">Select Manager</option>
+                <option th:each="employee: ${employees}" th:value="${employee.employeeId}"
+					th:text="${employee.name}">
+				</option>
+            </select>
 			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
 		</fieldset>
 		
@@ -33,15 +43,24 @@
 			<p th:if="${#fields.hasErrors('annualLeaveCount')}" th:errors="*{annualLeaveCount}"></p>
 		</fieldset>
 		
+		
 		<fieldset>
 			Medical Leave Entitlement: <input type="number" th:field="*{medicalLeaveCount}">
 			<p th:if="${#fields.hasErrors('medicalLeaveCount')}" th:errors="*{medicalLeaveCount}"></p>
 		</fieldset>
 		
+		
 		<fieldset>
 			Compensation Leave Entitlement:<input type="number" th:field="*{compensationLeaveCount}">
 			<p th:if="${#fields.hasErrors('compensationLeaveCount')}" th:errors="*{compensationLeaveCount}"></p>
 		</fieldset>
+		
+		
+		<fieldset>
+			Email:<input type="email" th:field="*{emailId}">
+			<p th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></p>
+		</fieldset>
+		
 		
 		<fieldset>
 			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
