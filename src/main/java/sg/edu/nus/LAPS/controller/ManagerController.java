@@ -82,7 +82,7 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/approveLeave/{id}", method = RequestMethod.POST)
-	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, Model model) {
+	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, @RequestParam("manager-remarks") String managerComment, Model model) {
     	
     	LeaveApplication leaveAppToApprove = leaveApplicationService.findSingleLeaveById(id);
     	
@@ -90,6 +90,7 @@ public class ManagerController {
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.APPROVED);
     	}
     	else if (approvalResult.equalsIgnoreCase("Reject")) {
+    		leaveAppToApprove.setManagerComment(managerComment);
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.REJECTED);
     	}
     	
