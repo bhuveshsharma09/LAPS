@@ -1,11 +1,14 @@
 package sg.edu.nus.LAPS.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.repo.ClaimRepository;
 
+import javax.transaction.Transactional;
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -18,7 +21,7 @@ public class ClaimServiceImpl implements ClaimService{
     // save the Claims in Claim table
     @Override
     public boolean saveClaimRequest(Claim claim) {
-        if(claimRepository.save(claim)!=null) return true; else return false;
+        if(claimRepository.saveAndFlush(claim)!=null) return true; else return false;
     }
 
     // find all the claims in the Claim table
@@ -28,9 +31,11 @@ public class ClaimServiceImpl implements ClaimService{
     }
 
     @Override
+    @Transactional
     public Claim findClaimById(Integer id) {
        // return claimRepository.findClaimById(id);
-        return claimRepository.findById(id).orElse(null);
+       //
+        return claimRepository.findById(id).orElse(new Claim());
     }
 
     // filter claims, based on Employee Id
@@ -68,5 +73,10 @@ public class ClaimServiceImpl implements ClaimService{
     public List<Claim> findPendingClaimsByEmployeeId(Integer employeeId) {
         List<Claim> claimList = claimRepository.findPendingClaimsByEmployeeEmployeeId(employeeId);
         return claimList;
+    }
+
+    @Override
+    public List<Claim> findLastClaim() {
+        return claimRepository.findAllClaimsSorted();
     }
 }

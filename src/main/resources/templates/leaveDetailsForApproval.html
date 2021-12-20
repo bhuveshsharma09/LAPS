@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" th:object="${selectedLeave}" th:action="@{/manager/approveLeave/}+${selectedLeave.leaveId}" method="post">
+        <fieldset>
+            <label for="leaveId">LeaveId: </label>
+            <input type="text" th:field="*{leaveId}" readonly />
+        </fieldset>
+        <fieldset>
+            <label for="empId">Employee Id: </label>
+            <input type="text" th:field="${employee.employeeId}" id="empId" readonly />
+        </fieldset>
+        <fieldset>
+        	<label for="empName">Employee Name: </label>
+            <input type="text" th:field="${employee.name}" id="empName" readonly />
+        </fieldset>
+        <fieldset>
+            <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
+            <label for="fromDate">From Date: </label>
+            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" readonly />
+        </fieldset>
+        <fieldset>
+            <label for="toDate">To Date: </label>
+            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" readonly />
+        </fieldset>
+        <fieldset>
+            <label for="remarks">Remarks: </label>
+            <input type="text" name="remarks" id="remarks" th:field="*{remarks}" readonly />
+        </fieldset>
+        <fieldset>
+            <label for="coveringEmp">Covering Employee: </label>
+            <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}"  readonly />
+        </fieldset>
+        <fieldset>
+            <label for="contactDetails">Contact Details: </label>
+            <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}"  readonly />
+        </fieldset>
+        <fieldset>
+            <label for="leaveName">Leave Type: </label>
+            <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}"  readonly />
+        </fieldset>
+      <fieldset>
+      		<label for="approve-leave">Approve</label>
+        	<input type="radio" name="approve_reject" id="approve-leave" value="Approve">
+        	<label for="reject-leave">Reject</label>
+        	<input type="radio" name="approve_reject" id="reject-leave" value="Reject">
+        </fieldset>
+        <fieldset>
+        	<label for="manager-remarks">Manager's remarks</label>
+        	<textarea id="manager-remarks" name="manager-remarks" rows="3" placeholder="Remarks here"></textarea>
+        </fieldset>
+        <fieldset>
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+</body>
+</html>

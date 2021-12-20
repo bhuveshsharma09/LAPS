@@ -106,6 +106,7 @@ public class StaffController {
     	leaveAppToChange.setFromDate(LA.getFromDate());
     	leaveAppToChange.setToDate(LA.getToDate());
     	leaveAppToChange.setRemarks(LA.getRemarks());
+    	leaveAppToChange.setContactDetails(LA.getContactDetails());
     	leaveAppToChange.setCoveringEmp(LA.getCoveringEmp());
     	leaveAppToChange.setLeaveType(LA.getLeaveType());
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.UPDATED);
@@ -120,6 +121,10 @@ public class StaffController {
     @RequestMapping("/deleteLeave/{id}")
 	public String deleteLeave(@PathVariable("id") Integer id, Model model) {
 		leaveApplicationService.deleteLeave(id);
+		
+//		LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
+//    	leaveAppToChange.setApprovalStatus(ApprovalStatus.DELETED);
+//    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
 		return "home";
 	}
     
