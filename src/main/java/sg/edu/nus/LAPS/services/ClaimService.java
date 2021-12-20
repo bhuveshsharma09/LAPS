@@ -23,6 +23,8 @@ public interface ClaimService {
 
     List<Claim> findPendingClaimsByEmployeeId(Integer employeeId);
 
+    List<Claim> findLastClaim();
+
 
 
 

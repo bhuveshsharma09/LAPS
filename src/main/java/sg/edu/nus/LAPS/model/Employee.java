@@ -27,6 +27,9 @@ public class Employee {
 	private Double medicalLeaveCount; //5
 	private Double compensationLeaveCount; //6
 
+	@Column(name = "emailId")
+	private String emailId; //6
+
 	//Relations
 	@OneToOne(mappedBy = "employee") //one Employee can only have one set of login credentials
 	private UserCredentials userCredentials;
