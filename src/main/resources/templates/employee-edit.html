@@ -31,7 +31,7 @@
 		
 		<fieldset> 
 			Manager:
-             <select th:field="*{managerId}" name="managerId" <!--size="1" id="managerId"-->>
+             <select th:field="*{managerId}" name="managerId" size="1" id="managerId">
             	<option value="">Select Manager</option>
                 <option th:each="employee: ${employees}" th:value="${employee.employeeId}" 
                 	th:text="${employee.name}"> 
