@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="#" th:object="${selectedLeave}" method="post">
+    <form action="#" th:object="${selectedLeave}" th:action="@{/manager/approveLeave/}+${selectedLeave.leaveId}" method="post">
         <fieldset>
             <label for="leaveId">LeaveId: </label>
             <input type="text" th:field="*{leaveId}" readonly />
@@ -23,11 +23,11 @@
         <fieldset>
             <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
             <label for="fromDate">From Date: </label>
-            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(selectedLeave.fromDate,'dd-MM-yyyy')}" readonly />
+            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" readonly />
         </fieldset>
         <fieldset>
             <label for="toDate">To Date: </label>
-            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(selectedLeave.toDate,'dd-MM-yyyy')}" readonly />
+            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" readonly />
         </fieldset>
         <fieldset>
             <label for="remarks">Remarks: </label>
@@ -45,22 +45,18 @@
             <label for="leaveName">Leave Type: </label>
             <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}"  readonly />
         </fieldset>
-      <!--  <fieldset>
+      <fieldset>
+      		<label for="approve-leave">Approve</label>
         	<input type="radio" name="approve_reject" id="approve-leave" value="Approve">
+        	<label for="reject-leave">Reject</label>
         	<input type="radio" name="approve_reject" id="reject-leave" value="Reject">
-        </fieldset> -->
+        </fieldset>
         <fieldset>
         	<label for="manager-remarks">Manager's remarks</label>
         	<textarea id="manager-remarks" name="manager-remarks" rows="3">Remarks here</textarea>
         </fieldset>
         <fieldset>
-            <input type="submit" value="Approve" th:action="@{/employee/approveLeave}+${selectedLeave.leaveId}">
-            <input type="submit" value="Reject" th:action="@{/employee/rejectLeave}+${selectedLeave.leaveId}">
-        </fieldset>
-        <fieldset>
-
-            <a th:href="@{update}"></a>
-            <a th:href="@{delete}"></a>
+            <input type="submit" value="Submit">
         </fieldset>
     </form>
 </body>

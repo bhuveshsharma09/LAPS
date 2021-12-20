@@ -5,12 +5,16 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Employee;
@@ -66,7 +70,7 @@ public class ManagerController {
 	}
 	
 	@RequestMapping("/viewLeaveDetails/{id}")
-	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model) {
     	
     	LeaveApplication selectedLeave = leaveApplicationService.findSingleLeaveById(id);
     	Employee selectedEmp = selectedLeave.getEmployee();
@@ -77,21 +81,20 @@ public class ManagerController {
 		return "leaveDetailsForApproval";
 	}
 	
-	@RequestMapping("/approveLeave/{id}")
-	public String approveLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
+	@RequestMapping(value = "/approveLeave/{id}", method = RequestMethod.POST)
+	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, Model model) {
     	
-    	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
-    	leaveAppToChange.setApprovalStatus(ApprovalStatus.APPROVED);
-    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
-		return "home";
-	}
-	
-	@RequestMapping("/rejectLeave/{id}")
-	public String rejectLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute LeaveApplication LA) {
+    	LeaveApplication leaveAppToApprove = leaveApplicationService.findSingleLeaveById(id);
     	
-    	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
-    	leaveAppToChange.setApprovalStatus(ApprovalStatus.REJECTED);
-    	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+    	if (approvalResult.equalsIgnoreCase("Approve")) {
+    		leaveAppToApprove.setApprovalStatus(ApprovalStatus.APPROVED);
+    	}
+    	else if (approvalResult.equalsIgnoreCase("Reject")) {
+    		leaveAppToApprove.setApprovalStatus(ApprovalStatus.REJECTED);
+    	}
+    	
+    	leaveApplicationService.saveLeaveApplication(leaveAppToApprove);
+    	
 		return "home";
 	}
 }
