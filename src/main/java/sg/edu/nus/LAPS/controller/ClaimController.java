@@ -71,7 +71,7 @@ public class ClaimController {
             , HttpSession httpSession) throws MessagingException, IOException {
 
         //System.out.println("inside the /Claim/save function");
-       if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "claim-form";
         }
 

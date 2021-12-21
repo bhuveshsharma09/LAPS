@@ -57,5 +57,7 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     @Query("SELECT leaves FROM LeaveApplication leaves JOIN leaves.employee e WHERE e.employeeId = :eid")
     Page<LeaveApplication> findAllLeavesByEmployeeIdWithPage(@Param("eid") int eid, Pageable page);
 
+    @Query("SELECT la from LeaveApplication la order by la.leaveId desc")
+    List<LeaveApplication> findAllLeaveApplicationSorted();
 
 }

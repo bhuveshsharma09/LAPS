@@ -84,4 +84,8 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
             return true;
         }
     }
+    @Override
+    public List<LeaveApplication> findAllLeaveApplicationSorted(){
+        return leaveApplicationRepository.findAllLeaveApplicationSorted();
+    }
 }
