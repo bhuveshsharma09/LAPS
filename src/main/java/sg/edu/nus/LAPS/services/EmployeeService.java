@@ -21,6 +21,9 @@ public interface EmployeeService {
 
 
 
-    
+    //Bowen add
+	public ArrayList<String> findAllEmployeeNames();
+	
+	public Employee findEmployeeByName1(String name);
 
 }

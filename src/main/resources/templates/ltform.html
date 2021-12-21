@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave type form</title>
+</head>
+
+<body>
+    <h1>Welcome admin!</h1>
+
+    <form th:object="${leaveType}" th:action="@{/leavetype/addLeaveType}" method="POST">
+        <fieldset>
+            LEAVE NAME : <input type="text" th:field="*{leaveName}" />
+            <p th:if="${#fields.hasErrors('leaveName')}" th:errors="*{leaveName}"></p>
+        </fieldset>
+
+        <fieldset>
+            Granularity: <input type="number" th:field="*{granularity}" />
+            <p th:if="${#fields.hasErrors('granularity')}" th:errors="*{granularity}"></p>
+        </fieldset>
+
+        <fieldset>
+            LEAVE CODE: <input type="text" th:field="*{leaveCode}" />
+            <p th:if="${#fields.hasErrors('leaveCode')}" th:errors="*{leaveCode}"></p>
+        </fieldset>
+
+        <fieldset>
+            <input type="submit" value="SAVE" />
+            &nbsp;&nbsp;&nbsp;
+            <input type="reset" value="RESET" />
+        </fieldset>
+    </form>
+</body>
+
+</html>

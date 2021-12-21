@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave type</title>
+</head>
+
+<body>
+    <h1>Hello, admin! You can manage all leave types!</h1>
+    <br />
+    <h2>Please add a new leave type </h2>
+    <br>
+    <p><a th:href="@{/leavetype/load}">Add</a></p>
+    <br>
+    <table th:if="${not #lists.isEmpty(leaveTypes)}" border="1" cellpadding="20"
+    cellspacing="0" width="500" height="249">
+        <tr>
+            <th>LEAVE NAME</th>
+            <th>Granularity</th>
+            <th>LEAVE CODE</th>           
+            <th>EDIT</th>           
+            <th>DELETE</th>           
+        </tr>
+        <tr th:each="leaveType:${leaveTypes}">
+            <td th:text="${leaveType.leaveName}">LEAVE NAME</td>
+            <td th:text="${leaveType.granularity}">Granularity</td>
+            <td th:text="${leaveType.leaveCode}">LEAVE CODE</td>
+            
+            <td><a href="ltform.html" th:href="@{/leavetype/edit/}+${leaveType.leaveName}">Edit</a></td> >
+            <td><a href="ltform.html" th:href="@{/leavetype/delete/}+${leaveType.leaveName}">Delete</a></td> >
+            
+        </tr>
+    </table>
+</body>
+</html>

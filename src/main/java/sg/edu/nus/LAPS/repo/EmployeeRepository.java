@@ -1,5 +1,6 @@
 package sg.edu.nus.LAPS.repo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	@Query("SELECT DISTINCT e2 FROM Employee e1, Employee e2 WHERE e1.employeeId = e2.managerId AND e1.employeeId = :eid")
 	public List<Employee> findEmployeesByManagerId(@Param("eid") Integer employeeId);
 	
+
 	@Query("Select m from Employee m where m.name LIKE :name")
 	List<Employee> findMemberByFirstName(@Param("name") String name);
 	
@@ -23,4 +25,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	Employee findByEmployeeId(@Param("id") Integer employeeId);
 
 	public List<Employee> findEmployeesByManager_EmployeeId(Integer employeeId);
+
+
+	 
+	 //Bowen add
+	 @Query("SELECT DISTINCT e.name FROM Employee e")
+	 ArrayList<String> findAllEmployeeNames();
+	 
+	@Query("SELECT e from Employee e where e.name = :name")
+	public Employee findEmployeeByName(@Param("name") String name);
+	 
+	 
+	 
+
 }
