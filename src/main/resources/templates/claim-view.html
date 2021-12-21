@@ -1,15 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View All claim</title>
-</head>
-    <meta charset="UTF-8">
-    <title>View Claim Details</title>
-</head>
-<body>
+<html lang="en">
+<head th:replace="fragment/layout.html :: head"/>
+
+<body
+        class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #ffffff;">
+
+<div th:replace="fragment/layout.html :: navbar-inv"/>
+
+
+
+
+<section
+        class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+        style="padding: 133px 0px;background: #ffffff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;padding-top: 39px;">
+    <div class="row">
+        <div
+                class="col" style="width: 1320px;">
+            <div
+                    class="container"
+                    style="padding: 50px;padding-top: 0px;padding-bottom: 10px;width: 673px;background: url(&quot;https://i.ibb.co/ygmsBnL/paper.jpg&quot;) no-repeat;">
+                <div class="intro"></div>
+                <h3 style="margin-bottom: 44px;margin-top: 20px;padding-top: 23px;">Claim Details</h3>
+                <div class="buttons"></div>
+                <div class="table-responsive" style="border-radius: 8px;border-width: 2px;border-bottom-width: 0px;width: 564px;background: rgba(15,11,11,0);transform: translate(0px);">
+
+                    <table class="table"
+                           th:if="${not #lists.isEmpty(newClaim)}">
+
+                        <thead style="border-color: rgba(33,37,41,0);">
+                        <tr class="text-start" style="background: rgba(152,181,255,0.57);font-size: 18px;"></tr>
+                        </thead>
+                        <tbody style="border-width: 0px;font-weight: bold;">
+                        <tr>
+                            <td style="font-size: 18px;">Claim Id</td>
+                            <td style="font-size: 18px;"><span th:text="${newClaim.get(0).claimId}"></span></td>
+                        </tr>
+                        <tr style="font-size: 18px;">
+                            <td style="font-size: 18px;">Approval Status</td>
+                            <td style="font-size: 18px;"><span th:text="${newClaim.get(0).approvalStatus}"></span></td>
+                        </tr>
+                        <tr style="font-size: 18px;">
+                            <td style="font-size: 18px;">Eligible Claim</td>
+                            <td style="font-size: 18px;"><span th:text="${newClaim.get(0).eligibleClaim}"></span></td>
+                        </tr>
+                        <tr style="font-size: 18px;">
+                            <td style="font-size: 18px;">Hours Worked</td>
+                            <td style="font-size: 18px;"><span th:text="${newClaim.get(0).hoursWorked}"></span></td>
+                        </tr>
+                        <tr style="font-size: 18px;">
+                            <td style="font-size: 18px;">Overtime Date</td>
+                            <td style="font-size: 18px;"><span th:text="${newClaim.get(0).overtimeDate}"></span></td>
+                        </tr>
+                        <tr style="font-size: 18px;">
+                            <td style="font-size: 18px;">Remarks</td>
+                            <td style="font-size: 18px;"><span th:text="${newClaim.get(0).remarks}"></span></td>
+                        </tr>
+                        <tr style="font-size: 18px;">
+                            <td style="font-size: 18px;">Manager's Remark</td>
+                            <td style="font-size: 18px;"><span th:text="${newClaim.get(0).managerComment}"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div><button class="btn btn-primary"
+
+
+                              type="button" style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px;">
+                <a href="/Claim/all" >Back</a>
+            </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+
 <h1>Claim details</h1>
 
 
@@ -46,5 +126,16 @@
 
 </table>
 <h3><a th:href="@{/back}">Go Back</a> </h3>
+-->
+
+
+<footer style="background-color: #98b5ff; max-height: 30px;">
+    <h1 class="text-start">Take your holidays without worry!</h1>
+</footer>
+
+
+<script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+
+
 </body>
 </html>
