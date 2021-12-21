@@ -41,7 +41,7 @@
                     <td th:text="${subordinate.annualLeaveCount}" />
                     <td th:text="${subordinate.medicalLeaveCount}" />
                     <td th:text="${subordinate.compensationLeaveCount}" />
-                    <td th:text="${subordinate.jobTitle}" />
+                   <!-- <td th:text="${subordinate.jobTitle}" />-->
                     <!--
                         <td> <a href="/employee/leaveList/+${subordinate.employeeId}" >Manage Leave entitlement</a><td  />
                     -->
@@ -129,6 +129,6 @@
 <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean">
     <h1 class="text-start">Take your holidays without worry!</h1>
 </footer>
-
+<script  type="text/javascript" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
 </html>
