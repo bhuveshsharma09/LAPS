@@ -76,11 +76,12 @@ public class StaffController {
     	if(bdResult.hasErrors()){
 			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate");
-			return "leaveForm";
+			return "forward:/employee/addLeave/"+employee.getEmployeeId();
 		}
 		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
+			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate", "Date is wrong");
-			return "leaveForm";
+			return "forward:/employee/addLeave/"+employee.getEmployeeId();
 		}
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
@@ -88,7 +89,7 @@ public class StaffController {
         leaveApplicationService.saveLeaveApplication(LA);
 		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
 		System.out.println(last.get(0).getLeaveId());
-		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
+		// emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
         return "forward:/employee/leaveList/"+employee.getEmployeeId();
     }
     
