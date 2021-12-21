@@ -29,7 +29,7 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     LeaveApplication findSingleLeaveById(@Param("leaveId") Integer leaveId);
     
     //Use case: Find all employees leaves under the manager
-    @Query("SELECT leaves FROM LeaveApplication leaves JOIN leaves.employee e WHERE e.managerId = :mid AND leaves.approvalStatus = :status")
+    @Query("SELECT leaves FROM LeaveApplication leaves JOIN leaves.employee e WHERE e.manager.employeeId = :mid AND leaves.approvalStatus = :status")
     List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(@Param("mid") int mid,@Param("status") ApprovalStatus approval);
 
     @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 3", nativeQuery = true)

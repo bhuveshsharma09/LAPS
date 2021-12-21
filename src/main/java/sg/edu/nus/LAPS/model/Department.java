@@ -32,4 +32,9 @@ public class Department {
 	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL) //one Department can have many Employees
 	private List<Employee> employees;
 	
+	@Override
+	public String toString() {
+		return departmentId + "- " + departmentName;
+	}
+	
 }

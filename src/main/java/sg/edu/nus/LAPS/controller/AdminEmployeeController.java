@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sg.edu.nus.LAPS.services.DepartmentService;
+import sg.edu.nus.LAPS.services.DepartmentServiceImpl;
+import sg.edu.nus.LAPS.model.Department;
 ///import Exceptions.EmployeeNotFound;
 //import Validators.EmployeeValidator;
 import sg.edu.nus.LAPS.model.Employee;
@@ -31,7 +34,15 @@ public class AdminEmployeeController {
 	public void setEmployeeService(EmployeeServiceImpl empServiceImpl) {
 		this.employeeService = empServiceImpl;
 	}
+
 	
+	@Autowired
+	private DepartmentService deptService;
+	
+	@Autowired
+	public void setDepartmentService(DepartmentServiceImpl deptServiceImpl) {
+		this.deptService = deptServiceImpl;
+	}
 	
 	//View a list of all employees - employee/all
 	@RequestMapping(value = "/all")
@@ -49,6 +60,9 @@ public class AdminEmployeeController {
 		
 		ArrayList<Employee> emps = employeeService.findAllEmployees();
 		model.addAttribute("employees", emps);
+		
+		ArrayList<Department> depts = deptService.findAllDepartments();
+		model.addAttribute("departments", depts);
 		
 		return "employee-form";
 	}
@@ -77,6 +91,9 @@ public class AdminEmployeeController {
 		ArrayList<Employee> managerId = employeeService.findAllEmployees();
 		model.addAttribute("employees", managerId);
 		
+		ArrayList<Department> depts = deptService.findAllDepartments();
+		model.addAttribute("departments", depts);
+		
 		return "employee-edit";
 	}
 	
@@ -95,6 +112,7 @@ public class AdminEmployeeController {
 	public String editEmployeeLeave(@PathVariable("id") Integer id, Model model) {
 		Employee e = employeeService.findEmployeeById(id);
 		model.addAttribute("employee", e);
+		
 		ArrayList<Employee> managerId = employeeService.findAllEmployees();
 		model.addAttribute("employees", managerId);
 		
