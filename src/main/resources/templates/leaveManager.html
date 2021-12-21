@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Personal Leave Manager</title>
 </head>
 <body>
     <table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
@@ -11,11 +11,11 @@
         <tr>
             <th >Leave Id</th>
             <th>Employee Id</th>
-            <th>from date</th>
-            <th>to date</th>
-            <th>leave type</th>
-            <th>remark</th>
-            <th>contact detail</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Leave Type</th>
+            <th>Remarks</th>
+            <th>Contact Detail</th>
             <th>Status</th>
             <th>Manager's Comment</th>
             <th>View Details</th>
@@ -37,12 +37,12 @@
         <td th:text="${leave.managerComment}" />
         <td><a href="leaveForm.html" th:href="@{/employee/viewLeaveDetails/}+${leave.leaveId}">View Details</a></td>
         <td><a href="leaveForm.html" th:unless="${leave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:href="@{/employee/editLeave/}+${leave.leaveId}">Edit</a></td>
-		<td><a href="leaveForm.html" th:href="@{/employee/deleteLeave/}+${leave.leaveId}">Delete</a></td>
+		<td><a href="leaveForm.html" th:unless="${leave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:href="@{/employee/deleteLeave/}+${leave.leaveId}">Delete</a></td>
 		<td><a href="leaveForm.html" th:if="${leave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:href="@{/employee/cancelLeave/}+${leave.leaveId}">Cancel</a></td >
     </tr>
         </tbody>
     
     </table>
-    <a th:href="@{/employee/home}">Back</a>
+    <a th:href="@{/employee/}">Back</a>
 </body>
 </html>
