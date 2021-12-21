@@ -69,7 +69,7 @@ public class StaffController {
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
     public String saveLeave(@ModelAttribute("newLeave") @Valid LeaveApplication LA,
 							BindingResult bdResult, @ModelAttribute("employee") @Valid Employee employee,
-							Model model)throws MessagingException, IOException {
+							Model model) throws MessagingException, IOException {
 		List<Object> leaveType = leaveTypeService.findAllLeaveType();
 		Date fromDate = LA.getFromDate();
 		Date toDate = LA.getToDate();
@@ -96,6 +96,7 @@ public class StaffController {
     public String manageLeave(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
         list.addAll(leaveApplicationService.findAllLeaves(id));
+        
         model.addAttribute("leaveList", list);
         model.addAttribute("employee", employeeService.findEmployeeById(id));
         
@@ -103,12 +104,12 @@ public class StaffController {
     }
     
     @RequestMapping("/viewLeaveDetails/{id}")
-	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model) {
     	
     	LeaveApplication selectedLeave = leaveApplicationService.findSingleLeaveById(id);
     	Employee selectedEmp = selectedLeave.getEmployee();
     	List<Object> leaveType = leaveTypeService.findAllLeaveType();
-    	
+
     	model.addAttribute("newLeave", selectedLeave);
     	model.addAttribute("employee", selectedEmp);
     	model.addAttribute("leaveTypeValue", leaveType);
@@ -117,21 +118,36 @@ public class StaffController {
 	}
     
     @RequestMapping(value = "/editLeave/{id}")
-	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+	public String editLeave(@PathVariable("id") Integer id, Model model) {
+    	
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	List<Object> leaveType = leaveTypeService.findAllLeaveType();
+    	
     	model.addAttribute("newLeave", leaveAppToChange);
     	model.addAttribute("leaveTypeValue", leaveType);
-		
+    	model.addAttribute("employee", leaveAppToChange.getEmployee());
+    	
 		return "leaveForm-edit";
 	}
     
-    @RequestMapping(value = "/updateLeave/{id}")
-	public String updateLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute @Valid LeaveApplication LA, BindingResult bdgresult) {
-    	if(bdgresult.hasErrors())
-        {
-            return "leaveForm-edit";
-        }
+    @RequestMapping(value = "/updateLeave/{id}", method = RequestMethod.POST)
+	public String updateLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute("newLeave") @Valid LeaveApplication LA, BindingResult bdgresult,
+			@ModelAttribute("employee") Employee employee) {
+    	
+    	List<Object> leaveType = leaveTypeService.findAllLeaveType();
+		Date fromDate = LA.getFromDate();
+		Date toDate = LA.getToDate();
+		
+		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
+			model.addAttribute("wrongDate", "Date is wrong");
+			model.addAttribute("leaveTypeValue", leaveType);
+			return "leaveForm-edit";
+		}
+    	if(bdgresult.hasErrors()){
+			model.addAttribute("leaveTypeValue", leaveType);
+			model.addAttribute("wrongDate");
+			return "leaveForm-edit";
+		}
     	
     	// find the leave to change
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
@@ -144,6 +160,7 @@ public class StaffController {
     	leaveAppToChange.setCoveringEmp(LA.getCoveringEmp());
     	leaveAppToChange.setLeaveType(LA.getLeaveType());
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.UPDATED);
+    	
     	// save changes
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
     	
