@@ -22,6 +22,7 @@
             <th>remark</th>
             <th>contact detail</th>
             <th>Status</th>
+            <th>View Details</th>
     
         </tr>
         </thead>
@@ -35,6 +36,7 @@
         <td th:text="${leave.remarks}" />
         <td th:text="${leave.contactDetails}" />
         <td th:text="${leave.approvalStatus}" />
+        <td><a th:href="@{/manager/viewLeaveDetails/}+${leave.leaveId}">View Details</a></td>
     </tr>
         </tbody>
     
