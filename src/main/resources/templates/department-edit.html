@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Department</title>
+</head>
+
+
+<body>
+
+	<h1>Edit Department Details</h1>
+
+	<form action="#" th:object="${department}" th:action="@{/department/editDepartmentSuccess/}+${department.departmentId}" method="post">
+		
+		<input type="hidden" th:field="*{departmentId}" />
+		
+		<fieldset>
+			Department Name: <input type="text" th:field="*{departmentName}">
+			<p th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></p>
+		</fieldset>
+	
+		
+		<fieldset>
+			Manager Name: 
+             <select th:field="*{managerId}" name="managerId" size="1" id="managerId">
+            	<option value="">Select Manager</option>
+                <option th:each="employee: ${employees}" th:value="${employee.employeeId}"
+						th:text="${employee.name}">
+				</option>
+            </select>      
+			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
+		</fieldset>
+		
+		
+		<fieldset>
+			<input type="submit" value="Update" /> &nbsp; &nbsp; 
+			<input type="button" value="Back" onclick="window.location.href='/department/all'; return false"/>
+		</fieldset>
+
+	</form>
+	
+</body>
+</html>

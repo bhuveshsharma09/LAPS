@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments</title>
+</head>
+
+
+<body>
+	<h1>Hey Admin, here's where you manage all departments</h1>
+	<!-- Add Hyperlink -->
+	
+	<h4>Add a new department via the link below.</h4>
+	<a href="employee-form.html" th:href="@{/department/add}">Add department</a>
+
+	<h4 th:if="${not #lists.isEmpty(departments)}">
+	Edit or delete a department using the options available below.</h4>
+
+	<table th:if="${not #lists.isEmpty(departments)}" >
+		<tr >
+			<th >Department ID</th>
+			<th >Name</th>
+			<th >Manager ID</th>
+			<th >Edit</th>
+			<th >Delete</th>
+		</tr>
+		
+		<tr th:each="department:${departments}" class="table-row">
+			<td th:text=${department.departmentId}>department ID</td>
+			<td th:text=${department.departmentName}>Name</td>
+			<td th:text=${department.managerId}>Manager ID</td>
+			
+			
+			<td><a href="department-edit.html"
+				th:href="@{/department/editDepartment/}+${department.departmentId}">Edit</a>
+			</td>
+	
+		
+			<td><a href="department-delete.html"
+				th:href="@{/department/delete/}+${department.departmentId}">Delete</a>
+			</td>
+		</tr>
+	</table>
+	
+	
+</body>
+</html>
