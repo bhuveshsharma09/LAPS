@@ -1,5 +1,6 @@
 package sg.edu.nus.LAPS.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
@@ -20,4 +21,6 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findPastLeavesByEmployeeId(Integer id);
     
     LeaveApplication deleteLeave(Integer id);
+    
+    Double getLeaveDuration(Integer id);
 }

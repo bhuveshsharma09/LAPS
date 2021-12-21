@@ -1,5 +1,6 @@
 package sg.edu.nus.LAPS.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,11 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
 	public LeaveApplication deleteLeave(Integer id) {
 		leaveApplicationRepository.deleteById(id);
 		return null;
+	}
+
+	@Override
+	public Double getLeaveDuration(Integer id) {
+		return leaveApplicationRepository.getLeaveDuration(id);
+		
 	}
 }

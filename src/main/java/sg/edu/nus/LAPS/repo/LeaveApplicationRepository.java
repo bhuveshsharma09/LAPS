@@ -41,15 +41,19 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     List<LeaveApplication> findUpcomingLeaves(@Param("employeeId") Integer employeeId, @Param("approvalStatus") ApprovalStatus approvalStatus, @Param("inputDate") Date inputDate);
 
     // find leave by leaveId
-    // required to send email for a particular levae id
+    // required to send email for a particular leave id -- same method as line 26-27
    // @Query("SELECT l from LeaveApplication l WHERE l.leaveId =: id")
     //public LeaveApplication findLeaveApplicationByLeaveId(@Param("id") Integer id);
 
     @Query("SELECT l FROM LeaveApplication l where l.leaveId = :id")
     LeaveApplication findLeaveApplicationById(@Param("id") Integer id);
     
+    // for PDF document download
     @Query(value = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'leave_application'", nativeQuery = true)
     Integer countColumns();
+    
+    @Query(value = "SELECT datediff(to_date, from_date) FROM laps.leave_application WHERE leave_id = :leaveId", nativeQuery = true)
+	Double getLeaveDuration(@Param("leaveId") Integer leaveId);
 
 
 }

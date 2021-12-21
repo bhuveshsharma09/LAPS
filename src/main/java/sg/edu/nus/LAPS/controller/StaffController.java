@@ -151,6 +151,22 @@ public class StaffController {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.CANCELLED);
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+    	
+    	Employee emp = leaveAppToChange.getEmployee();
+    	
+    	// get leave duration
+		Double leaveDuration = leaveApplicationService.getLeaveDuration(id);
+		
+		// return subtracted leave days to leave count
+		String leaveType = leaveAppToChange.getLeaveType().getLeaveName();
+		if (leaveType.equalsIgnoreCase("AL")) {
+			emp.setAnnualLeaveCount(emp.getAnnualLeaveCount() + leaveDuration);
+		}
+		else if (leaveType.equalsIgnoreCase("ML")) {
+			emp.setMedicalLeaveCount(emp.getMedicalLeaveCount() + leaveDuration);
+		}
+		employeeService.saveEmployee(emp);
+    	
 		return "redirect:/employee/manageLeave/" + leaveAppToChange.getEmployee().getEmployeeId();
 	}
 

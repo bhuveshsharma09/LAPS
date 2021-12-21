@@ -1,10 +1,11 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,9 @@ public class ManagerController {
     
 	@Autowired
 	LeaveApplicationRepository leaveApplicationRepository;
+	
+	@Autowired
+	EmployeeService employeeService;
 
     @RequestMapping("/request/{id}")
     public String getEmployeeLeaves(Model model,@PathVariable Integer id){
@@ -85,10 +89,23 @@ public class ManagerController {
 	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, @RequestParam("manager-remarks") String managerComment, Model model) {
     	
     	LeaveApplication leaveAppToApprove = leaveApplicationService.findSingleLeaveById(id);
+    	Employee subEmp = leaveAppToApprove.getEmployee();
     	
     	if (approvalResult.equalsIgnoreCase("Approve")) {
     		leaveAppToApprove.setManagerComment(managerComment);
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.APPROVED);
+    		
+    		// get leave duration
+    		Double leaveDuration = leaveApplicationService.getLeaveDuration(id);
+    		
+    		// subtract leave duration from leave count
+    		String leaveType = leaveAppToApprove.getLeaveType().getLeaveName();
+    		if (leaveType.equalsIgnoreCase("AL")) {
+    			subEmp.setAnnualLeaveCount(subEmp.getAnnualLeaveCount() - leaveDuration);
+    		}
+    		else if (leaveType.equalsIgnoreCase("ML")) {
+    			subEmp.setMedicalLeaveCount(subEmp.getMedicalLeaveCount() - leaveDuration);
+    		}
     	}
     	else if (approvalResult.equalsIgnoreCase("Reject")) {
     		leaveAppToApprove.setManagerComment(managerComment);
@@ -96,7 +113,8 @@ public class ManagerController {
     	}
     	
     	leaveApplicationService.saveLeaveApplication(leaveAppToApprove);
+    	employeeService.saveEmployee(subEmp);
     	
-		return "home";
+		return "redirect:/manager/request/" + subEmp.getManagerId();
 	}
 }
