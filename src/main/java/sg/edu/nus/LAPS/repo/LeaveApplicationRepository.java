@@ -32,8 +32,29 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     @Query("SELECT leaves FROM LeaveApplication leaves JOIN leaves.employee e WHERE e.manager.employeeId = :mid AND leaves.approvalStatus = :status")
     List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(@Param("mid") int mid,@Param("status") ApprovalStatus approval);
 
-    @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 3", nativeQuery = true)
-    List<LeaveApplication> findPastLeavesByEmployeeId(@Param("eid") int eid);
+  //Use case: Find all leaves under the employee at current year
+    @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND YEAR(to_date) = :currentYear", nativeQuery = true)
+    Page<LeaveApplication> findAllLeaves(@Param("eid") int eid, @Param("currentYear") int year, Pageable page);
+    
+    //Use case: Find all 'Approved' leaves under the employee at current year
+    @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 'APPROVED' AND YEAR(to_date) = :currentYear", nativeQuery = true)
+    Page<LeaveApplication> findApprovedLeaves(@Param("eid") int eid, @Param("currentYear") int year, Pageable page);
+    
+    //Use case: Find all 'Rejected' leaves under the employee at current year
+    @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 'REJECTED' AND YEAR(to_date) = :currentYear", nativeQuery = true)
+    Page<LeaveApplication> findRejectedLeaves(@Param("eid") int eid, @Param("currentYear") int year, Pageable page);
+    
+    //Use case: Find all 'Applied' leaves under the employee at current year
+    @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 'APPLIED' AND YEAR(to_date) = :currentYear", nativeQuery = true)
+    Page<LeaveApplication> findAppliedLeaves(@Param("eid") int eid, @Param("currentYear") int year, Pageable page);
+    
+    //Use case: Find all 'Updated' leaves under the employee at current year
+    @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 'UPDATED' AND YEAR(to_date) = :currentYear", nativeQuery = true)
+    Page<LeaveApplication> findUpdatedLeaves(@Param("eid") int eid, @Param("currentYear") int year, Pageable page);
+    
+    //Use case: Find all 'Cancelled' leaves under the employee at current year
+    @Query(value = "SELECT * FROM laps.leave_application WHERE employee_id = :eid AND approval_status = 'CANCELLED' AND YEAR(to_date) = :currentYear", nativeQuery = true)
+    Page<LeaveApplication> findCancelledLeaves(@Param("eid") int eid, @Param("currentYear") int year, Pageable page);
     
     List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatus(Integer employeeId, ApprovalStatus approvalStatus);
     
