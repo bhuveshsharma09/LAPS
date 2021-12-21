@@ -21,14 +21,14 @@ public class Employee {
 
 	// do not need manager_id as the navigation already created department id for us
 	// which can be used to get manager id
-	private Integer managerId;
+	private Integer managerId; //4
 
-	private Double annualLeaveCount; //4
-	private Double medicalLeaveCount; //5
-	private Double compensationLeaveCount; //6
+	private Double annualLeaveCount; //5 
+	private Double medicalLeaveCount; //6
+	private Double compensationLeaveCount; //7
 
 	@Column(name = "emailId")
-	private String emailId; //6
+	private String emailId; //8
 
 	//Relations
 	@OneToOne(mappedBy = "employee") //one Employee can only have one set of login credentials

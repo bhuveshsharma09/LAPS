@@ -28,6 +28,7 @@ public class Claim {
 	private Double hoursWorked; //3
 	private Double eligibleClaim; //4
 	private String remarks; //5
+	private String managerComment;
 	//private ApprovalStatus approvalStatus; //6
 	//adding direct enum support as per leave application
 	@Column(name="approvalStatus",columnDefinition = "ENUM('APPLIED', 'UPDATED', 'CANCELLED', 'APPROVED', 'DELETED', 'REJECTED')")

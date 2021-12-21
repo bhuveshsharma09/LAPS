@@ -25,9 +25,11 @@
         <th >hoursWorked</th>
         <th >overtimeDate</th>
         <th >remarks</th>
+        <th >Manager's comment</th>
 
         <th >Edit claim</th>
         <th >Delete claim</th>
+        <th >View details</th>
     </tr>
     <tr th:each="claim:${claimList}" class="table-row">
         <td th:text="${claim.claimId}">ID</td>
@@ -40,6 +42,8 @@
         <td th:text="${claim.hoursWorked}">Name</td>
         <td th:text="${claim.overtimeDate}">ID</td>
         <td th:text="${claim.remarks}">Name</td>
+        <td th:text="${claim.managerComment}">Name</td>
+        <td><a th:href="@{/Claim/viewClaimDetails/}+${claim.claimId}">View Details</a></td>
 
 
 <!--
@@ -73,7 +77,8 @@
 </table>
 <br/>
 <!--	<div th:replace="fragments/general.html :: footer"></div>-->
-<a th:href="@{/authenticate}">Back</a>
+<!--<a th:href="@{/authenticate}">Back</a>-->
+<h3><a th:href="@{/back}">Go Back</a> </h3>
 
 </body>
 </html>
