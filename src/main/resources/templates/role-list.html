@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role</title>
+</head>
+
+<body>
+    <h1>Hello, admin! You can manage all roles!</h1>
+    <br />
+    <h2>Please add a new role </h2>
+    <br>
+    <p><a th:href="@{/role/load}">Add</a></p>
+    <br>
+    <table th:if="${not #lists.isEmpty(roles)}" border="1" cellpadding="20"
+    cellspacing="0" width="500" height="249">
+        <tr>
+            <th>ROLE ID</th>
+            <th>ROLE DESCRIPTION</th>
+            <th>ROLE TITLE</th>           
+            <th>EDIT</th>           
+            <th>DELETE</th>           
+        </tr>
+        <tr th:each="role:${roles}">
+            <td th:text="${role.roleId}">ROLE ID</td>
+            <td th:text="${role.roleDesc}">ROLE DESCRIPTION</td>
+            <td th:text="${role.roleTitle}">ROLE TITLE</td>
+            
+            <td><a href="role-form.html" th:href="@{/role/edit/}+${role.roleId}">Edit</a></td> >
+            <td><a href="role-form.html" th:href="@{/role/delete/}+${role.roleId}">Delete</a></td> >
+            
+        </tr>
+    </table>
+</body>
+</html>
