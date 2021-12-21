@@ -1,10 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>make a claim</title>
-</head>
-<body>
+<head th:replace="fragment/layout.html :: head"/>
+<body
+        class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #ffffff;">
+
+<div th:replace="fragment/layout.html :: navbar-inv"/>
+
+<section
+        class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+        style="padding: 133px 0px;
+             background: #ffffff;
+             color: rgb(0,0,0);
+             margin-bottom: 0px;
+             padding-bottom: 380px;
+             padding-top: 39px;">
+
+    <div class="row">
+        <div class="col">
+            <div class="container"
+                 style="padding: 50px;
+                     padding-top: 0px;
+                     padding-bottom: 10px;">
+
+                <div class="intro">
+
+                </div>
+                <h3>Edit the Claim request</h3>
+                <div class="buttons">
+
+                </div>
+
+                <form
+                        class="flex-fill" action="#" th:object="${claim}"   th:action="@{/Claim/edit/}+${claim.claimId}" method="post"
+
+                        style="padding: 114px;
+                    padding-top: 20px;
+                    padding-right: 510px;
+                    padding-bottom: 50px;
+                    padding-left: 0px;">
+
+
+                    <!--one entry-->
+                    <div class="mb-3">
+                        <label
+                                class="form-label"
+                                style="margin-bottom: 3px;">
+                            <strong><span th:text="#{Label.claimOverTimeDate}"></span></strong>
+                        </label>
+
+                        <input
+                                class="form-control"
+                                type="text"
+                                name="fromDate"
+                                placeholder="Select the date when you over worked"
+                                style="background: rgba(152,181,255,0.26);"
+                                th:field="*{overtimeDate}"
+                                th:text="${#dates.format(claim.overtimeDate,'dd-MM-yyyy')}">
+                    </div>
+                 <!--   <div class="mb-3">
+                        <label
+                                class="error-message">
+                            <strong><span th:if="${#fields.hasErrors('overtimeDate')}" th:errors="*{overtimeDate}"></span></strong>
+                        </label>
+                    </div>-->
+
+                    <!--second entry-->
+                    <div class="mb-3">
+                        <label
+                                class="form-label"
+                                style="margin-bottom: 3px;">
+                            <strong><span th:text="#{Label.claimHoursWorked}"></span></strong>
+                        </label>
+
+                        <input
+                                class="form-control"
+                                type="number"
+                                name="hoursWorked"
+                                min="4" max="8"
+                                placeholder="Enter the number of hours"
+                                style="background: rgba(152,181,255,0.26);"
+                                th:field="*{hoursWorked}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label
+                                class="error-message">
+                            <strong><span th:if="${#fields.hasErrors('hoursWorked')}" th:errors="*{hoursWorked}"></span></strong>
+                        </label>
+                    </div>
+
+
+                    <!--third entry-->
+                    <div class="mb-3">
+                        <label
+                                class="form-label"
+                                style="margin-bottom: 3px;">
+                            <strong><span th:text="#{Label.claimEligibleClaim}"></span></strong>
+                        </label>
+
+                        <input
+                                class="form-control"
+                                type="number"
+                                name="eligibleClaim"
+                                placeholder="Enter the eligible claim hours"
+                                style="background: rgba(152,181,255,0.26);"
+                                th:field="*{eligibleClaim}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label
+                                class="error-message">
+                            <strong><span th:if="${#fields.hasErrors('eligibleClaim')}" th:errors="*{eligibleClaim}"></span></strong>
+                        </label>
+                    </div>
+
+
+                    <!--fourth entry-->
+                    <div class="mb-3">
+                        <label
+                                class="form-label"
+                                style="margin-bottom: 3px;">
+                            <strong><span th:text="#{Label.claimRemark}"></span></strong>
+                        </label>
+
+                        <input
+                                class="form-control"
+                                type="text"
+                                name="remarks"
+                                placeholder="Enter your remarks"
+                                style="background: rgba(152,181,255,0.26);"
+                                th:field="*{remarks}">
+                    </div>
+
+
+                    <div class="text-end mb-3">
+                        <button class="btn btn-primary"
+                                type="submit"
+                                style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;">
+                            <strong><span th:text="#{Label.editEntry}"></span></strong></button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+        <div class="col">
+            <img th:src="@{https://i.ibb.co/Hgh1n1s/edit-leave-form.jpg}" src="https://i.ibb.co/Hgh1n1s/edit-leave-form.jpg"
+                 style="height: 395px;width: 427.78px;margin-top: 144px;border-radius: 17px;"/>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!--
 <H1>Make a claim</H1>
 <form action="#" th:object="${claim}"   th:action="@{/Claim/edit/}+${claim.claimId}" method="post">
 
@@ -33,6 +189,15 @@
 
 
 </form>
-<h3><a th:href="@{/back}">Go Back</a> </h3>
+<h3><a th:href="@{/back}">Go Back</a> </h3>-->
+
+
+            <footer style="background-color: #98b5ff; max-height: 30px;">
+                <h1 class="text-start">Take your holidays without worry!</h1>
+            </footer>
+
+
+            <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+
 </body>
 </html>

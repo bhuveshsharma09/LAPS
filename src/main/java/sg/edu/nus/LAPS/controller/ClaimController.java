@@ -83,7 +83,7 @@ public class ClaimController {
         //EmailController emailController = new EmailController();
         emailController.sendTheEmail(1,claim1.get(0).getClaimId(),ApprovalStatus.APPLIED);
 
-        return "forward:/Claim/all";
+        return "redirect:/Claim/all";
     }
 
     @RequestMapping(value = "/all")
