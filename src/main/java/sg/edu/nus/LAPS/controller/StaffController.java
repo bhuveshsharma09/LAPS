@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Employee;
@@ -76,11 +78,12 @@ public class StaffController {
     	if(bdResult.hasErrors()){
 			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate");
-			return "leaveForm";
+			return "forward:/employee/addLeave/"+employee.getEmployeeId();
 		}
 		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
+			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate", "Date is wrong");
-			return "leaveForm";
+			return "forward:/employee/addLeave/"+employee.getEmployeeId();
 		}
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
@@ -88,7 +91,7 @@ public class StaffController {
         leaveApplicationService.saveLeaveApplication(LA);
 		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
 		System.out.println(last.get(0).getLeaveId());
-		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
+		// emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
         return "forward:/employee/leaveList/"+employee.getEmployeeId();
     }
     
@@ -199,20 +202,22 @@ public class StaffController {
 	}
 
 
-	@RequestMapping(value = "/history")
-	public String LeaveHistory(HttpSession session, Model model) {
+    @RequestMapping(value = "/history")
+	public String LeaveHistory(HttpSession session, Model model, @RequestParam(value="pageNumber", required=false, defaultValue="1") int pageNumber,
+			@RequestParam(value="size", required=false, defaultValue="5") int size) {
 		SessionController usession = (SessionController) session.getAttribute("userSession");
-		//ModelAndView mav = new ModelAndView("login");
-		if (usession.getUserCredentials() != null) {
-			//mav = new ModelAndView("staff-course-history");
-			//System.out.println(usession.getEmployee());
-			if (leaveApplicationService.findPastLeavesByEmployeeId(usession.getEmployee().getEmployeeId()).size() > 0) {
-				model.addAttribute("leaveHistory", leaveApplicationService.findPastLeavesByEmployeeId(usession.getEmployee().getEmployeeId()));
-			}
+		
+		if (usession.getUserCredentials() != null) {	
+				model.addAttribute("leaveHistory", leaveApplicationService.findAllLeaves(usession.getEmployee().getEmployeeId(), Calendar.getInstance().get(Calendar.YEAR), pageNumber, size));
+				model.addAttribute("approvedLeaveHistory", leaveApplicationService.findApprovedLeaves(usession.getEmployee().getEmployeeId(), Calendar.getInstance().get(Calendar.YEAR), pageNumber, size));
+				model.addAttribute("rejectedLeaveHistory", leaveApplicationService.findRejectedLeaves(usession.getEmployee().getEmployeeId(), Calendar.getInstance().get(Calendar.YEAR), pageNumber, size));
+				model.addAttribute("appliedLeaveHistory", leaveApplicationService.findAppliedLeaves(usession.getEmployee().getEmployeeId(), Calendar.getInstance().get(Calendar.YEAR), pageNumber, size));
+				model.addAttribute("updatedLeaveHistory", leaveApplicationService.findUpdatedLeaves(usession.getEmployee().getEmployeeId(), Calendar.getInstance().get(Calendar.YEAR), pageNumber, size));
+				model.addAttribute("cancelledLeaveHistory", leaveApplicationService.findCancelledLeaves(usession.getEmployee().getEmployeeId(), Calendar.getInstance().get(Calendar.YEAR), pageNumber, size));
 			return "leavehistory";
 		}
 		return "login";
-	}
+    }
 
 	@GetMapping("/download/{id}")
 	public void downloadList(HttpServletResponse response,@ModelAttribute("id") Integer eid) throws DocumentException, IOException{

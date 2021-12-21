@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role form</title>
+</head>
+
+<body>
+    <h1>Welcome admin!</h1>
+
+    <form th:object="${role}" th:action="@{/role/addRole}" method="POST">
+        <fieldset>
+			<input type="hidden" th:field="*{roleId}" />
+		</fieldset>
+
+        <fieldset>
+            ROLE DESCRIPTION: <input type="text" th:field="*{roleDesc}" />
+            <p th:if="${#fields.hasErrors('roleDesc')}" th:errors="*{roleDesc}"></p>
+        </fieldset>
+
+        <fieldset>
+            ROLE TITLE: <input type="text" th:field="*{roleTitle}" />
+            <p th:if="${#fields.hasErrors('roleTitle')}" th:errors="*{roleTitle}"></p>
+        </fieldset>
+
+        <fieldset>
+            <input type="submit" value="SAVE" />
+            &nbsp;&nbsp;&nbsp;
+            <input type="reset" value="RESET" />
+        </fieldset>
+    </form>
+</body>
+
+</html>

@@ -5,35 +5,209 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link th:href="@{/css/leavehistory.css}" rel="stylesheet" />
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+	<script type="text/javascript" th:src="@{/js/leavehistory.js}"></script>
 </head>
 <body>
+	<div class="container">
+    <div class="row">
+    <div class="col-lg-10 mt-5 mb-5">
 	<h2>Employee Leave History</h2>
-		<table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
-    <thead>
-    <tr>
-        <th >Leave Id</th>
-        <th>from date</th>
-        <th>to date</th>
-        <th>leave type</th>
-        <th>remark</th>
-        <th>contact detail</th>
-        <th>Status</th>
+	
 
-    </tr>
-    </thead>
+		<button th:onclick=showTable('t1')> Show all </button>
+		<button th:onclick=showTable('t2')> Show approved leaves </button>
+		<button th:onclick=showTable('t3')> Show rejected leaves </button>
+		<button th:onclick=showTable('t4')> Show applied leaves </button>
+		<button th:onclick=showTable('t5')> Show updated leaves </button>
+		<button th:onclick=showTable('t6')> Show cancelled leaves </button>
+
+	
+	
+		<table class="table table-bordered table-responsive-sm" id="t1" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    	<thead>
+		    <tr>
+		        <th >leave id</th>
+		        <th>from date</th>
+		        <th>to date</th>
+		        <th>leave type</th>
+		        <th>remark</th>
+		        <th>contact detail</th>
+		        <th>Status</th>	
+		    </tr>
+    	</thead>
     
-    <tbody>
-<tr th:each="leave: ${leaveHistory}">
-    <td th:text="${leave.leaveId}" />
-    <td th:text="${leave.fromDate}" />
-    <td th:text="${leave.toDate}" />
-    <td th:text="${leave.leaveType.leaveCode}" />
-    <td th:text="${leave.remarks}" />
-    <td th:text="${leave.contactDetails}" />
-    <td th:text="${leave.approvalStatus}" />
-
-</tr>
-    </tbody>
-
-</table>
+    	<tbody>
+				<tr th:each="leave: ${leaveHistory.page}">
+			    <td> <a th:href = "@{/employee/viewLeaveDetails/} + ${leave.leaveId}" th:text="${leave.leaveId}"/> </td>
+			    <td th:text="${leave.fromDate}" />
+			    <td th:text="${leave.toDate}" />
+			    <td th:text="${leave.leaveType.leaveCode}" />
+			    <td th:text="${leave.remarks}" />
+			    <td th:text="${leave.contactDetails}" />
+			    <td th:text="${leave.approvalStatus}" />
+			</tr>
+    	</tbody>
+	</table>
+	
+	<table class="table table-bordered table-responsive-sm" id="t2" width="auto" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    	<thead>
+		    <tr>
+		        <th >Leave Id</th>
+		        <th>from date</th>
+		        <th>to date</th>
+		        <th>leave type</th>
+		        <th>remark</th>
+		        <th>contact detail</th>
+		        <th>Status</th>
+		
+		    </tr>
+    	</thead>
+    
+    	<tbody>
+				<tr th:each="leave: ${approvedLeaveHistory.page}">
+			    <td> <a th:href = "@{/employee/viewLeaveDetails/} + ${leave.leaveId}" th:text="${leave.leaveId}"/> </td>
+			    <td th:text="${leave.fromDate}" />
+			    <td th:text="${leave.toDate}" />
+			    <td th:text="${leave.leaveType.leaveCode}" />
+			    <td th:text="${leave.remarks}" />
+			    <td th:text="${leave.contactDetails}" />
+			    <td th:text="${leave.approvalStatus}" />
+			</tr>
+    	</tbody>
+	</table>
+	
+	<table id="t3" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    	<thead>
+		    <tr>
+		        <th >Leave Id</th>
+		        <th>from date</th>
+		        <th>to date</th>
+		        <th>leave type</th>
+		        <th>remark</th>
+		        <th>contact detail</th>
+		        <th>Status</th>	
+		    </tr>
+    	</thead>
+    
+    	<tbody>
+				<tr th:each="leave: ${rejectedLeaveHistory.page}">
+			    <td> <a th:href = "@{/employee/viewLeaveDetails/} + ${leave.leaveId}" th:text="${leave.leaveId}"/> </td>
+			    <td th:text="${leave.fromDate}" />
+			    <td th:text="${leave.toDate}" />
+			    <td th:text="${leave.leaveType.leaveCode}" />
+			    <td th:text="${leave.remarks}" />
+			    <td th:text="${leave.contactDetails}" />
+			    <td th:text="${leave.approvalStatus}" />
+			</tr>
+    	</tbody>
+	</table>
+	
+	<table id="t4" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    	<thead>
+		    <tr>
+		        <th >Leave Id</th>
+		        <th>from date</th>
+		        <th>to date</th>
+		        <th>leave type</th>
+		        <th>remark</th>
+		        <th>contact detail</th>
+		        <th>Status</th>	
+		    </tr>
+    	</thead>
+    
+    	<tbody>
+				<tr th:each="leave: ${appliedLeaveHistory.page}">
+			    <td> <a th:href = "@{/employee/viewLeaveDetails/} + ${leave.leaveId}" th:text="${leave.leaveId}"/> </td>
+			    <td th:text="${leave.fromDate}" />
+			    <td th:text="${leave.toDate}" />
+			    <td th:text="${leave.leaveType.leaveCode}" />
+			    <td th:text="${leave.remarks}" />
+			    <td th:text="${leave.contactDetails}" />
+			    <td th:text="${leave.approvalStatus}" />
+			</tr>
+    	</tbody>
+	</table>
+	
+	<table id="t5" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    	<thead>
+		    <tr>
+		        <th >Leave Id</th>
+		        <th>from date</th>
+		        <th>to date</th>
+		        <th>leave type</th>
+		        <th>remark</th>
+		        <th>contact detail</th>
+		        <th>Status</th>	
+		    </tr>
+    	</thead>
+    
+    	<tbody>
+				<tr th:each="leave: ${updatedLeaveHistory.page}">
+			    <td> <a th:href = "@{/employee/viewLeaveDetails/} + ${leave.leaveId}" th:text="${leave.leaveId}"/> </td>
+			    <td th:text="${leave.fromDate}" />
+			    <td th:text="${leave.toDate}" />
+			    <td th:text="${leave.leaveType.leaveCode}" />
+			    <td th:text="${leave.remarks}" />
+			    <td th:text="${leave.contactDetails}" />
+			    <td th:text="${leave.approvalStatus}" />
+			</tr>
+    	</tbody>
+	</table>
+	
+	<table id="t6" width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
+    	<thead>
+		    <tr>
+		        <th >Leave Id</th>
+		        <th>from date</th>
+		        <th>to date</th>
+		        <th>leave type</th>
+		        <th>remark</th>
+		        <th>contact detail</th>
+		        <th>Status</th>	
+		    </tr>
+    	</thead>
+    
+    	<tbody>
+				<tr th:each="leave: ${cancelledLeaveHistory.page}">
+			    <td> <a th:href = "@{/employee/viewLeaveDetails/} + ${leave.leaveId}" th:text="${leave.leaveId}"/> </td>
+			    <td th:text="${leave.fromDate}" />
+			    <td th:text="${leave.toDate}" />
+			    <td th:text="${leave.leaveType.leaveCode}" />
+			    <td th:text="${leave.remarks}" />
+			    <td th:text="${leave.contactDetails}" />
+			    <td th:text="${leave.approvalStatus}" />
+			</tr>
+    	</tbody>
+	</table>
+	
+	<nav aria-label="Page navigation" class="paging">
+    	<ul  class="pagination" th:if="${leaveHistory.page.totalPages > 1}">
+    		<li class="page-item" th:classappend="${!leaveHistory.paging.isPrevEnabled()? 'disabled' : ''}">
+    			<a  class="page-link" th:href="@{'?pageNumber=' + ${leaveHistory.paging.pageNumber - 1}}"
+                           tabindex="-1">Previous</a>
+            </li>
+    		<th:block th:each="item : ${leaveHistory.paging.getItems()}">
+    			<li class="page-item" th:classappend="${item.index == leaveHistory.paging.pageNumber? 'active' : ''}" 
+    			th:if="${item.pageItemType.name() == 'PAGE'}">
+    				<a class="page-link" th:href="@{'?pageNumber=' + ${item.index}}"
+                               th:text="${item.index}"></a>
+    			</li>
+    			<li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+    				<a class="page-link" href="#">...</a>
+    			</li>
+    		</th:block>   
+    			<li class="page-item" th:classappend="${!leaveHistory.paging.isNextEnabled()? 'disabled' : ''}">
+    				<a class="page-link" th:href="@{'?pageNumber=' + ${leaveHistory.paging.pageNumber + 1}}">Next</a>
+    			</li>       
+    	</ul>
+    </nav>
+    
+    </div>
+    </div>
+    </div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>

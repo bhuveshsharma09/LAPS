@@ -86,8 +86,8 @@ public class EmailController {
 
             System.out.println("in claim");
 
-            Integer managerId = claim.getEmployee().getManagerId();
-            String managerEmailId = employeeService.findEmployeeById(managerId).getEmailId();
+            Employee manager = claim.getEmployee().getManager();
+            String managerEmailId = employeeService.findEmployeeById(manager.getEmployeeId()).getEmailId();
 
             System.out.println(managerEmailId);
 
@@ -127,8 +127,8 @@ public class EmailController {
             Date toDate = leaveApplication.getToDate();
 
 
-            Integer managerId = leaveApplication.getEmployee().getManagerId();
-            String managerEmailId = employeeService.findEmployeeById(managerId).getEmailId();
+            Employee manager = leaveApplication.getEmployee().getManager();
+            String managerEmailId = employeeService.findEmployeeById(manager.getEmployeeId()).getEmailId();
 
             System.out.println(managerEmailId);
 

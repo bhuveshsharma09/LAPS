@@ -19,7 +19,17 @@ public interface LeaveApplicationService {
 
     List<LeaveApplication> findAllLeavesOfEmployeeByManagerIdWithStatus(Integer mid,ApprovalStatus status);
     
-    List<LeaveApplication> findPastLeavesByEmployeeId(Integer id);
+    Paged<LeaveApplication> findAllLeaves(Integer eid, Integer Year, int pageNumber, int size);
+    
+    Paged<LeaveApplication> findApprovedLeaves(Integer id, Integer Year, int pageNumber, int size);
+    
+    Paged<LeaveApplication> findRejectedLeaves(Integer id, Integer Year, int pageNumber, int size);
+    
+    Paged<LeaveApplication> findAppliedLeaves(Integer id, Integer Year, int pageNumber, int size);
+    
+    Paged<LeaveApplication> findUpdatedLeaves(Integer id, Integer Year, int pageNumber, int size);
+    
+    Paged<LeaveApplication> findCancelledLeaves(Integer id, Integer Year, int pageNumber, int size);
     
     LeaveApplication deleteLeave(Integer id);
     

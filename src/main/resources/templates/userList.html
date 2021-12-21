@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+</head>
+
+<body>
+    <h1>Hello, admin! You can manage all user credentials!</h1>
+    <br />
+    <h2>Please add a new user credential </h2>
+    <br>
+    <p><a th:href="@{/adminuser/add}">Add</a></p>
+    <br>
+    <table th:if="${not #lists.isEmpty(ulist)}" border="1" cellpadding="20" cellspacing="0" width="500"
+        height="249">
+        <tr>
+            <th>USER ID</th>
+            <th>USER NAME</th>
+            <th>PASSWORD</th>
+            <th>EMPLOYEE ID</th>
+           <!-- <th>ROLE</th>-->
+            <th>EDIT</th>
+            <th>DELETE</th>
+        </tr>
+        <tr th:each="user:${ulist}">
+            <td th:text="${user.userId}">USER ID</td>
+            <td th:text="${user.username}">USER NAME</td>
+            <td th:text="${user.password}">PASSWORD</td>
+            <td th:text="${user.employee.employeeId}">EMPLOYEE ID</td>
+            <!--<td th:text="${user.roles}">ROLE</td>-->
+
+            <td><a href="userEdit.html" th:href="@{/adminuser/edit/}+${user.userId}">Edit</a></td> >
+            <td><a href="userForm.html" th:href="@{/adminuser/delete/}+${user.userId}">Delete</a></td> >
+
+        </tr>
+    </table>
+</body>
+
+</html>

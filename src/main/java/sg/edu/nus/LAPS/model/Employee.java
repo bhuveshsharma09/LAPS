@@ -17,18 +17,14 @@ public class Employee {
 	private Integer employeeId; //1
 
 	private String name; //2
-	private String jobTitle; //3
 
-	// do not need manager_id as the navigation already created department id for us
-	// which can be used to get manager id
-	private Integer managerId; //4
-
-	private Double annualLeaveCount; //5 
-	private Double medicalLeaveCount; //6
-	private Double compensationLeaveCount; //7
+	private Double annualLeaveCount; //3
+	private Double medicalLeaveCount; //4
+	private Double compensationLeaveCount; //5
 
 	@Column(name = "emailId")
-	private String emailId; //8
+	private String emailId; //6
+	
 
 	//Relations
 	@OneToOne(mappedBy = "employee") //one Employee can only have one set of login credentials
@@ -45,11 +41,11 @@ public class Employee {
 	private List<Claim> claims;
 	
 	@ManyToOne
-	private Employee manager;
+	private Employee manager; 
 
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + "]";
+		return employeeId + "- " + name;
 	}
 	
 
