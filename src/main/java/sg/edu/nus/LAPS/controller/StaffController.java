@@ -132,7 +132,7 @@ public class StaffController {
     
     @RequestMapping(value = "/updateLeave/{id}", method = RequestMethod.POST)
 	public String updateLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute("newLeave") @Valid LeaveApplication LA, BindingResult bdgresult,
-			@ModelAttribute("employee") Employee employee) {
+			@ModelAttribute("employee") Employee employee) throws MessagingException, IOException {
     	
     	List<Object> leaveType = leaveTypeService.findAllLeaveType();
 		Date fromDate = LA.getFromDate();
@@ -164,6 +164,11 @@ public class StaffController {
     	// save changes
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
     	
+    	// send email to manager
+		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
+		System.out.println(last.get(0).getLeaveId());
+		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.UPDATED);
+    	
     	model.addAttribute("newLeave", leaveAppToChange);
 		
 		return "redirect:/employee/manageLeave/" + leaveAppToChange.getEmployee().getEmployeeId();
@@ -187,20 +192,8 @@ public class StaffController {
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.CANCELLED);
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
     	
-    	Employee emp = leaveAppToChange.getEmployee();
-    	
-    	// get leave duration
-		Double leaveDuration = leaveApplicationService.getLeaveDuration(id);
-		
-		// return subtracted leave days to leave count
-		String leaveType = leaveAppToChange.getLeaveType().getLeaveName();
-		if (leaveType.equalsIgnoreCase("AL")) {
-			emp.setAnnualLeaveCount(emp.getAnnualLeaveCount() + leaveDuration);
-		}
-		else if (leaveType.equalsIgnoreCase("ML")) {
-			emp.setMedicalLeaveCount(emp.getMedicalLeaveCount() + leaveDuration);
-		}
-		employeeService.saveEmployee(emp);
+    	// return subtracted leave days to leave count
+    	employeeService.updateLeaveCount(leaveAppToChange.getEmployee(), leaveAppToChange);
     	
 		return "redirect:/employee/manageLeave/" + leaveAppToChange.getEmployee().getEmployeeId();
 	}

@@ -130,42 +130,32 @@ public class ManagerController {
 
 		return "claimDetailsForApproval";
 	}
-
-
-
-
 	
 	@RequestMapping(value = "/approveLeave/{id}", method = RequestMethod.POST)
-	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, @RequestParam("manager-remarks") String managerComment, Model model) {
+	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, 
+			@RequestParam("manager-remarks") String managerComment, Model model) throws MessagingException, IOException {
     	
     	LeaveApplication leaveAppToApprove = leaveApplicationService.findSingleLeaveById(id);
-    	Employee subEmp = leaveAppToApprove.getEmployee();
     	
     	if (approvalResult.equalsIgnoreCase("Approve")) {
     		leaveAppToApprove.setManagerComment(managerComment);
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.APPROVED);
     		
-    		// get leave duration
-    		Double leaveDuration = leaveApplicationService.getLeaveDuration(id);
-    		
     		// subtract leave duration from leave count
-    		String leaveType = leaveAppToApprove.getLeaveType().getLeaveName();
-    		if (leaveType.equalsIgnoreCase("AL")) {
-    			subEmp.setAnnualLeaveCount(subEmp.getAnnualLeaveCount() - leaveDuration);
-    		}
-    		else if (leaveType.equalsIgnoreCase("ML")) {
-    			subEmp.setMedicalLeaveCount(subEmp.getMedicalLeaveCount() - leaveDuration);
-    		}
+    		employeeService.updateLeaveCount(leaveAppToApprove.getEmployee(), leaveAppToApprove);
+    		
     	}
     	else if (approvalResult.equalsIgnoreCase("Reject")) {
     		leaveAppToApprove.setManagerComment(managerComment);
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.REJECTED);
+    	
     	}
-    	
     	leaveApplicationService.saveLeaveApplication(leaveAppToApprove);
-    	employeeService.saveEmployee(subEmp);
     	
-		return "redirect:/manager/request/" + subEmp.getManagerId();
+    	// send email to staff
+    	emailController.sendTheEmailToEmp(2, leaveAppToApprove.getLeaveId(), leaveAppToApprove.getApprovalStatus());
+    	
+		return "redirect:/manager/request/" + leaveAppToApprove.getEmployee().getManagerId();
 	}
 
 	// approve claim

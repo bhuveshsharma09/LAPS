@@ -3,6 +3,7 @@ package sg.edu.nus.LAPS.services;
 import java.util.ArrayList;
 
 import sg.edu.nus.LAPS.model.Employee;
+import sg.edu.nus.LAPS.model.LeaveApplication;
 
 public interface EmployeeService {
     
@@ -17,6 +18,8 @@ public interface EmployeeService {
 	public void deleteEmployee(Employee employee); //delete employee
 	
 	public Employee findEmployeeByName(String name);
+	
+	public void updateLeaveCount(Employee e, LeaveApplication LA);
 
 
 
