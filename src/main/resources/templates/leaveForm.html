@@ -16,12 +16,12 @@
             <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
             <label for="fromDate">From Date: </label>
             <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}" required/>
-            <p th:if="${#fields.hasErrors('fromDate')}" th:errors="*{fromDate}"></p>
+            <p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
         </fieldset>
         <fieldset>
             <label for="toDate">To Date: </label>
             <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"required/>
-            <p th:if="${#fields.hasErrors('toDate')}" th:errors="*{toDate}"></p>
+            <p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
         </fieldset>
         <fieldset>
             <label for="remarks">Remarks: </label>

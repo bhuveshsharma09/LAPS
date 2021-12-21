@@ -44,6 +44,7 @@ public class StaffController {
 	@Autowired
 	PDFGenerateService pdfGenerateService;
 	
+
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
@@ -64,11 +65,19 @@ public class StaffController {
     }
     
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
-    public String saveLeave(@ModelAttribute("newLeave") @Valid LeaveApplication LA,BindingResult bdResult, @ModelAttribute("employee") @Valid Employee employee){
+    public String saveLeave(@ModelAttribute("newLeave") @Valid LeaveApplication LA,BindingResult bdResult, @ModelAttribute("employee") @Valid Employee employee,Model model){
+		List<Object> leaveType = leaveTypeService.findAllLeaveType();
+		Date fromDate = LA.getFromDate();
+		Date toDate = LA.getToDate();
     	if(bdResult.hasErrors()){
+			model.addAttribute("leaveTypeValue", leaveType);
+			model.addAttribute("wrongDate");
 			return "leaveForm";
 		}
-		
+		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
+			model.addAttribute("wrongDate", "Date is wrong");
+			return "leaveForm";
+		}
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
 

@@ -75,4 +75,13 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     public List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatusIn(Integer employeeId, List<ApprovalStatus> approvalStatus) {
     	return leaveApplicationRepository.findLeavesByEmployee_employeeIdAndApprovalStatusIn(employeeId, approvalStatus);
     }
+
+    @Override
+    public boolean comapreTwoDates(Date fromDate, Date toDate){
+        if(fromDate.compareTo(toDate)>0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

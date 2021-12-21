@@ -28,4 +28,6 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findUpcomingLeavesForEmployee(Integer employeeId, Date inputDate);
     
     List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatusIn(Integer employeeId, List<ApprovalStatus> approvalStatus);
+    
+    boolean comapreTwoDates(Date fromDate,Date toDate);
 }
