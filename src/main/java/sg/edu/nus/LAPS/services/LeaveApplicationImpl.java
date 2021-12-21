@@ -41,11 +41,6 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
         
         return leaveApplicationRepository.findAllLeavesOfEmployeeByManagerIdWithStatus(mid,status);
     }
-    @Override
-    public List<LeaveApplication> findPastLeavesByEmployeeId(Integer id) {
-        List<LeaveApplication> leaveApplication= leaveApplicationRepository.findPastLeavesByEmployeeId(id);
-        return leaveApplication;
-    }
     
     @Override
     public LeaveApplication findSingleLeaveById(Integer leaveId) {
@@ -87,5 +82,47 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     @Override
     public List<LeaveApplication> findAllLeaveApplicationSorted(){
         return leaveApplicationRepository.findAllLeaveApplicationSorted();
+    }
+    
+    @Override
+    public Paged<LeaveApplication> findApprovedLeaves(Integer id, Integer year, int pageNumber, int size) {
+    	PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<LeaveApplication> leaveApplication= leaveApplicationRepository.findApprovedLeaves(id, year, request);
+        return new Paged<>(leaveApplication, Paging.of(leaveApplication.getTotalPages(), pageNumber, size));
+    }
+    
+    @Override
+    public Paged<LeaveApplication> findRejectedLeaves(Integer id, Integer year, int pageNumber, int size) {
+    	PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<LeaveApplication> leaveApplication= leaveApplicationRepository.findRejectedLeaves(id, year, request);
+        return new Paged<>(leaveApplication, Paging.of(leaveApplication.getTotalPages(), pageNumber, size));
+    }
+    
+    @Override
+    public Paged<LeaveApplication> findAppliedLeaves(Integer id, Integer year, int pageNumber, int size) {
+    	PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<LeaveApplication> leaveApplication= leaveApplicationRepository.findAppliedLeaves(id, year, request);
+        return new Paged<>(leaveApplication, Paging.of(leaveApplication.getTotalPages(), pageNumber, size));
+    }
+    
+    @Override
+    public Paged<LeaveApplication> findUpdatedLeaves(Integer id, Integer year, int pageNumber, int size) {
+    	PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<LeaveApplication> leaveApplication= leaveApplicationRepository.findUpdatedLeaves(id, year, request);
+        return new Paged<>(leaveApplication, Paging.of(leaveApplication.getTotalPages(), pageNumber, size));
+    }
+    
+    @Override
+    public Paged<LeaveApplication> findCancelledLeaves(Integer id, Integer year, int pageNumber, int size) {
+    	PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<LeaveApplication> leaveApplication= leaveApplicationRepository.findCancelledLeaves(id, year, request);
+        return new Paged<>(leaveApplication, Paging.of(leaveApplication.getTotalPages(), pageNumber, size));
+    }
+    
+    @Override
+    public Paged<LeaveApplication> findAllLeaves(Integer eid, Integer year, int pageNumber, int size) {
+    	PageRequest request = PageRequest.of(pageNumber - 1, size);
+    	Page<LeaveApplication> leaveApplication= leaveApplicationRepository.findAllLeaves(eid, year, request);
+        return new Paged<>(leaveApplication, Paging.of(leaveApplication.getTotalPages(), pageNumber, size));
     }
 }

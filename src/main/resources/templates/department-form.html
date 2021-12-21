@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Department</title>
+</head>
+
+
+<body>
+
+	<h1>Add a NEW Department</h1>
+	
+	<form action="#" th:object="${department}" th:action="@{/department/save}"method="post">
+		
+		<fieldset>
+			Department Name: <input type="text" th:field="*{departmentName}">
+			<p th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></p>
+		</fieldset>
+	
+		
+		<fieldset>
+			Manager Name: 
+             <select name="managerId" size="1" id="managerId">
+            	<option value="">Select Manager</option>
+                <option th:each="employee: ${employees}" th:value="${employee.employeeId}"
+						th:text="${employee.name}">
+				</option>
+            </select>      
+			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
+		</fieldset>
+	
+		
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
+		</fieldset>
+
+	</form>
+	
+</body>
+</html>

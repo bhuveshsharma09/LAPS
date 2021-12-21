@@ -18,23 +18,27 @@
 		</fieldset>
 		
 		
-		<fieldset> 
-			Position: 
-        	<input type="radio" name="staff" th:field="*{jobTitle}" value="Staff"> Staff 
-        	<input type="radio" name="manager" th:field="*{jobTitle}" value="Manager"> Manager 
-        	<input type="radio" name="admin" th:field="*{jobTitle}" value="Admin"> Admin 
-        </fieldset>
-	
-		
 		<fieldset>
 			Manager Name: 
-             <select name="managerId" size="1" id="managerId">
+             <select name="manager" size="1" id="manager">
             	<option value="">Select Manager</option>
                 <option th:each="employee: ${employees}" th:value="${employee.employeeId}"
 					th:text="${employee.name}">
 				</option>
             </select>
-			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
+			<p th:if="${#fields.hasErrors('manager')}" th:errors="*{manager}"></p>
+		</fieldset>
+		
+		
+		<fieldset>
+			Department Name: 
+             <select name="department" size="1" id="department">
+            	<option value="">Select Department</option>
+                <option th:each="department: ${departments}" th:value="${department.departmentId}"
+								th:text="${department.departmentName}">
+				</option>
+            </select>
+			<p th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></p>
 		</fieldset>
 		
 		

@@ -33,27 +33,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	
-	@Override
+	@Transactional
 	public Employee findEmployeeById(Integer id) { // find by employee ID
 		
 		return emprepo.findById(id).get();
 	}
 	
 
-	@Override
+	@Transactional
 	public void deleteEmployee(Employee employee) { //delete employee
 		emprepo.delete(employee);
 	}
 	
 	
 
-	@Override
+	@Transactional
 	public Employee findEmployeeByName(String name) {
 		return emprepo.findByName(name).get();
 	}
 	
 	
-	@Override
+	@Transactional
 	public Employee editEmployee(Employee e) {
 		return emprepo.saveAndFlush(e);
 	}
@@ -65,6 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return (ArrayList<String>) emprepo.findAllEmployeeNames();
 	}
 
+	
 	@Transactional
 	public Employee findEmployeeByName1(String name) {
 		
