@@ -15,7 +15,7 @@
             <th>To Date</th>
             <th>Leave Type</th>
             <th>Remarks</th>
-            <th>Contact Detail</th>
+            <th>Contact Details</th>
             <th>Status</th>
             <th>Manager's Comment</th>
             <th>View Details</th>
@@ -37,7 +37,7 @@
         <td th:text="${leave.managerComment}" />
         <td><a href="leaveForm.html" th:href="@{/employee/viewLeaveDetails/}+${leave.leaveId}">View Details</a></td>
         <td><a href="leaveForm.html" th:unless="${leave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:href="@{/employee/editLeave/}+${leave.leaveId}">Edit</a></td>
-		<td><a href="leaveForm.html" th:unless="${leave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:href="@{/employee/deleteLeave/}+${leave.leaveId}">Delete</a></td>
+		<td><a href="leaveForm.html" th:unless="${leave.approvalStatus.toString().equalsIgnoreCase('DELETED') or leave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:href="@{/employee/deleteLeave/}+${leave.leaveId}">Delete</a></td>
 		<td><a href="leaveForm.html" th:if="${leave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:href="@{/employee/cancelLeave/}+${leave.leaveId}">Cancel</a></td >
     </tr>
         </tbody>

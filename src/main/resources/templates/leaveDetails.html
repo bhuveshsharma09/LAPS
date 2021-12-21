@@ -43,9 +43,10 @@
 		</table>		
 		<form method="POST">
 			<button type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:formaction="@{/employee/editLeave/}+*{leaveId}">Edit</button>
-			<button type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:formaction="@{/employee/deleteLeave/}+*{leaveId}">Delete</button>
+			<button type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED') or newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/deleteLeave/}+*{leaveId}">Delete</button>
 			<button type="submit" th:if="${newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/cancelLeave/}+*{leaveId}">Cancel leave</button>
 		</form>
+			<!--<a href="#" th:href="@{/employee/manageLeave/}+*{leaveId}"><button type="button">Back</button></a> -->
 	</div >
 
 <!--    <form action="#" th:object="${newLeave}" th:action="@{/employee/updateLeave/}+${newLeave.leaveId}" method="post">
