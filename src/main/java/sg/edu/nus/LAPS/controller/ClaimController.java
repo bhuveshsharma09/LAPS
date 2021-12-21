@@ -1,11 +1,25 @@
 package sg.edu.nus.LAPS.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import sg.edu.nus.LAPS.exceptions.ClaimNotFound;
 import sg.edu.nus.LAPS.model.ApprovalStatus;
@@ -14,12 +28,6 @@ import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.repo.ClaimRepository;
 import sg.edu.nus.LAPS.services.ClaimService;
 import sg.edu.nus.LAPS.validators.ClaimValidator;
-
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/Claim")
@@ -63,7 +71,7 @@ public class ClaimController {
             , HttpSession httpSession) throws MessagingException, IOException {
 
         //System.out.println("inside the /Claim/save function");
-       if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "claim-form";
         }
 
@@ -163,6 +171,20 @@ public class ClaimController {
         return "all-claims";
     }
 
+
+    @RequestMapping("/viewClaimDetails/{id}")
+    public String viewClaimDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+
+        Claim selectedClaim= claimService.findClaimById(id);
+        Employee selectedEmp = selectedClaim.getEmployee();
+        //List<Object> leaveType = claimService.findAllLeaveType();
+        List<Claim> claimList = new ArrayList<Claim>(Arrays. asList(selectedClaim));
+        model.addAttribute("newClaim", claimList);
+        model.addAttribute("employee", selectedEmp);
+       // model.addAttribute("leaveTypeValue", leaveType);
+
+        return "claim-view";
+    }
 
 
 

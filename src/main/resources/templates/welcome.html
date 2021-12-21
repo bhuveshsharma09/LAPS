@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-	<h1>Welcome to LAPS</h1>
 
-	<p>
-		Leave Application Processing
-	</p>
-	<a href="/login" >login here</a>	
+<!--added bootstrap links-->
+<head th:replace="fragment/layout.html :: head"/>
+
+<body style="background: #98b5ff;">
+<div class="container-fluid fill d-flex flex-column">
+	<div class="container">
+		<div class="row fill">
+			<div class="col-lg-3" style="background: #000000;"></div>
+			<div class="col" style="background: #98b5ff;/*border-radius: 102px;*/">
+				<h5 style="padding-top: 204px;padding-left: 115px;font-family: 'Abril Fatface', serif;">Welcome back!<br></h5>
+				<h1 style="padding-right: 432px;padding-left: 115px;padding-top: 5px;">Manage all your leaves and claims in one place.<br>
+				</h1>
+				<button  onclick="window.location.href='/login'"
+						 class="btn btn-primary"
+						 type="button"
+						 style="margin-left: 115px;
+						 margin-top: 34px;
+						 background: #80ffc6;color: rgb(0,0,0);
+						 border-width: 0px;
+						 border-radius: 5px;">
+					<strong>Login</strong>
+				</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

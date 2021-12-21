@@ -23,30 +23,44 @@
 	
 	<table th:if="${not #lists.isEmpty(employees)}" >
 		<tr >
-			<th >Employee ID</th>
+			<th >ID</th>
 			<th >Name</th>
 			<th >Position</th>
 			<th >Manager ID</th>
-
-			<th >Edit Employee</th>
-			<th >Delete Employee</th>
+			<th >Email</th>
+			<th >Edit Details</th>
+			<th >Annual Leave</th>
+			<th >Medical Leave</th>
+			<th >Compensation Leave</th>
+			<th >Edit Leave Entitlement</th>
+			<th >Delete</th>
 		</tr>
+		
 		<tr th:each="employee:${employees}" class="table-row">
-			<td th:text="${employee.employeeId}">ID</td>
-			<td th:text="${employee.name}">Name</td>
+			<td th:text=${employee.employeeId}>ID</td>
+			<td th:text=${employee.name}>Name</td>
 			<td th:text=${employee.jobTitle}>Position</td>
 			<td th:text=${employee.managerId}>Manager ID</td>
+			<td th:text=${employee.emailId}>Email</td>
 
-		<td><a href="employee-edit.html"
-				th:href="@{/employee/edit/}+${employee.employeeId}">Edit</a>
-		</td>
-		<td><a href="employee-delete.html"
+			<td><a href="employee-edit.html" 
+				th:href="@{/employee/edit/}+${employee.employeeId}">Edit Details</a>
+			</td>
+		
+			<td th:text=${employee.annualLeaveCount}>Annual Leave</td>
+			<td th:text=${employee.medicalLeaveCount}>Medical Leave</td>
+			<td th:text=${employee.compensationLeaveCount}>Compensation Leave</td>
+		
+			<td><a href="employee-edit.html"
+				th:href="@{/employee/editLeaveEntitlement/}+${employee.employeeId}">Edit Leave Entitlement</a>
+			</td>
+			
+			<td><a href="employee-delete.html"
 				th:href="@{/employee/delete/}+${employee.employeeId}">Delete</a>
-		</td>
-
+			</td>
 		</tr>
-
 	</table>
+	
     <br/>
 <!--	<div th:replace="fragments/general.html :: footer"></div>-->
 	

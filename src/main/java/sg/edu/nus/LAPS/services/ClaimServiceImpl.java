@@ -1,15 +1,14 @@
 package sg.edu.nus.LAPS.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import sg.edu.nus.LAPS.model.Claim;
-import sg.edu.nus.LAPS.model.Employee;
-import sg.edu.nus.LAPS.repo.ClaimRepository;
+import java.util.List;
 
 import javax.transaction.Transactional;
-import java.awt.print.Pageable;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import sg.edu.nus.LAPS.model.Claim;
+import sg.edu.nus.LAPS.repo.ClaimRepository;
 
 @Service
 public class ClaimServiceImpl implements ClaimService{

@@ -3,7 +3,6 @@ package sg.edu.nus.LAPS.services;
 import java.util.List;
 
 import sg.edu.nus.LAPS.model.Claim;
-import sg.edu.nus.LAPS.model.Employee;
 
 public interface ClaimService {
 

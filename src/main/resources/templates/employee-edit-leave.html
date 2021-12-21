@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee</title>
+</head>
+
+<body>
+
+<h1>Update Employee Leave Entitlement</h1>
+	<form action="#" th:object="${employee}" th:action="@{/employee/editLeaveSuccess/}+${employee.employeeId}"method="POST">
+	
+           <input type="hidden" th:field="*{employeeId}" />
+		
+		<fieldset>
+			Full Name: <input type="text" th:field="*{name}">
+			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+		</fieldset>
+		
+		<input type="hidden" th:field="*{jobTitle}">
+		
+		<input type="hidden" th:field="*{managerId}">
+		
+		<input type="hidden" th:field="*{emailId}">
+			
+		<fieldset>
+			Annual Leave Entitlement: <input type="number" th:field="*{annualLeaveCount}">
+			<p th:if="${#fields.hasErrors('annualLeaveCount')}" th:errors="*{annualLeaveCount}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Medical Leave Entitlement: <input type="number" th:field="*{medicalLeaveCount}">
+			<p th:if="${#fields.hasErrors('medicalLeaveCount')}" th:errors="*{medicalLeaveCount}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Compensation Leave Entitlement:<input type="number" th:field="*{compensationLeaveCount}">
+			<p th:if="${#fields.hasErrors('compensationLeaveCount')}" th:errors="*{compensationLeaveCount}"></p>
+		</fieldset>
+
+		
+		<fieldset>
+			<input type="submit" value="Update" /> &nbsp; &nbsp; 
+			<input type="button" value="Back" onclick="window.location.href='/employee/all'; return false"/>
+		</fieldset>
+	
+
+	</form>
+	
+	
+	
+</body>
+
+</html>

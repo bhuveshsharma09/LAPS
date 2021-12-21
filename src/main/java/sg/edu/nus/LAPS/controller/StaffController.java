@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -43,7 +44,9 @@ public class StaffController {
     LeaveTypeService leaveTypeService;
 	@Autowired
 	PDFGenerateService pdfGenerateService;
-	
+	@Autowired
+	EmailController emailController;
+
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
@@ -64,14 +67,29 @@ public class StaffController {
     }
     
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
-    public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
-    	
+    public String saveLeave(@ModelAttribute("newLeave") @Valid LeaveApplication LA,
+							BindingResult bdResult, @ModelAttribute("employee") @Valid Employee employee,
+							Model model)throws MessagingException, IOException {
+		List<Object> leaveType = leaveTypeService.findAllLeaveType();
+		Date fromDate = LA.getFromDate();
+		Date toDate = LA.getToDate();
+    	if(bdResult.hasErrors()){
+			model.addAttribute("leaveTypeValue", leaveType);
+			model.addAttribute("wrongDate");
+			return "leaveForm";
+		}
+		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
+			model.addAttribute("wrongDate", "Date is wrong");
+			return "leaveForm";
+		}
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
 
-        // Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
-        return "home";
+		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
+		System.out.println(last.get(0).getLeaveId());
+		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
+        return "forward:/employee/leaveList/"+employee.getEmployeeId();
     }
     
     @RequestMapping("/manageLeave/{id}")

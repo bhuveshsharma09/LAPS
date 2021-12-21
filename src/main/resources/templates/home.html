@@ -1,123 +1,132 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-<h1>Welcome <span th:text="${session.userSession.userCredentials.username}"></span></h1>
-
-<h2>Services available for: <span th:each="role:${session.userSession.userCredentials.roles}" th:text="${role.roleDesc} + ' '"></span></h2>
 
 
+<head th:replace="fragment/layout.html :: head"/>
 
-<h2>Subordinates</h2>
+<body  class="align-items-center align-content-center align-self-center mx-auto" style="background: #ffffff;">
 
-<table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
-    <thead>
-    <tr>
-        <th>Employee Id</th>
-        <th>Employee name</th>
-        <th>Annual leave count</th>
-        <th>Medical leave count</th>
-        <th>Compensation leave count</th>
-        <th>Job Title</th>
+<div th:replace="fragment/layout.html :: navbar"/>
+<section
+        class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+        style="padding: 133px 0px;background: #bde0ff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;">
+    <div class="container">
+        <div class="intro">
 
 
-    </tr>
-    </thead>
-<tbody>
-<tr th:each="subordinate: ${session.userSession.subordinates}">
-    <td th:text="${subordinate.employeeId}" />
-    <td th:text="${subordinate.name}" />
-    <td th:text="${subordinate.annualLeaveCount}" />
-    <td th:text="${subordinate.medicalLeaveCount}" />
-    <td th:text="${subordinate.compensationLeaveCount}" />
-    <td th:text="${subordinate.jobTitle}" />
-<!--
-    <td> <a href="/employee/leaveList/+${subordinate.employeeId}" >Manage Leave entitlement</a><td  />
--->
+            <h1>Welcome <span th:text="${session.userSession.userCredentials.username}"></span></h1>
 
-    <td><a th:href="@{/manager/leavelist/{id}(id=${subordinate.employeeId})}">view</a></td>
+            <h2>Services available for: <span th:each="role:${session.userSession.userCredentials.roles}" th:text="${role.roleDesc} + ' '"></span></h2>
 
 
-</tr>
-</tbody>
-</table>
+            <h3>Details of your subordinates</h3>
+
+            <table width="600" cellpadding="5" cellspacing="2" border="0.5" bgcolor="#98B5FF">
+                <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Employee name</th>
+                    <th>Annual leave count</th>
+                    <th>Medical leave count</th>
+                    <th>Compensation leave count</th>
+                    <th>Job Title</th>
 
 
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="subordinate: ${session.userSession.subordinates}">
+                    <td th:text="${subordinate.employeeId}" />
+                    <td th:text="${subordinate.name}" />
+                    <td th:text="${subordinate.annualLeaveCount}" />
+                    <td th:text="${subordinate.medicalLeaveCount}" />
+                    <td th:text="${subordinate.compensationLeaveCount}" />
+                    <td th:text="${subordinate.jobTitle}" />
+                    <!--
+                        <td> <a href="/employee/leaveList/+${subordinate.employeeId}" >Manage Leave entitlement</a><td  />
+                    -->
 
-<h3>-- Services --</h3>
- 
-<div th:each="role:${session.userSession.userCredentials.roles}">
-<div th:if="${role.roleDesc == 'ADMIN'}">
-    <br>
-    <a href="/onLeave" >Employees on leave (Movement Register)</a>
-    <br>
-    <a href="/onLeave" >Manage Leave Types</a>
-    <br>
-    <a href="/employee/all" >Manage Staff members</a>
-    <br>
-    <a href="/onLeave" >Manage Leave entitlement</a>
-    <br>
-    <a href="/onLeave" >Manage Approval hierarcy</a>
-    <br>
-</div>
+                    <td><a th:href="@{/manager/leavelist/{id}(id=${subordinate.employeeId})}">view</a></td>
 
 
-<div th:if="${role.roleDesc == 'MANAGER'}">
-    <h3>Manager services</h3>
-    <a href="/onLeave" >View Applications from approval </a>
-    <br>
-    <a href="/onLeave" >View subordinate leave history</a>
-    <br>
-    <a th:href="@{/manager/request/}+${session.userSession.employee.employeeId}" >Approve or reject application request </a>
-    <br>
-    <a href="/onLeave" >Approve or reject claim request </a>
-    <br>
-</div>
-
-<div th:if="${role.roleDesc == 'STAFF'}">
-	<h3>Staff services</h3>
-    <a href="/onLeave" >Employees on leave (Movement Register)</a>
-    <br>
-    <br>
-    <a th:href="@{/employee/addLeave/}+${session.userSession.employee.employeeId}" >Submit leave application</a>
-    <br>
-    <br>
-    <a th:href="@{/employee/manageLeave/}+${session.userSession.employee.employeeId}" >Manage leave application</a>
-    <br>
-    <br>
-    <a href="/Claim/new" >Submit Claim compensation</a>
-    <br>
-    <br>
-    <a href="/Claim/all" >View your Claim compensation</a>
-    <br>
-    <br>
-    <a href="/onLeave" >Manage (edit/delete) your Claim compensation</a>
-    <br>
-    <br>
-    <a th:href="@{/employee/leaveList/}+${session.userSession.employee.employeeId}" >View personal leave history </a>
-    <br>
-    <br>
-</div>
-</div>
+                </tr>
+                </tbody>
+            </table>
 
 
 
+            <h3>-- Services --</h3>
+
+            <div th:each="role:${session.userSession.userCredentials.roles}">
+                <div th:if="${role.roleDesc == 'ADMIN'}">
+                    <br>
+                    <a href="/onLeave" >Employees on leave (Movement Register)</a>
+                    <br>
+                    <a href="/onLeave" >Manage Leave Types</a>
+                    <br>
+                    <a href="/employee/all" >Manage Staff members</a>
+                    <br>
+                    <a href="/onLeave" >Manage Leave entitlement</a>
+                    <br>
+                    <a href="/onLeave" >Manage Approval hierarcy</a>
+                    <br>
+                </div>
+
+                <div th:if="${role.roleDesc == 'MANAGER'}">
+                    <h3>Manager services</h3>
+                    <a href="/onLeave" >View Applications from approval </a>
+                    <br>
+                    <a href="/onLeave" >View subordinate leave history</a>
+                    <br>
+                    <a th:href="@{/manager/request/}+${session.userSession.employee.employeeId}" >Approve or reject application request </a>
+                    <br>
+                    <a th:href="@{/manager/claimRequest/}+${session.userSession.employee.employeeId}" >Approve or reject claim request </a>
+                    <br>
+                </div>
+
+                <div th:if="${role.roleDesc == 'STAFF'}">
+                    <h3>Staff services</h3>
+                    <a href="/onLeave" >Employees on leave (Movement Register)</a>
+                    <br>
+                    <br>
+                    <a th:href="@{/employee/addLeave/}+${session.userSession.employee.employeeId}" >Submit leave application</a>
+                    <br>
+                    <br>
+                    <a th:href="@{/employee/manageLeave/}+${session.userSession.employee.employeeId}" >Manage leave application</a>
+                    <br>
+                    <br>
+                    <a href="/Claim/new" >Submit Claim compensation</a>
+                    <br>
+                    <br>
+                    <a href="/Claim/all" >View your Claim compensation</a>
+                    <br>
+                    <br>
+                    <a href="/onLeave" >Manage (edit/delete) your Claim compensation</a>
+                    <br>
+                    <br>
+                    <a th:href="@{/employee/leaveList/}+${session.userSession.employee.employeeId}" >View personal leave history </a>
+                    <br>
+                    <br>
+                </div>
+            </div>
+
+            <h3>-- logout --</h3>
+            <br>
+            <h3><a href="/logout" >logout here</a></h3>
+            <br>
 
 
 
+        </div>
+        <div class="buttons"></div>
+    </div>
+</section>
+<div id="lapsbanner"></div>
+<footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean">
+    <h1 class="text-start">Take your holidays without worry!</h1>
+</footer>
 
 
-<h3>-- logout --</h3>
-<br>
-<h3><a href="/logout" >logout here</a></h3>
-<br>
-
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

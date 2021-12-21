@@ -3,12 +3,13 @@ package sg.edu.nus.LAPS.repo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
-import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 
 public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication, Integer> {
@@ -35,10 +36,12 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     
     List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatus(Integer employeeId, ApprovalStatus approvalStatus);
     
+    List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatusIn(Integer employeeId, List<ApprovalStatus> approvalStatus);
+    
     @Query("select leaves from LeaveApplication leaves where leaves.employee.employeeId = :employeeId "
-    		+ "and leaves.approvalStatus = :approvalStatus "
+    		+ "and leaves.approvalStatus = 3 "
     		+ "and leaves.fromDate = :inputDate or leaves.fromDate > :inputDate")
-    List<LeaveApplication> findUpcomingLeaves(@Param("employeeId") Integer employeeId, @Param("approvalStatus") ApprovalStatus approvalStatus, @Param("inputDate") Date inputDate);
+    List<LeaveApplication> findUpcomingLeavesForEmployee(@Param("employeeId") Integer employeeId, @Param("inputDate") Date inputDate);
 
     // find leave by leaveId
     // required to send email for a particular leave id -- same method as line 26-27
@@ -54,6 +57,11 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     
     @Query(value = "SELECT datediff(to_date, from_date) FROM laps.leave_application WHERE leave_id = :leaveId", nativeQuery = true)
 	Double getLeaveDuration(@Param("leaveId") Integer leaveId);
+    
+    @Query("SELECT leaves FROM LeaveApplication leaves JOIN leaves.employee e WHERE e.employeeId = :eid")
+    Page<LeaveApplication> findAllLeavesByEmployeeIdWithPage(@Param("eid") int eid, Pageable page);
 
+    @Query("SELECT la from LeaveApplication la order by la.leaveId desc")
+    List<LeaveApplication> findAllLeaveApplicationSorted();
 
 }
