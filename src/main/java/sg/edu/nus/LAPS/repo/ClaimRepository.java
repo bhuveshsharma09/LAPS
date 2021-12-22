@@ -1,17 +1,14 @@
 package sg.edu.nus.LAPS.repo;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Claim;
 import sg.edu.nus.LAPS.model.Employee;
-import sg.edu.nus.LAPS.model.LeaveApplication;
-
-import java.awt.print.Pageable;
-import java.util.List;
 
 public interface ClaimRepository extends JpaRepository<Claim, Integer> {
     /*

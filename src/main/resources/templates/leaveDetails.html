@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Leave Details</title>
 </head>
 <body>
 	<h3>Leave Details</h3>
@@ -35,61 +35,18 @@
 					<td >Leave Type:</td >
 					<td th:text="*{leaveType.leaveName}"></td >
 				</tr>
+				<tr>
+					<td >Leave Status:</td >
+					<td th:text="*{approvalStatus}"></td >
+				</tr>
 			</tbody>
 		</table>		
 		<form method="POST">
-			<button type="submit" th:formaction="@{/employee/editLeave/}+*{leaveId}">Edit</button>
-			<button type="submit" th:formaction="@{/employee/deleteLeave/}+*{leaveId}">Delete</button>
+			<button type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:formaction="@{/employee/editLeave/}+*{leaveId}">Edit</button>
+			<button type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED') or newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/deleteLeave/}+*{leaveId}">Delete</button>
+			<button type="submit" th:if="${newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/cancelLeave/}+*{leaveId}">Cancel leave</button>
 		</form>
+			<!--<a href="#" th:href="@{/employee/manageLeave/}+*{leaveId}"><button type="button">Back</button></a> -->
 	</div >
-	
-	
-
-    <form action="#" th:object="${newLeave}" th:action="@{/employee/updateLeave/}+${newLeave.leaveId}" method="post">
-        <fieldset>
-            <input type="hidden" th:field="*{leaveId}"/>
-            <input type="hidden" th:field="${employee.employeeId}">
-        </fieldset>
-        <fieldset>
-            <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
-            <label for="fromDate">From Date: </label>
-            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}"/>
-        </fieldset>
-        <fieldset>
-            <label for="toDate">To Date: </label>
-            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"/>
-        </fieldset>
-        <fieldset>
-            <label for="remarks">Remarks: </label>
-            <input type="text" name="remarks" id="remarks" th:field="*{remarks}">
-        </fieldset>
-        <fieldset>
-            <label for="coveringEmp">Covering Employee: </label>
-            <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}">
-        </fieldset>
-        <fieldset>
-            <label for="contactDetails">Contact Details: </label>
-            <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}">
-        </fieldset>
-        <fieldset>
-            <label for="leaveName">Leave Type: </label>
-
-            <!-- <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}"> -->
-
-            <select name="leaveType" id="leaveName" th:field="*{leaveType.leaveName}">
-
-                <option th:each="type:${leaveTypeValue}" th:value="${type[0]}" th:text="${type[1]}"></option>
-
-            </select>
-        </fieldset>
-        <fieldset>
-            <input type="submit" value="Submit">
-        </fieldset>
-        <fieldset>
-
-            <a th:href="@{update}"></a>
-            <a th:href="@{delete}"></a>
-        </fieldset>
-    </form>
 </body>
 </html>

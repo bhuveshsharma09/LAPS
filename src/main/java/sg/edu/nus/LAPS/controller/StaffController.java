@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -45,7 +46,9 @@ public class StaffController {
     LeaveTypeService leaveTypeService;
 	@Autowired
 	PDFGenerateService pdfGenerateService;
-	
+	@Autowired
+	EmailController emailController;
+
     @RequestMapping("/leaveList/{id}")
     public String getAllLeaves(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
@@ -66,20 +69,37 @@ public class StaffController {
     }
     
     @RequestMapping(value="/saveLeave",method = RequestMethod.POST)
-    public String saveLeave(@ModelAttribute("newLeave") LeaveApplication LA,@ModelAttribute("employee") Employee employee){
-    	
+    public String saveLeave(@ModelAttribute("newLeave") @Valid LeaveApplication LA,
+							BindingResult bdResult, @ModelAttribute("employee") @Valid Employee employee,
+							Model model) throws MessagingException, IOException {
+		List<Object> leaveType = leaveTypeService.findAllLeaveType();
+		Date fromDate = LA.getFromDate();
+		Date toDate = LA.getToDate();
+    	if(bdResult.hasErrors()){
+			model.addAttribute("leaveTypeValue", leaveType);
+			model.addAttribute("wrongDate");
+			return "forward:/employee/addLeave/"+employee.getEmployeeId();
+		}
+		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
+			model.addAttribute("leaveTypeValue", leaveType);
+			model.addAttribute("wrongDate", "Date is wrong");
+			return "forward:/employee/addLeave/"+employee.getEmployeeId();
+		}
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
 
-        // Integer id = employee.getEmployeeId();
         leaveApplicationService.saveLeaveApplication(LA);
-        return "home";
+		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
+		System.out.println(last.get(0).getLeaveId());
+		// emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
+        return "forward:/employee/leaveList/"+employee.getEmployeeId();
     }
     
     @RequestMapping("/manageLeave/{id}")
     public String manageLeave(@PathVariable("id") Integer id, Model model){
         List<LeaveApplication> list = new ArrayList<LeaveApplication>();
         list.addAll(leaveApplicationService.findAllLeaves(id));
+        
         model.addAttribute("leaveList", list);
         model.addAttribute("employee", employeeService.findEmployeeById(id));
         
@@ -87,12 +107,12 @@ public class StaffController {
     }
     
     @RequestMapping("/viewLeaveDetails/{id}")
-	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+	public String viewLeaveDetails(@PathVariable("id") Integer id, Model model) {
     	
     	LeaveApplication selectedLeave = leaveApplicationService.findSingleLeaveById(id);
     	Employee selectedEmp = selectedLeave.getEmployee();
     	List<Object> leaveType = leaveTypeService.findAllLeaveType();
-    	
+
     	model.addAttribute("newLeave", selectedLeave);
     	model.addAttribute("employee", selectedEmp);
     	model.addAttribute("leaveTypeValue", leaveType);
@@ -101,21 +121,36 @@ public class StaffController {
 	}
     
     @RequestMapping(value = "/editLeave/{id}")
-	public String editLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+	public String editLeave(@PathVariable("id") Integer id, Model model) {
+    	
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	List<Object> leaveType = leaveTypeService.findAllLeaveType();
+    	
     	model.addAttribute("newLeave", leaveAppToChange);
     	model.addAttribute("leaveTypeValue", leaveType);
-		
+    	model.addAttribute("employee", leaveAppToChange.getEmployee());
+    	
 		return "leaveForm-edit";
 	}
     
-    @RequestMapping(value = "/updateLeave/{id}")
-	public String updateLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute @Valid LeaveApplication LA, BindingResult bdgresult) {
-    	if(bdgresult.hasErrors())
-        {
-            return "leaveForm-edit";
-        }
+    @RequestMapping(value = "/updateLeave/{id}", method = RequestMethod.POST)
+	public String updateLeave(@PathVariable("id") Integer id, Model model, @ModelAttribute("newLeave") @Valid LeaveApplication LA, BindingResult bdgresult,
+			@ModelAttribute("employee") Employee employee) throws MessagingException, IOException {
+    	
+    	List<Object> leaveType = leaveTypeService.findAllLeaveType();
+		Date fromDate = LA.getFromDate();
+		Date toDate = LA.getToDate();
+		
+		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
+			model.addAttribute("wrongDate", "Date is wrong");
+			model.addAttribute("leaveTypeValue", leaveType);
+			return "leaveForm-edit";
+		}
+    	if(bdgresult.hasErrors()){
+			model.addAttribute("leaveTypeValue", leaveType);
+			model.addAttribute("wrongDate");
+			return "leaveForm-edit";
+		}
     	
     	// find the leave to change
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
@@ -128,8 +163,14 @@ public class StaffController {
     	leaveAppToChange.setCoveringEmp(LA.getCoveringEmp());
     	leaveAppToChange.setLeaveType(LA.getLeaveType());
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.UPDATED);
+    	
     	// save changes
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+    	
+    	// send email to manager
+		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
+		System.out.println(last.get(0).getLeaveId());
+		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.UPDATED);
     	
     	model.addAttribute("newLeave", leaveAppToChange);
 		
@@ -153,6 +194,10 @@ public class StaffController {
     	LeaveApplication leaveAppToChange = leaveApplicationService.findSingleLeaveById(id);
     	leaveAppToChange.setApprovalStatus(ApprovalStatus.CANCELLED);
     	leaveApplicationService.saveLeaveApplication(leaveAppToChange);
+    	
+    	// return subtracted leave days to leave count
+    	employeeService.updateLeaveCount(leaveAppToChange.getEmployee(), leaveAppToChange);
+    	
 		return "redirect:/employee/manageLeave/" + leaveAppToChange.getEmployee().getEmployeeId();
 	}
 

@@ -1,5 +1,6 @@
 package sg.edu.nus.LAPS.services;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,12 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
 		leaveApplicationRepository.deleteById(id);
 		return null;
 	}
+
+	@Override
+	public Double getLeaveDuration(Integer id) {
+		return leaveApplicationRepository.getLeaveDuration(id);
+		
+	}
     
     @Override
     public Paged<LeaveApplication> findAllLeavesByEmployeeIdWithPage(Integer employeeId, int pageNumber, int size) {
@@ -69,6 +76,19 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     @Override
     public List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatusIn(Integer employeeId, List<ApprovalStatus> approvalStatus) {
     	return leaveApplicationRepository.findLeavesByEmployee_employeeIdAndApprovalStatusIn(employeeId, approvalStatus);
+    }
+
+    @Override
+    public boolean comapreTwoDates(Date fromDate, Date toDate){
+        if(fromDate.compareTo(toDate)>0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    @Override
+    public List<LeaveApplication> findAllLeaveApplicationSorted(){
+        return leaveApplicationRepository.findAllLeaveApplicationSorted();
     }
     
     @Override
