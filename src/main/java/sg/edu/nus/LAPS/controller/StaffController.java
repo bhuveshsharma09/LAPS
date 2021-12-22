@@ -35,7 +35,8 @@ import sg.edu.nus.LAPS.services.LeaveTypeService;
 import sg.edu.nus.LAPS.services.PDFGenerateService;
 
 @Controller
-@RequestMapping("/employee")
+@RequestMapping(value = "/employee")
+
 public class StaffController {
 	
     @Autowired
@@ -91,7 +92,7 @@ public class StaffController {
         leaveApplicationService.saveLeaveApplication(LA);
 		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
 		System.out.println(last.get(0).getLeaveId());
-		// emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
+		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
         return "forward:/employee/leaveList/"+employee.getEmployeeId();
     }
     

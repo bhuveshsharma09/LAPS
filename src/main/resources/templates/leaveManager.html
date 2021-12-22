@@ -2,42 +2,57 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <title>Personal Leave Manager</title>
-<head th:replace="fragment/layout.html :: head"/>
+<head th:replace="fragment/layout.html :: head" />
+
 <body>
-	<div th:replace="fragment/layout.html :: navbar-inv"/>
-	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
-	<h3>Personal Leave Manager</h3>
-    <table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
-        <thead>
-        <tr>
-            <th >Leave Id</th>
-            <th>Employee Id</th>
-            <th>From Date</th>
-            <th>To Date</th>
-            <th>Leave Type</th>
-            <th>Remarks</th>
-            <th>Contact Details</th>
-            <th>Status</th>
-            <th>Manager's Comment</th>
-            <th>View Details</th>
-        </tr>
-        </thead>
-        <tbody>
-    <tr th:each="leave: ${leaveList}">
-        <td th:text="${leave.leaveId}">
-        <td th:text="${leave.employee.employeeId}" />
-        <td th:text="${leave.fromDate}" />
-        <td th:text="${leave.toDate}" />
-        <td th:text="${leave.leaveType.leaveName}" />
-        <td th:text="${leave.remarks}" />
-        <td th:text="${leave.contactDetails}" />
-        <td th:text="${leave.approvalStatus}" />
-        <td th:text="${leave.managerComment}" />
-        <td><a href="leaveForm.html" th:href="@{/employee/viewLeaveDetails/}+${leave.leaveId}">View Details</a></td>
-    </tr>
-        </tbody>
-    
-    </table>
-    <a th:href="@{/employee/}">Back</a>
+	<div th:replace="fragment/layout.html :: navbar-inv" />
+	<div class="container">
+		<section>
+			<header>
+				<div class="row">
+					<div class="col">
+						<h3>Personal Leave Manager</h3>
+					</div>
+				</div>
+			</header>
+		</section>
+		<section>
+			<div class="row">
+				<div class="col">
+					<table class= "table table-bordered table-striped table-responsive" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
+						<thead>
+							<tr class="text-start">
+								<th>Leave Id</th>
+								<th>Employee Id</th>
+								<th>From Date</th>
+								<th>To Date</th>
+								<th>Leave Type</th>
+								<th>Remarks</th>
+								<th>Contact Details</th>
+								<th>Status</th>
+								<th>Manager's Comment</th>
+								<th>View Details</th>
+							</tr >
+						</thead>
+						<tbody>
+							<tr th:each="leave: ${leaveList}">
+								<td th:text="${leave.leaveId}">
+									<td th:text="${leave.employee.employeeId}" />
+									<td th:text="${leave.fromDate}" />
+									<td th:text="${leave.toDate}" />
+									<td th:text="${leave.leaveType.leaveName}" />
+									<td th:text="${leave.remarks}" />
+									<td th:text="${leave.contactDetails}" />
+									<td th:text="${leave.approvalStatus}" />
+									<td th:text="${leave.managerComment}" />
+								<td><a href="leaveForm.html" th:href="@{/employee/viewLeaveDetails/}+${leave.leaveId}">View Details</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
