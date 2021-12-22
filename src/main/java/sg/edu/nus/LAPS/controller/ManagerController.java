@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -133,7 +134,7 @@ public class ManagerController {
 	
 	@RequestMapping(value = "/approveLeave/{id}", method = RequestMethod.POST)
 	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, 
-			@RequestParam("manager-remarks") String managerComment, Model model) throws MessagingException, IOException {
+			@RequestParam("manager-remarks") String managerComment, Model model, HttpSession httpSession) throws MessagingException, IOException {
     	
     	LeaveApplication leaveAppToApprove = leaveApplicationService.findSingleLeaveById(id);
     	
@@ -153,9 +154,11 @@ public class ManagerController {
     	leaveApplicationService.saveLeaveApplication(leaveAppToApprove);
     	
     	// send email to staff
-    	emailController.sendTheEmailToEmp(2, leaveAppToApprove.getLeaveId(), leaveAppToApprove.getApprovalStatus());
+    	//emailController.sendTheEmailToEmp(2, leaveAppToApprove.getLeaveId(), leaveAppToApprove.getApprovalStatus());
     	
-		return "redirect:/manager/request/" + leaveAppToApprove.getEmployee().getManagerId();
+    	SessionController sessionController = (SessionController) httpSession.getAttribute("userSession");
+    	
+		return "redirect:/manager/request/" + sessionController.getEmployee().getEmployeeId();
 	}
 
 	// approve claim

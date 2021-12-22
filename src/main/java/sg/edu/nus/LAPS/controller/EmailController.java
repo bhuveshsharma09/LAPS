@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Claim;
+import sg.edu.nus.LAPS.model.Employee;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.services.ClaimService;
 import sg.edu.nus.LAPS.services.EmployeeService;
