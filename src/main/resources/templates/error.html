@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    #center-all{
+        padding-top: 100px;
+        text-align: center;
+        padding-bottom: 255px;
+    }
+</style>
+
+<head th:replace="fragment/layout.html :: head"/>
+
+<body  class="align-items-center align-content-center align-self-center mx-auto" style="background: #ffffff;">
+
+<div th:replace="fragment/layout.html :: navbar"/>
+<div id="center-all">
+    <h1 class="text-center">Ohoh!! Something went wrong!!</h1>
+    <br>
+    <h3 class="text-center">Seems like we don't have this route!</h3>
+    <br>
+    <div class="text-center">
+        <button type="button" class="btn btn-secondary"><a style="text-decoration: none;" class="link-light" href="/back">Back</a></button>
+    </div>
+</div>
+    
+<footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+    <h1 class="text-start text-white">Take your holidays without worry!</h1>
+</footer>
+<script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+</body>
+</html>
