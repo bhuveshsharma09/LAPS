@@ -42,7 +42,7 @@
             <select name="roles" <!--multiple="multiple" id="roles"-->>
             	<option value="">=Please choose=</option>
                 <option th:each="role : ${rolesall}" th:value="${role.roleId}"
-								th:text="${role.roleTitle}">
+								th:text="${role.roleDesc}">
 				</option>
             </select>
             
