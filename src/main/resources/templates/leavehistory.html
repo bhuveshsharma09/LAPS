@@ -24,6 +24,7 @@
 		<button class="filter-button"th:onclick=showTable('t4')> Applied Leaves </button>
 		<button class="filter-button"th:onclick=showTable('t5')> Updated Leaves </button>
 		<button class="filter-button"th:onclick=showTable('t6')> Cancelled Leaves </button>
+		<button class="filter-button"><a th:href="@{/employee/download/}+${session.userSession.employee.employeeId}">Download</a></button>
 </div>
 	
 <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue" style="padding: 133px 0px;background: #ffffff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;padding-top: 39px;">
@@ -211,9 +212,13 @@
 							    				<a class="page-link" th:href="@{'?pageNumber=' + ${leaveHistory.paging.pageNumber + 1}}">Next</a>
 							    			</li>       
 							    	</ul>
+									
 							    </nav>
+								
 				</div>
+				
 			</div>
+			
 		</div>
 	</div>
 </section> 

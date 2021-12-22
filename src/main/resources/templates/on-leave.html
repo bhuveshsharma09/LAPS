@@ -1,16 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!--
-<span th:text="${leavelist}"></span></h1>
--->
+<head th:replace="fragment/layout.html :: head"/>
+<body
+        class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #ffffff;">
 
+<div th:replace="fragment/layout.html :: navbar-inv"/>
+
+
+
+
+<section
+        class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+        style="padding: 133px 0px;background: #ffffff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;padding-top: 39px;">
+    <div class="row">
+        <div
+                class="col"
+                style="width: 1320px;">
+            <div
+                    class="container"
+                    style="padding: 50px;padding-top: 0px;padding-bottom: 10px;width: 1314px;">
+                <div class="intro"></div>
+                <h3 style="margin-bottom: 30px;"><span th:text="#{Site.AllEmployeeOnLeaveTitle}"></span></h3>
+                <div class="buttons"></div>
+                <div class="table-responsive" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
+                    <table
+                            class="table"
+                            th:if="${not #lists.isEmpty(leavelist)}">
+
+                        <thead>
+                        <tr class="text-start" style="background: rgba(152,181,255,0.57);font-size: 18px;">
+                            <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;"><span th:text="#{heading.leave.leaveId}"></span></th>
+                            <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;"><span th:text="#{heading.employee.employeeName}"></span></th>
+                            <th style="border-right-width: 0px;"><span th:text="#{heading.leave.fromDate}"></span></th>
+                            <th style="border-right-width: 0px;"><span th:text="#{heading.leave.toDate}"></span></th>
+                            <th style="border-right-width: 0px;"><span th:text="#{heading.leave.leaveType}"></span></th>
+                            <th style="border-right-width: 0px;"><span th:text="#{heading.leave.remarks}"></span></th>
+                            <th style="border-right-width: 0px;"><span th:text="#{heading.leave.contactDetail}"></span></th>
+                            <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 1px;"><span th:text="#{heading.leave.approvalStatus}"></span></th>
+                           <!-- <th style="background: #80ffc6;border-left-width: 1px;">Details</th>
+                            <th style="background: #80ffc6;border-left-width: 1px;">Update</th>
+                            <th style="background: rgba(255,143,143,0.51);border-left-width: 1px;">Delete</th>-->
+                            <!--<th style="background: rgba(255,143,143,0.51);border-left-width: 1px;">Cancel</th>-->
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="leave: ${leavelist}">
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.leaveId}"></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.employee.name}"></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.fromDate}"></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.toDate}"></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.leaveType.leaveName}"></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.remarks}"></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.contactDetails}"></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:text="${leave.approvalStatus}"></span></td>
+
+                         <!--   <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/Claim/viewClaimDetails/}+${claim.claimId}">View Details</a></td>
+                            <td style="background: rgba(152,181,255,0.09);"><span th:if="${claim.approvalStatus == 'DELETED'}"> No actions  </span>
+                                <span th:unless="${claim.approvalStatus == 'DELETED'}"><a th:href="@{/Claim/edit/}+${claim.claimId}" >
+                Update</a></span></td>
+                            <td style="background: rgba(152,181,255,0.09);"> <span th:if="${claim.approvalStatus == 'DELETED'}">  No actions </span>
+                                <span th:unless="${claim.approvalStatus == 'DELETED'}"><a th:href="@{/Claim/delete/}+${claim.claimId}" >
+            Delete</a></span></td>
+-->
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <h3>ON LEAVE PAGE</h3>
 
 
@@ -44,6 +124,10 @@
 
 </table>
 
-<a href="/login" >login</a>
+<a href="/login" >login</a>-->
+<footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+    <h1 class="text-start text-white">Take your holidays without worry!</h1>
+</footer>
+<script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
 </html>

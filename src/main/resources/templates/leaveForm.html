@@ -1,63 +1,101 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="#" th:object="${newLeave}" th:action="@{/employee/saveLeave}" method="post">
-        <fieldset>
-            <input type="hidden" th:field="*{leaveId}"/>
-            <input type="hidden" th:field="${employee.employeeId}">
-        </fieldset>
-        <fieldset>
-            <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
-            <label for="fromDate">From Date: </label>
-            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}" required/>
-            <p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
-        </fieldset>
-        <fieldset>
-            <label for="toDate">To Date: </label>
-            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"required/>
-            <p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
-        </fieldset>
-        <fieldset>
-            <label for="remarks">Remarks: </label>
-            <input type="text" name="remarks" id="remarks" th:field="*{remarks}"required>
-            <p th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></p>
-        </fieldset>
-        <fieldset>
-            <label for="coveringEmp">Covering Employee: </label>
-            <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}"required>
-            <p th:if="${#fields.hasErrors('coveringEmp')}" th:errors="*{coveringEmp}"></p>
-        </fieldset>
-        <fieldset>
-            <label for="contactDetails">Contact Details: </label>
-            <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}"required>
-            <p th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></p>
-        </fieldset>
-        <fieldset>
-            <label for="leaveName">Leave Type: </label>
+<html lang="en">
+<title>LAPS-Form</title>
+<head th:replace="fragment/layout.html :: head"/>
 
-            <!-- <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}"> -->
+<body class="align-items-center align-content-center align-self-center mx-auto"
+style="background: #ffffff;">
+    <div th:replace="fragment/layout.html :: navbar"/>
+    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+            style="padding: 133px 0px;
+            background: #ffffff;
+            color: rgb(0,0,0);
+            margin-bottom: 0px;
+            padding-top: 39px;">
+        <div class="row">
+            <div class="col">
+                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
+                    <div class="intro">
 
-            <select name="leaveType" id="leaveName" th:field="*{leaveType.leaveName}">
-
-                <option th:each="type:${leaveTypeValue}" th:value="${type[0]}" th:text="${type[1]}"></option>
-
-            </select>
-            <p th:if="${#fields.hasErrors('leaveType')}" th:errors="*{leaveType}"></p>
-        </fieldset>
-        <fieldset>
-            <input type="submit" value="Submit">
-        </fieldset>
-        <fieldset>
-
-            <a th:href="@{update}"></a>
-            <a th:href="@{delete}"></a>
-        </fieldset>
-    </form>
+                    </div>
+                    <h3><span th:text="#{leave.formTitle}"></span></h3>
+                    <form class="flex-fill" action="#" th:object="${newLeave}" th:action="@{/employee/saveLeave}" method="post" 
+                                style="padding: 114px;
+                                padding-top: 20px;
+                                padding-right: 510px;
+                                padding-bottom: 50px;
+                                padding-left: 0px;">
+                        <input type="hidden" th:field="*{leaveId}"/>
+                        <input type="hidden" th:field="${employee.employeeId}">
+                        <div class="mb-3">
+                            <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
+                            <label class="form-label" style="margin-bottom: 3px;" for="fromDate"><strong><span th:text="#{Label.leaveFromDate}"></span></strong></label>
+                            <input class="form-control" name="fromDate" id="fromDate" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}" required/>
+                        </div>
+                        <div class="mb-3">
+                            <p style="color: red;" th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
+                        </div>
+                        <div class="mb-3">
+                            <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
+                            <label class="form-label" style="margin-bottom: 3px;" for="toDate"><strong><span th:text="#{Label.leaveToDate}"></span></strong></label>
+                            <input class="form-control" name="toDate" id="toDate" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}" required/>
+                        </div>
+                        <div class="mb-3">
+                            <p style="color: red;" th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="remarks"style="margin-bottom: 3px;"><strong><span th:text="#{Label.leaveRemarks}"></span></strong></label>
+                            <input class="form-control" type="text" name="remarks" id="remarks" style="background: rgba(152,181,255,0.26);" th:field="*{remarks}" placeholder="Remarks" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="error-message">
+                                <strong><span th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></span></strong>
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="coveringEmp"style="margin-bottom: 3px;"><strong><span th:text="#{Label.leaveCoveringEmp}"></span></strong></label>
+                            <input class="form-control" type="text" name="coveringEmp" id="coveringEmp" style="background: rgba(152,181,255,0.26);" th:field="*{coveringEmp}" placeholder="Covering Emp" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="error-message">
+                                <strong><span th:if="${#fields.hasErrors('coveringEmp')}" th:errors="*{coveringEmp}"></span></strong>
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="contactDetails"style="margin-bottom: 3px;"><strong><span th:text="#{Label.leaveContactDetails}"></span></strong></label>
+                            <input class="form-control" type="text" name="contactDetails" id="contactDetails" style="background: rgba(152,181,255,0.26);" th:field="*{contactDetails}" placeholder="Contact Details" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="error-message">
+                                <strong><span th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></span></strong>
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="leaveName"style="margin-bottom: 3px;"><strong><span th:text="#{Label.leaveLeaveType}"></span></strong></label>
+                            <select class="form-select" aria-label="Default select example" name="leaveType" id="leaveName" style="background: rgba(152,181,255,0.26);" th:field="*{leaveType.leaveName}">
+                
+                                <option th:each="type:${leaveTypeValue}" th:value="${type[0]}" th:text="${type[1]}"></option>
+                
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="error-message">
+                                <strong><span th:if="${#fields.hasErrors('leaveType')}" th:errors="*{leaveType}"></span></strong>
+                            </label>
+                        </div>
+                        <div class="text-end mb-3">
+                            <button class="btn btn-primary" type="submit" style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;">
+                                <strong><span th:text="#{Label.leaveSubmit}"></span></strong>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
+    <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
 </html>
