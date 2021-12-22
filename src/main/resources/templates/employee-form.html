@@ -1,79 +1,249 @@
 <!DOCTYPE html>
+
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+
+<head th:replace="fragment/layout.html :: head">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Employee</title>
-</head>
+</head >
 
-<body>
 
-<h1>Add a NEW Employee</h1>
-	<form action="#" th:object="${employee}" th:action="@{/employee/save}"method="post">
-		
-		<fieldset>
-			Full Name: <input type="text" th:field="*{name}">
-			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			Manager Name: 
-             <select name="managerId" size="1" id="managerId">
-            	<option value="">Select Manager</option>
-                <option th:each="employee: ${employees}" th:value="${employee.employeeId}"
-					th:text="${employee.name}">
-				</option>
-            </select>
-			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			Department Name: 
-             <select name="department" size="1" id="department">
-            	<option value="">Select Department</option>
-                <option th:each="department: ${departments}" th:value="${department.departmentId}"
-								th:text="${department.departmentName}">
-				</option>
-            </select>
-			<p th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			Annual Leave Entitlement: <input type="number" th:field="*{annualLeaveCount}">
-			<p th:if="${#fields.hasErrors('annualLeaveCount')}" th:errors="*{annualLeaveCount}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			Medical Leave Entitlement: <input type="number" th:field="*{medicalLeaveCount}">
-			<p th:if="${#fields.hasErrors('medicalLeaveCount')}" th:errors="*{medicalLeaveCount}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			Compensation Leave Entitlement:<input type="number" th:field="*{compensationLeaveCount}">
-			<p th:if="${#fields.hasErrors('compensationLeaveCount')}" th:errors="*{compensationLeaveCount}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			Email:<input type="email" th:field="*{emailId}">
-			<p th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
-				type="reset" value="Reset" />
-		</fieldset>
-		
+<body
+		class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #ffffff;">
+        
+        <div th:replace="fragment/layout.html :: navbar-inv"/>
+        <br>
+        <br>
+        
+<sectionclass="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+             style="padding: 133px 0px;
+             background: #ffffff;
+             color: rgb(0,0,0);
+             margin-bottom: 0px;
+             padding-bottom: 380px;
+             padding-top: 39px;">
 
-	</form>
+        <div class="row">
+            <div class="col">
+                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
+                    <div class="intro"></div>
+                    <h3><span th:text="#{Site.NewEmpTitle}"></span></h3>
+                    <div class="buttons"></div>
+                    
+	<form class="flex-fill" 
+			action="#" 
+			th:object="${employee}" th:action="@{/employee/save}"
+			method="post"
+			style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
+                    
+	<div class="mb-3"> <!--1.Name-->
+		<label class="form-label" style="margin-bottom: 3px;">
+            <strong><span th:text="#{Label.empName}"></span></strong>
+        </label>
+        
+		<input
+			class="form-control"
+            type="text"
+            name="name"
+            placeholder="Enter full name"
+            style="background: rgba(152,181,255,0.26);"
+            th:field="*{name}"
+            maxLength="50"> <!--was fieldset -->
+	</div>
+	<div class="mb-3">
+        <label
+            class="error-message">
+            <strong><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></strong>
+        </label>
+    </div>	
 	
+	
+	<div class="mb-3"> <!--2.ManagerId-->
+		<label class="form-label" style="margin-bottom: 3px;"> 
+			<strong><span th:text="#{Label.empMgr}"></span></strong></label>
+         	<select class="form-select" aria-label="Default select example" 
+        		 	name="managerId" id="managerId" size="1"
+         			style="background: rgba(152,181,255,0.26);" 
+         		 	th:field="*{managerId}">
+              
+         	 	<option value="">Select Manager</option>
+        	 	<option th:each="employee: ${employees}" 
+         		 		th:value="${employee.employeeId}"
+				 		th:text="${employee.name}"></option>     
+         	</select>
+	</div>
+	<div class="mb-3">
+        <label
+            class="error-message">
+            <strong><span th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></span></strong>
+        </label>
+    </div>	
+	
+	
+	<div class="mb-3"> <!--3.Department Name-->
+		<label class="form-label" style="margin-bottom: 3px;"> 
+			<strong><span th:text="#{Label.empDept}"></span></strong></label>
+         	<select class="form-select" aria-label="Default select example" 
+        		 	name="department" id="department" size="1"
+         			style="background: rgba(152,181,255,0.26);" 
+         		 	th:field="*{department}">
+              
+         	 	<option value="">Select Department</option>
+        	 	<option th:each="department: ${departments}" 
+        	 			th:value="${department.departmentId}"
+						th:text="${department.departmentName}">
+				</option>   
+         	</select>
+	</div>
+	<div class="mb-3">
+        <label
+            class="error-message">
+            <strong><span th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></span></strong>
+        </label>
+    </div>	
+		
+                
+	<div class="mb-3"> <!--4.Annual Leave Entitlement-->
+		<label class="form-label" style="margin-bottom: 3px;">
+            <strong><span th:text="#{Label.empAL}"></span></strong>
+        </label>
+        
+		<input
+			class="form-control"
+            type="number"
+            name="annualLeaveCount"
+            placeholder="Enter annual leave total"
+            style="background: rgba(152,181,255,0.26);"
+            th:field="*{annualLeaveCount}"
+            min="1" max="2"> 
+	</div>
+	<div class="mb-3">
+        <label
+            class="error-message">
+            <strong><span th:if="${#fields.hasErrors('annualLeaveCount')}" th:errors="*{annualLeaveCount}"></span></strong>
+        </label>
+    </div>	
+    
+    
+    <div class="mb-3"> <!--5. Medical Leave Entitlement-->
+		<label class="form-label" style="margin-bottom: 3px;">
+            <strong><span th:text="#{Label.empML}"></span></strong>
+        </label>
+        
+		<input
+			class="form-control"
+            type="number"
+            name="medicalLeaveCount"
+            placeholder="Enter medical leave total"
+            style="background: rgba(152,181,255,0.26);"
+            th:field="*{medicalLeaveCount}"
+            min="1" max="2"> 
+	</div>
+	<div class="mb-3">
+        <label
+            class="error-message">
+            <strong><span th:if="${#fields.hasErrors('medicalLeaveCount')}" th:errors="*{medicalLeaveCount}"></span></strong>
+        </label>
+    </div>	
+		
+
+    <div class="mb-3"> <!--6. Compensation Leave Entitlement-->
+		<label class="form-label" style="margin-bottom: 3px;">
+            <strong><span th:text="#{Label.empCL}"></span></strong>
+        </label>
+        
+		<input
+			class="form-control"
+            type="number"
+            name="compensationLeaveCount"
+            placeholder="Enter compensation leave total"
+            style="background: rgba(152,181,255,0.26);"
+            th:field="*{compensationLeaveCount}"
+            min="1" max="2"> 
+	</div>
+	<div class="mb-3">
+        <label
+            class="error-message">
+            <strong><span th:if="${#fields.hasErrors('compensationLeaveCount')}" th:errors="*{compensationLeaveCount}"></span></strong>
+        </label>
+    </div>	
+
+
+	<div class="mb-3"> <!--7. Email-->
+		<label class="form-label" style="margin-bottom: 3px;">
+            <strong><span th:text="#{Label.empEm}"></span></strong>
+        </label>
+        
+		<input
+			class="form-control"
+            type="email"
+            name="emailId"
+            placeholder="Enter email address"
+            style="background: rgba(152,181,255,0.26);"
+            th:field="*{emailId}"
+            maxLength="50"> 
+	</div>
+	<div class="mb-3">
+        <label
+            class="error-message">
+            <strong><span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span></strong>
+        </label>
+    </div>	
+    
+    
+    <div class="text-end mb-3">
+        <button class="btn btn-primary"
+             type="submit"
+             style="background: #80ffc6;
+             color: rgb(0,0,0);
+             border-width: 0px;
+             margin-top: 50px;">
+             <strong><span th:text="#{Label.newEmpSubmit}"></span></strong></button>
+             
+             &nbsp; &nbsp;
+             
+             <button class="btn btn-primary"
+             type="reset"
+             style="background: rgb(192, 192, 192);
+             color: rgb(0,0,0);
+             border-width: 0px;
+             margin-top: 50px;">
+             <strong><span th:text="#{Label.newEmpReset}"></span></strong></button>
+    </div>
+    
+    
+	</form>
+		
+    </div>
+ 	</div>
+      
+      
+    <div class="col" style="text-align: center;">
+                <img th:src="@{/assets/img/newEmp.PNG}"
+                     style="height: 395px;width: 427.78px;margin-top: 144px;border-radius: 17px;"/>
+
+<!--
+                <a href="https://imgbb.com/"><img src="https://i.ibb.co/Hgh1n1s/edit-leave-form.jpg" alt="edit-leave-form" border="0"></a>
+                <a href="https://ibb.co/MGTQrMc"><img src="https://i.ibb.co/SdTGbRt/laps-background.jpg" alt="laps-background" border="0"></a>
+                <a href="https://ibb.co/tzv2Py4"><img src="https://i.ibb.co/nBY18hb/leave-manager.png" alt="leave-manager" border="0"></a>
+                <a href="https://imgbb.com/"><img src="https://i.ibb.co/jGBGRWR/new-leave-image.jpg" alt="new-leave-image" border="0"></a>
+                <a href="https://ibb.co/vLCzvx2"><img src="https://i.ibb.co/ygmsBnL/paper.jpg" alt="paper" border="0"></a>-->
+    </div>
+                
+                
+ 	</div>
+</section>
+
+
+<footer style="background-color: #98b5ff; height: 50px;"></footer>
+
+<script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+
+
 </body>
 
 </html>
