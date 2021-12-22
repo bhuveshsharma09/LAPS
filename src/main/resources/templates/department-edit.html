@@ -1,45 +1,104 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Department</title>
-</head>
-
-
-<body>
-
-	<h1>Edit Department Details</h1>
-
-	<form action="#" th:object="${department}" th:action="@{/department/editDepartmentSuccess/}+${department.departmentId}" method="post">
-		
-		<input type="hidden" th:field="*{departmentId}" />
-		
-		<fieldset>
-			Department Name: <input type="text" th:field="*{departmentName}">
-			<p th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></p>
-		</fieldset>
-	
-		
-		<fieldset>
-			Manager Name: 
-             <select th:field="*{managerId}" name="managerId" size="1" id="managerId">
-            	<option value="">Select Manager</option>
-                <option th:each="employee: ${employees}" th:value="${employee.employeeId}"
-						th:text="${employee.name}">
-				</option>
-            </select>      
-			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			<input type="submit" value="Update" /> &nbsp; &nbsp; 
-			<input type="button" value="Back" onclick="window.location.href='/department/all'; return false"/>
-		</fieldset>
-
-	</form>
-	
-</body>
+<html lang="en">
+   <head th:replace="fragment/layout.html :: head"/>
+   <body
+      class="align-items-center align-content-center align-self-center mx-auto"
+      style="background: #ffffff;">
+      <div th:replace="fragment/layout.html :: navbar-inv"/>
+      <br>
+      <br>
+      <sectionclass="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+      style="padding: 133px 0px;
+      background: #ffffff;
+      color: rgb(0,0,0);
+      margin-bottom: 0px;
+      padding-bottom: 380px;
+      padding-top: 39px;">
+      <div class="row">
+         <div class="col">
+            <div class="container" style="padding-left: 100px; padding-right: 100px; padding-top: 0px; padding-bottom: 10px;">
+               <div class="intro"></div>
+               <div class="buttons"></div>
+               <form class="flex-fill" 
+                  action="#" 
+                  th:object="${department}" th:action="@{/department/editDepartmentSuccess/}+${department.departmentId}"
+                  method="post"
+                  style="padding: 114px; padding-top: 20px; padding-bottom: 50px;">
+                  <h3><span th:text="#{Site.NewDeptTitle}"></span></h3>
+                  <br>
+                  <br>
+                  <div class="mb-3">
+                     <!--1.Name-->
+                     <label class="form-label" style="margin-bottom: 3px;"><strong><span th:text="#{Label.deptName}"></span></strong></label>
+                     <input
+                        class="form-control"
+                        type="text"
+                        name="departmentName"
+                        placeholder="Enter department name"
+                        style="background: rgba(152,181,255,0.26);"
+                        th:field="*{departmentName}"
+                        maxLength="50"> 
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></span></strong>
+                     </label>
+                  </div>
+                  <div class="mb-3">
+                     <!--2.ManagerId-->
+                     <label class="form-label" style="margin-bottom: 3px;"> 
+                     <strong><span th:text="#{Label.deptMgr}"></span></strong></label>
+                     <select class="form-select" aria-label="Default select example" 
+                        name="managerId" id="managerId" size="1"
+                        style="background: rgba(152,181,255,0.26);" 
+                        th:field="*{managerId}">
+                        <option value="">Select Manager</option>
+                        <option th:each="employee: ${employees}" 
+                           th:value="${employee.employeeId}"
+                           th:text="${employee.name}"></option>
+                     </select>
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></span></strong>
+                     </label>
+                  </div>
+                  <div class="text-end mb-3">
+                     <button class="btn btn-primary"
+                        type="submit"
+                        style="background: #80ffc6;
+                        color: rgb(0,0,0);
+                        border-width: 0px;
+                        margin-top: 50px;">
+                     <strong><span th:text="#{Label.editEmpUpdate}"></span></strong></button>
+                     &nbsp; &nbsp;
+                     <button class="btn btn-primary"
+                        type="button"
+                        style="background: rgb(192, 192, 192);
+                        color: rgb(0,0,0);
+                        border-width: 0px;
+                        margin-top: 50px;">
+                     <strong><span th:text="#{Label.editDeptBack}"
+                        onclick="window.location.href='/department/all'; return false"></span></strong></button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div class="col" style="text-align: center;">
+         <img th:src="@{/assets/img/dept.PNG}"
+            style="height: 350px;width: 450px;margin-top: 144px;border-radius: 17px;"/>
+      </div>
+      </section>
+      <!--<footer style="background-color: #98b5ff; height: 50px;"></footer>-->
+      <br>
+      <br>
+      <br>
+      <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+         <h1 class="text-start text-white">Take your holidays without worry!</h1>
+      </footer>
+      <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+   </body>
 </html>
