@@ -35,7 +35,8 @@ import sg.edu.nus.LAPS.services.LeaveTypeService;
 import sg.edu.nus.LAPS.services.PDFGenerateService;
 
 @Controller
-@RequestMapping("/employee")
+@RequestMapping(value = "/employee")
+
 public class StaffController {
 	
     @Autowired
@@ -78,12 +79,12 @@ public class StaffController {
     	if(bdResult.hasErrors()){
 			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate");
-			return "forward:/employee/addLeave/"+employee.getEmployeeId();
+			return "leaveForm";
 		}
 		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
 			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate", "Date is wrong");
-			return "forward:/employee/addLeave/"+employee.getEmployeeId();
+			return "leaveForm";
 		}
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
