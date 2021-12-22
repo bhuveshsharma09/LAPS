@@ -6,4 +6,30 @@ button {
 	display: none;
 }
 
+.btn-group .filter-button {
+  background-color: #4CAF50; /* Green */
+  border: 1px solid green;
+  color: white;
+  padding: 7px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-group .filter-button:not(:last-child) {
+  border-right: none; 
+}
+
+table {
+	width: 100%;
+}
+
+
+.btn-group .button:hover {
+  background-color: #3e8e41;
+}
+
+
 
