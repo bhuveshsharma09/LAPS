@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leave Details</title>
-</head>
+<title>Leave Details</title>
+<head th:replace="fragment/layout.html :: head"/>
+
 <body>
+	<div th:replace="fragment/layout.html :: navbar-inv"/>
+	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+
 	<h3>Leave Details</h3>
 	<div th:object="${newLeave}">
 		<table>

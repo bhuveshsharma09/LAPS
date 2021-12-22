@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Approve/Reject Leave</title>
-</head>
+
+<title>Approve/Reject Leave</title>
+<head th:replace="fragment/layout.html :: head"/>
+
 <body>
+	<div th:replace="fragment/layout.html :: navbar-inv"/>
+	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+
     <form action="#" th:object="${selectedLeave}" th:action="@{/manager/approveLeave/}+${selectedLeave.leaveId}" method="post">
         <fieldset>
             <label for="leaveId">LeaveId: </label>

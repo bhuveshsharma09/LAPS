@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Leave Manager</title>
-</head>
+
+<title>Personal Leave Manager</title>
+<head th:replace="fragment/layout.html :: head"/>
 <body>
+	<div th:replace="fragment/layout.html :: navbar-inv"/>
+	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+	<h3>Personal Leave Manager</h3>
     <table width="400" cellpadding="10" cellspacing="5" border="2" bgcolor="#f5f5dc">
         <thead>
         <tr>

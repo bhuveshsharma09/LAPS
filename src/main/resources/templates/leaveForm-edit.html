@@ -1,66 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Leave Application</title>
-</head>
+<title>Edit Leave Application</title>
+<head th:replace="fragment/layout.html :: head"/>
+
 <body>
+	<div th:replace="fragment/layout.html :: navbar-inv"/>
+	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+	<h3>Edit Leave Application</h3>
     <form action="#" th:object="${newLeave}" th:action="@{/employee/updateLeave/}+${newLeave.leaveId}" method="post">
-        <fieldset>
+        <fieldset style="display: none;">
             <input type="hidden" th:field="*{leaveId}"/>
             <input type="hidden" th:field="${employee.employeeId}">
-        </fieldset>
+        </fieldset >
         <fieldset>
             <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
             <label for="fromDate">From Date: </label>
             <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}"/>
           	<p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
-            
         </fieldset>
         <fieldset>
             <label for="toDate">To Date: </label>
             <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"/>
-            <p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
-            
+            <p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p> 
         </fieldset>
         <fieldset>
             <label for="remarks">Remarks: </label>
             <input type="text" name="remarks" id="remarks" th:field="*{remarks}">
-            
+            <p th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></p>
         </fieldset>
         <fieldset>
             <label for="coveringEmp">Covering Employee: </label>
             <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}">
-
+            <p th:if="${#fields.hasErrors('coveringEmp')}" th:errors="*{coveringEmp}"></p>
         </fieldset>
         <fieldset>
             <label for="contactDetails">Contact Details: </label>
             <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}">
             <p th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></p>
-            
         </fieldset>
         <fieldset>
             <label for="leaveName">Leave Type: </label>
-
-            <!-- <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}"> -->
-
             <select name="leaveType" id="leaveName" th:field="*{leaveType.leaveName}">
-
                 <option th:each="type:${leaveTypeValue}" th:value="${type[0]}" th:text="${type[1]}"></option>
-
             </select>
-            
-            
         </fieldset>
         <fieldset>
             <input type="submit" value="Submit">
-        </fieldset>
-        <fieldset>
-
-            <a th:href="@{update}"></a>
-            <a th:href="@{delete}"></a>
         </fieldset>
     </form>
 </body>

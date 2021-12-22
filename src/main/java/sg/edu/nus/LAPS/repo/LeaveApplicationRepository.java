@@ -64,11 +64,6 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     		+ "and leaves.fromDate >= :inputDate")
     List<LeaveApplication> findUpcomingLeavesForEmployee(@Param("employeeId") Integer employeeId, @Param("inputDate") Date inputDate);
 
-    // find leave by leaveId
-    // required to send email for a particular leave id -- same method as line 26-27
-   // @Query("SELECT l from LeaveApplication l WHERE l.leaveId =: id")
-    //public LeaveApplication findLeaveApplicationByLeaveId(@Param("id") Integer id);
-
     @Query("SELECT l FROM LeaveApplication l where l.leaveId = :id")
     LeaveApplication findLeaveApplicationById(@Param("id") Integer id);
     
