@@ -7,108 +7,68 @@
       <div th:replace="fragment/layout.html :: navbar-inv"/>
       <section
          class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
-         style="padding: 133px 0px;background: #ffffff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;padding-top: 39px;">
+         style="padding: 133px 0px;background: #ffffff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 50px;padding-top: 39px;">
          <div class="row">
-            <div
-               class="col" style="width: 1320px;">
-               <div
-                  class="container"
-                  style="padding: 50px;padding-top: 0px;padding-bottom: 10px;width: 1320px;">
-                  <div class="intro"></div>
-                  <h3 style="margin-bottom: 30px;">
-                     Hey <span 
-                        th:text="${session.userSession.userCredentials.username}">
-                     </span>
-                     , here's where you manage all employees
-                  </h3>
-                  <div class="buttons"></div>
-                  <div class="table-responsive" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
-                     <h5>Add a new employee via the link below.</h5>
-                     <a href="employee-form.html" th:href="@{/employee/add}">Add Employee</a>
-                     <h4 th:if="${not #lists.isEmpty(employees)}">
-                        Edit or delete an employee using the options available below.
-                     </h4>
-                     <table 
-                        class="table" th:if="${not #lists.isEmpty(employees)}">
-                        <thead>
-                           <tr class="text-start" style="background:  rgba(152,181,255,0.57);font-size: 20px;">
-                              <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">ID</th>
-                              <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Name</th>
-                              <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Manager ID</th>
-                              <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Department</th>
-                              <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Email</th>
-                              <th style="background: #80ffc6;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Edit Details</th>
-                              <th style="border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Annual Leave</th>
-                              <th style="border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Medical Leave</th>
-                              <th style="border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Compensation Leave</th>
-                              <th style="background: #80ffc6; border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Edit Leave Entitlement</th>
-                              <th style="background: rgb(255, 128, 128); border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Delete</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <tr th:each="employee:${employees}">
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.employeeId}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.name}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.managerId}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.department}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.emailId}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/employee/edit/}+${employee.employeeId}">
-                              Edit Details</a></td>
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.annualLeaveCount}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.medicalLeaveCount}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.compensationLeaveCount}"></span></td>
-                              <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/employee/editLeaveEntitlement/}+${employee.employeeId}">
-                              Edit Leave Entitlement</a></td>
-                              <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/employee/delete/}+${employee.employeeId}">Delete</a></td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </div>
+            <div class="col" style="width: 1320px;">
+               <h3 style="margin-bottom: 30px;">Hey <span th:text="${session.userSession.userCredentials.username}"></span>, you can now manage all Employees in one place.</h3>
+               <div  class="buttons"></div>
+               <div class="table-responsive align-content-center" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
+                  <a href="employee-form.html" th:href="@{/employee/add}">Add Employee</a>
+                  <br>
+                  <br>
+                  <h5 th:if="${not #lists.isEmpty(employees)}">
+                     Edit or delete an employee using the options available below.
+                  </h5>
+                  <table 
+                     class="table" th:if="${not #lists.isEmpty(employees)}">
+                     <thead>
+                        <tr class="text-start" style="background:  rgba(152,181,255,0.57);font-size: 20px;">
+                           <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">ID</th>
+                           <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Name</th>
+                           <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Manager ID</th>
+                           <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Department</th>
+                           <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Email</th>
+                           <th style="background: #80ffc6;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Edit Details</th>
+                           <th style="border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Annual Leave</th>
+                           <th style="border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Medical Leave</th>
+                           <th style="border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Compensation Leave</th>
+                           <th style="background: #80ffc6; border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Edit Leave Entitlement</th>
+                           <th style="background: rgb(255, 128, 128); border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Delete</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr th:each="employee:${employees}">
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.employeeId}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.name}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.managerId}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.department}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.emailId}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/employee/edit/}+${employee.employeeId}">
+                              Edit Details</a>
+                           </td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.annualLeaveCount}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.medicalLeaveCount}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${employee.compensationLeaveCount}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/employee/editLeaveEntitlement/}+${employee.employeeId}">
+                              Edit Leave Entitlement</a>
+                           </td>
+                           <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/employee/delete/}+${employee.employeeId}">Delete</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
                </div>
             </div>
          </div>
       </section>
-      <!-- 
-         <th >ID</th>
-         <th >Name</th>
-         <th >Manager ID</th>
-         <th >Department</th>
-         <th >Email</th>
-         <th >Edit Details</th>
-         <th >Annual Leave</th>
-         <th >Medical Leave</th>
-         <th >Compensation Leave</th>
-         <th >Edit Leave Entitlement</th>
-         <th >Delete</th>
-         </tr>
-         
-         <tr th:each="employee:${employees}" class="table-row">
-         <td th:text=${employee.employeeId}>ID</td>
-         <td th:text=${employee.name}>Name</td>
-         <td th:text=${employee.managerId}>Manager ID</td>
-         <td th:text=${employee.department}>Department</td>
-         <td th:text=${employee.emailId}>Email</td>
-         
-         <td><a href="employee-edit.html" 
-         	th:href="@{/employee/edit/}+${employee.employeeId}">Edit Details</a>
-         </td>
-         
-         <td th:text=${employee.annualLeaveCount}>Annual Leave</td>
-         <td th:text=${employee.medicalLeaveCount}>Medical Leave</td>
-         <td th:text=${employee.compensationLeaveCount}>Compensation Leave</td>
-         
-         <td><a href="employee-edit.html"
-         	th:href="@{/employee/editLeaveEntitlement/}+${employee.employeeId}">Edit Leave Entitlement</a>
-         </td>
-         
-         <td><a href="employee-delete.html"
-         	th:href="@{/employee/delete/}+${employee.employeeId}">Delete</a>
-         </td>
-         </tr>
-         </table>
-            </section>
-            footer style="background-color: #98b5ff; height: 50px;"></footer>
-            !-->
+      <div class="col" style="text-align: center;">
+         <img th:src="@{/assets/img/newEmp.PNG}"
+            style="height: 395px;width: 427.78px;margin-top: 50px;border-radius: 17px;"/>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
          <h1 class="text-start text-white">Take your holidays without worry!</h1>
       </footer>
