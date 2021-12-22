@@ -158,6 +158,8 @@ public class ManagerController {
     	
     	SessionController sessionController = (SessionController) httpSession.getAttribute("userSession");
     	
+    	
+    	
 		return "redirect:/manager/request/" + sessionController.getEmployee().getEmployeeId();
 	}
 

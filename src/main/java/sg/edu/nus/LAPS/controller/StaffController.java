@@ -169,7 +169,7 @@ public class StaffController {
     	// send email to manager
 		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
 		System.out.println(last.get(0).getLeaveId());
-		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.UPDATED);
+		//emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.UPDATED);
     	
     	model.addAttribute("newLeave", leaveAppToChange);
 		

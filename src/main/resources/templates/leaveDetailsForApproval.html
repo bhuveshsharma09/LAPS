@@ -1,63 +1,92 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Approve/Reject Leave</title>
-</head>
-<body>
-    <form action="#" th:object="${selectedLeave}" th:action="@{/manager/approveLeave/}+${selectedLeave.leaveId}" method="post">
-        <fieldset>
-            <label for="leaveId">LeaveId: </label>
-            <input type="text" th:field="*{leaveId}" readonly />
-        </fieldset>
-        <fieldset>
-            <label for="empId">Employee Id: </label>
-            <input type="text" th:field="${employee.employeeId}" id="empId" readonly />
-        </fieldset>
-        <fieldset>
-        	<label for="empName">Employee Name: </label>
-            <input type="text" th:field="${employee.name}" id="empName" readonly />
-        </fieldset>
-        <fieldset>
-            <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
-            <label for="fromDate">From Date: </label>
-            <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" readonly />
-        </fieldset>
-        <fieldset>
-            <label for="toDate">To Date: </label>
-            <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" readonly />
-        </fieldset>
-        <fieldset>
-            <label for="remarks">Remarks: </label>
-            <input type="text" name="remarks" id="remarks" th:field="*{remarks}" readonly />
-        </fieldset>
-        <fieldset>
-            <label for="coveringEmp">Covering Employee: </label>
-            <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}"  readonly />
-        </fieldset>
-        <fieldset>
-            <label for="contactDetails">Contact Details: </label>
-            <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}"  readonly />
-        </fieldset>
-        <fieldset>
-            <label for="leaveName">Leave Type: </label>
-            <input type="text" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}"  readonly />
-        </fieldset>
-      <fieldset>
-      		<label for="approve-leave">Approve</label>
-        	<input type="radio" name="approve_reject" id="approve-leave" value="Approve">
-        	<label for="reject-leave">Reject</label>
-        	<input type="radio" name="approve_reject" id="reject-leave" value="Reject">
-        </fieldset>
-        <fieldset>
-        	<label for="manager-remarks">Manager's remarks</label>
-        	<textarea id="manager-remarks" name="manager-remarks" rows="3" placeholder="Remarks here" required></textarea>
-        </fieldset>
-        <fieldset>
-            <input type="submit" value="Submit">
-        </fieldset>
-    </form>
-</body>
+
+<title>Approve/Reject Leave</title>
+<head th:replace="fragment/layout.html :: head"/>
+
+<body class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #ffffff;">
+	<div th:replace="fragment/layout.html :: navbar-inv"/>
+	
+	<section
+        class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+        style="padding: 133px 0px;
+             background: #ffffff;
+             color: rgb(0,0,0);
+             margin-bottom: 0px;
+             padding-bottom: 380px;
+             padding-top: 39px;">
+
+    <div class="row">
+        <div class="col">
+            <div class="container" style="padding: 0px 50px 10px;">
+                <div class="intro"></div>
+                <h3>Approve or Reject Leave</h3>
+                <div class="buttons"></div>
+                <form class="flex-fill" action="#" th:object="${selectedLeave}" th:action="@{/manager/approveLeave/}+${selectedLeave.leaveId}" method="post" 
+                style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
+                <!-- one entry-->
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="leaveId" style="font-weight:bold; margin-bottom: 3px;">LeaveId: </label>
+                        <input class="form-control" type="text" th:field="*{leaveId}" style="background: rgba(152,181,255,0.26);" readonly />
+                    </fieldset>
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="empId" style="font-weight:bold; margin-bottom: 3px;">Employee Id: </label>
+                        <input class="form-control"  type="text" th:field="${employee.employeeId}" style="background: rgba(152,181,255,0.26);" id="empId" readonly />
+                    </fieldset>
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="empName" style="font-weight:bold; margin-bottom: 3px;">Employee Name: </label>
+                        <input class="form-control"  type="text" th:field="${employee.name}" id="empName" style="background: rgba(152,181,255,0.26);" readonly />
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
+                        <label for="fromDate" style="font-weight:bold; margin-bottom: 3px;">From Date: </label>
+                        <input class="form-control"  type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" style="background: rgba(152,181,255,0.26);" readonly />
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="toDate" style="font-weight:bold; margin-bottom: 3px;">To Date: </label>
+                        <input class="form-control"  type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" style="background: rgba(152,181,255,0.26);" readonly />
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="remarks" style="font-weight:bold; margin-bottom: 3px;">Remarks: </label>
+                        <input class="form-control" type="text" name="remarks" id="remarks" th:field="*{remarks}" style="background: rgba(152,181,255,0.26);" readonly />
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="coveringEmp" style="font-weight:bold; margin-bottom: 3px;">Covering Employee: </label>
+                        <input type="text" class="form-control" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}" style="background: rgba(152,181,255,0.26);"  readonly />
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="contactDetails" style="font-weight:bold; margin-bottom: 3px;">Contact Details: </label>
+                        <input type="text" class="form-control" name="contactDetails" id="contactDetails" th:field="*{contactDetails}" style="background: rgba(152,181,255,0.26);" readonly />
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="leaveName" style="font-weight:bold; margin-bottom: 3px;">Leave Type: </label>
+                        <input type="text" class="form-control" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}" style="background: rgba(152,181,255,0.26);" readonly />
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="approve-leave" style="font-weight:bold; margin-bottom: 3px;">Approve</label>
+                        <input class="form-check-input" type="radio" name="approve_reject" id="approve-leave" value="Approve">
+                    </fieldset >
+                    <fieldset class="mb-3">
+                    	<label for="reject-leave" style="font-weight:bold; margin-bottom: 3px;">Reject</label>
+                        <input class="form-check-input" type="radio" name="approve_reject" id="reject-leave" value="Reject">
+                    </fieldset>
+                    <fieldset class="mb-3">
+                        <label class="form-label" for="manager-remarks" style="font-weight:bold; margin-bottom: 3px;">Manager's remarks</label>
+                        <textarea class="form-control" id="manager-remarks" name="manager-remarks" rows="3" placeholder="Remarks here" style="background: rgba(152,181,255,0.26);" required></textarea>
+                    </fieldset >
+                    <fieldset class="mb-3">
+                        <button class="btn btn-primary" type="submit" value="Submit" style="font-weight:bold; background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;">Submit</button>
+                    </fieldset >
+                </form>
+            </div>
+        </div>
+        <div class="col">
+            <img th:src="@{https://i.ibb.co/Hgh1n1s/edit-leave-form.jpg}" src="https://i.ibb.co/Hgh1n1s/edit-leave-form.jpg"
+                style="height: 395px;width: 427.78px;margin-top: 144px;border-radius: 17px;"/>
+        </div>
+    </div>
+    </section>
+    <script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+</body >
 </html>
