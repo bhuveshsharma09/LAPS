@@ -6,12 +6,12 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,8 +26,6 @@ import sg.edu.nus.LAPS.repo.LeaveApplicationRepository;
 import sg.edu.nus.LAPS.services.ClaimService;
 import sg.edu.nus.LAPS.services.EmployeeService;
 import sg.edu.nus.LAPS.services.LeaveApplicationService;
-
-import javax.mail.MessagingException;
 
 @Controller
 @RequestMapping("/manager")
@@ -133,27 +131,34 @@ public class ManagerController {
 
 		return "claimDetailsForApproval";
 	}
-
-
-
-
 	
 	@RequestMapping(value = "/approveLeave/{id}", method = RequestMethod.POST)
-	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, @RequestParam("manager-remarks") String managerComment, Model model) {
+	public String approveLeave(@PathVariable("id") Integer id, @RequestParam("approve_reject") String approvalResult, 
+			@RequestParam("manager-remarks") String managerComment, Model model, HttpSession httpSession) throws MessagingException, IOException {
     	
     	LeaveApplication leaveAppToApprove = leaveApplicationService.findSingleLeaveById(id);
     	
     	if (approvalResult.equalsIgnoreCase("Approve")) {
+    		leaveAppToApprove.setManagerComment(managerComment);
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.APPROVED);
+    		
+    		// subtract leave duration from leave count
+    		employeeService.updateLeaveCount(leaveAppToApprove.getEmployee(), leaveAppToApprove);
+    		
     	}
     	else if (approvalResult.equalsIgnoreCase("Reject")) {
     		leaveAppToApprove.setManagerComment(managerComment);
     		leaveAppToApprove.setApprovalStatus(ApprovalStatus.REJECTED);
-    	}
     	
+    	}
     	leaveApplicationService.saveLeaveApplication(leaveAppToApprove);
     	
-		return "home";
+    	// send email to staff
+    	//emailController.sendTheEmailToEmp(2, leaveAppToApprove.getLeaveId(), leaveAppToApprove.getApprovalStatus());
+    	
+    	SessionController sessionController = (SessionController) httpSession.getAttribute("userSession");
+    	
+		return "redirect:/manager/request/" + sessionController.getEmployee().getEmployeeId();
 	}
 
 	// approve claim

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Leave Application</title>
 </head>
 <body>
     <form action="#" th:object="${newLeave}" th:action="@{/employee/updateLeave/}+${newLeave.leaveId}" method="post">
@@ -16,22 +16,30 @@
             <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
             <label for="fromDate">From Date: </label>
             <input type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.fromDate,'dd-MM-yyyy')}"/>
+          	<p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
+            
         </fieldset>
         <fieldset>
             <label for="toDate">To Date: </label>
             <input type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" th:text="${#dates.format(newLeave.toDate,'dd-MM-yyyy')}"/>
+            <p th:if="${wrongDate!=null}" th:text="${wrongDate}"></p>
+            
         </fieldset>
         <fieldset>
             <label for="remarks">Remarks: </label>
             <input type="text" name="remarks" id="remarks" th:field="*{remarks}">
+            
         </fieldset>
         <fieldset>
             <label for="coveringEmp">Covering Employee: </label>
             <input type="text" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}">
+
         </fieldset>
         <fieldset>
             <label for="contactDetails">Contact Details: </label>
             <input type="text" name="contactDetails" id="contactDetails" th:field="*{contactDetails}">
+            <p th:if="${#fields.hasErrors('contactDetails')}" th:errors="*{contactDetails}"></p>
+            
         </fieldset>
         <fieldset>
             <label for="leaveName">Leave Type: </label>
@@ -43,6 +51,8 @@
                 <option th:each="type:${leaveTypeValue}" th:value="${type[0]}" th:text="${type[1]}"></option>
 
             </select>
+            
+            
         </fieldset>
         <fieldset>
             <input type="submit" value="Submit">

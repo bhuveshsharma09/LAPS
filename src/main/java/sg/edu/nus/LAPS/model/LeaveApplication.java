@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,7 +39,6 @@ public class LeaveApplication {
 	@Column(name = "fromDate")
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fromDate; //2
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "toDate")
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -46,6 +47,8 @@ public class LeaveApplication {
 
 	private String remarks; //4
 	private String coveringEmp; //5 
+	@NotEmpty
+	@Size(min=8,max=8)
 	private String contactDetails; //6 
 	@Column(name="approvalStatus",columnDefinition = "ENUM('APPLIED', 'UPDATED', 'CANCELLED', 'APPROVED', 'DELETED', 'REJECTED')")
 	@Enumerated(EnumType.STRING)
