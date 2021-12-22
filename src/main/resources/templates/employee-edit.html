@@ -1,69 +1,153 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Employee Details</title>
-</head>
-
-<body>
-
-<h1>Update Employee Details</h1>
-
-	<form action="#" th:object="${employee}" th:action="@{/employee/editsuccess/}+${employee.employeeId}"method="POST">
-	
-		<input type="hidden" th:field="*{employeeId}"/>
-		
-		<fieldset>
-			Full Name: <input type="text" th:field="*{name}">
-			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-		</fieldset>
-		
-		
-		<fieldset> 
-			Manager:
-             <select th:field="*{managerId}" name="managerId" size="1" id="managerId">
-            	<option value="">Select Manager</option>
-                <option th:each="employee: ${employees}" th:value="${employee.employeeId}" 
-                	th:text="${employee.name}"> 
-                	</option>
-            </select>    
-			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			Department: 
-             <select th:field="*{department}" name="department" size="1" id="department">
-            	<option value="">Select Department</option>
-                <option th:each="department: ${departments}" th:value="${department.departmentId}"
-								th:text="${department.departmentName}">
-				</option>
-            </select>
-			<p th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></p>
-		</fieldset>
-
-		
-		<fieldset>
-			Email:<input type="email" th:field="*{emailId}">
-			<p th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></p>
-		</fieldset>
-		
-		
-		<fieldset>
-			<input type="submit" value="Update" /> &nbsp; &nbsp; 
-			<input type="button" value="Back" onclick="window.location.href='/employee/all'; return false"/>
-		</fieldset>
-		
-		
-			<input type="hidden" th:field="*{annualLeaveCount}">
-			<input type="hidden" th:field="*{medicalLeaveCount}">
-			<input type="hidden" th:field="*{compensationLeaveCount}">
-			
-	</form>
-	
-	
-</body>
-
+   <head th:replace="fragment/layout.html :: head">
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head >
+   <body
+      class="align-items-center align-content-center align-self-center mx-auto"
+      style="background: #ffffff;">
+      <div th:replace="fragment/layout.html :: navbar-inv"/>
+      <br>
+      <br>
+      <sectionclass="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+      style="padding: 133px 0px;
+      background: #ffffff;
+      color: rgb(0,0,0);
+      margin-bottom: 0px;
+      padding-bottom: 380px;
+      padding-top: 39px;">
+      <div class="row">
+         <div class="col">
+            <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
+               <div class="intro"></div>
+               <h3><span th:text="#{Site.EditEmpTitle}"></span></h3>
+               <div class="buttons"></div>
+               <form class="flex-fill" 
+                  action="#" 
+                  th:object="${employee}" 
+                  th:action="@{/employee/editsuccess/}+${employee.employeeId}"
+                  method="POST"
+                  style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
+                  <input type="hidden" th:field="*{employeeId}"/>
+                  <div class="mb-3">
+                     <!--1.Name-->
+                     <label class="form-label" style="margin-bottom: 3px;">
+                     <strong><span th:text="#{Label.empName}"></span></strong>
+                     </label>
+                     <input
+                        class="form-control"
+                        type="text"
+                        name="name"
+                        placeholder="Enter full name"
+                        style="background: rgba(152,181,255,0.26);"
+                        th:field="*{name}"
+                        maxLength="50"> <!--was fieldset -->
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></strong>
+                     </label>
+                  </div>
+                  <div class="mb-3">
+                     <!--2.ManagerId-->
+                     <label class="form-label" style="margin-bottom: 3px;"> 
+                     <strong><span th:text="#{Label.empMgr}"></span></strong></label>
+                     <select class="form-select" aria-label="Default select example" 
+                        name="managerId" id="managerId" size="1"
+                        style="background: rgba(152,181,255,0.26);" 
+                        th:field="*{managerId}">
+                        <option value="">Select Manager</option>
+                        <option th:each="employee: ${employees}" 
+                           th:value="${employee.employeeId}"
+                           th:text="${employee.name}"></option>
+                     </select>
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></span></strong>
+                     </label>
+                  </div>
+                  <div class="mb-3">
+                     <!--3.Department Name-->
+                     <label class="form-label" style="margin-bottom: 3px;"> 
+                     <strong><span th:text="#{Label.empDept}"></span></strong></label>
+                     <select class="form-select" aria-label="Default select example" 
+                        name="department" id="department" size="1"
+                        style="background: rgba(152,181,255,0.26);" 
+                        th:field="*{department}">
+                        <option value="">Select Department</option>
+                        <option th:each="department: ${departments}" 
+                           th:value="${department.departmentId}"
+                           th:text="${department.departmentName}">
+                        </option>
+                     </select>
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></span></strong>
+                     </label>
+                  </div>
+                  <div class="mb-3">
+                     <!--7. Email-->
+                     <label class="form-label" style="margin-bottom: 3px;">
+                     <strong><span th:text="#{Label.empEm}"></span></strong>
+                     </label>
+                     <input
+                        class="form-control"
+                        type="email"
+                        name="emailId"
+                        placeholder="Enter email address"
+                        style="background: rgba(152,181,255,0.26);"
+                        th:field="*{emailId}"
+                        maxLength="50"> 
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span></strong>
+                     </label>
+                  </div>
+                  <input type="hidden" th:field="*{annualLeaveCount}">
+                  <input type="hidden" th:field="*{medicalLeaveCount}">
+                  <input type="hidden" th:field="*{compensationLeaveCount}">
+                  <div class="text-end mb-3">
+                     <button class="btn btn-primary"
+                        type="submit"
+                        style="background: #80ffc6;
+                        color: rgb(0,0,0);
+                        border-width: 0px;
+                        margin-top: 50px;">
+                     <strong><span th:text="#{Label.editEmpUpdate}"></span></strong></button>
+                     &nbsp; &nbsp;
+                     <button class="btn btn-primary"
+                        type="button"
+                        style="background: rgb(192, 192, 192);
+                        color: rgb(0,0,0);
+                        border-width: 0px;
+                        margin-top: 50px;">
+                     <strong><span th:text="#{Label.editEmpBack}"
+                        onclick="window.location.href='/employee/all'; return false"></span></strong></button>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <div class="col" style="text-align: center;">
+            <img th:src="@{/assets/img/newEmp.PNG}"
+               style="height: 395px;width: 427.78px;margin-top: 144px;border-radius: 17px;"/>
+         </div>
+      </div>
+      </section>
+      <!--<footer style="background-color: #98b5ff; height: 50px;"></footer>-->
+      <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+         <h1 class="text-start text-white">Take your holidays without worry!</h1>
+      </footer>
+      <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+      </fieldset>
+      </form>
+   </body>
 </html>
