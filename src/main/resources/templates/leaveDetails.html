@@ -1,52 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<title>Leave Details</title>
+<title>LAPS-Leave Details</title>
 <head th:replace="fragment/layout.html :: head"/>
 
-<body>
+<body class="align-items-center align-content-center align-self-center mx-auto" style="background: #ffffff;">
 	<div th:replace="fragment/layout.html :: navbar-inv"/>
+	<section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+        style="padding: 133px 0px; background: #ffffff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;padding-top: 39px;">
+		<div class="row">
+			<div class="col" style="width: 1320px;">
+				<div class="container" style="padding: 50px;padding-top: 0px;padding-bottom: 10px;width: 673px;background: url(&quot;https://i.ibb.co/ygmsBnL/paper.jpg&quot;) no-repeat;">
+					<div class="intro"></div>
+					<h3 style="margin-bottom: 44px;margin-top: 20px;padding-top: 23px;">Leave Details</h3>
+					<div class="buttons"></div>
+					<div class="table-responsive" style="border-radius: 8px;border-width: 2px;border-bottom-width: 0px;width: 564px;background: rgba(15,11,11,0);transform: translate(0px);">
+						<table class="table" th:object="${newLeave}">
+							<tbody style="border-width: 0px;font-weight: bold; font-size: 18px;">
+								<tr>
+									<td>From Date:</td>
+									<td th:text="*{fromDate}"></td>
+								</tr>
+								<tr>
+									<td>To Date:</td>
+									<td th:text="*{toDate}"></td>
+								</tr>
+								<tr>
+									<td>Remarks:</td>
+									<td th:text="*{remarks}"></td>
+								</tr>
+								<tr>
+									<td>Covering Employee:</td>
+									<td th:text="*{coveringEmp}"></td>
+								</tr>
+								<tr>
+									<td>Contact Details:</td>
+									<td th:text="*{contactDetails}"></td>
+								</tr>
+								<tr>
+									<td>Leave Type:</td>
+									<td th:text="*{leaveType.leaveName}"></td>
+								</tr>
+								<tr>
+									<td>Leave Status:</td>
+									<td th:text="*{approvalStatus}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="container" style="padding: 10px;">
+					<form method="POST" th:object="${newLeave}">
+						<button class="btn btn-primary" type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:formaction="@{/employee/editLeave/}+*{leaveId}" 
+						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;">Edit</button>
+						<button class="btn btn-primary" type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED') or newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/deleteLeave/}+*{leaveId}"
+						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;">Delete</button>
+						<button class="btn btn-primary" type="submit" th:if="${newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/cancelLeave/}+*{leaveId}"
+						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;">Cancel leave</button >
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
 	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
-
-	<h3>Leave Details</h3>
-	<div th:object="${newLeave}">
-		<table>
-			<tbody>
-				<tr>
-					<td >From Date:</td >
-					<td th:text="*{fromDate}"></td >
-				</tr>
-				<tr>
-					<td >To Date:</td >
-					<td th:text="*{toDate}"></td >
-				</tr>
-				<tr>
-					<td >Remarks:</td >
-					<td th:text="*{remarks}"></td >
-				</tr>
-				<tr>
-					<td >Covering Employee:</td >
-					<td th:text="*{coveringEmp}"></td >
-				</tr>
-				<tr>
-					<td >Contact Details:</td >
-					<td th:text="*{contactDetails}"></td >
-				</tr>
-				<tr>
-					<td >Leave Type:</td >
-					<td th:text="*{leaveType.leaveName}"></td >
-				</tr>
-				<tr>
-					<td >Leave Status:</td >
-					<td th:text="*{approvalStatus}"></td >
-				</tr>
-			</tbody>
-		</table>		
-		<form method="POST">
-			<button type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:formaction="@{/employee/editLeave/}+*{leaveId}">Edit</button>
-			<button type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED') or newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/deleteLeave/}+*{leaveId}">Delete</button>
-			<button type="submit" th:if="${newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/cancelLeave/}+*{leaveId}">Cancel leave</button>
-		</form>
-			<!--<a href="#" th:href="@{/employee/manageLeave/}+*{leaveId}"><button type="button">Back</button></a> -->
-	</div >
 </body>
 </html>
