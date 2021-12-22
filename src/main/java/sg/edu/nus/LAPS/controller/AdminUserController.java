@@ -61,7 +61,7 @@ public class AdminUserController {
 		 }
 		user.setRoles(newRoles);
 		
-		Employee employee = employeeService.findEmployeeByName(user.getEmployee().getName());
+		Employee employee = employeeService.findEmployeeByName1(user.getEmployee().getName());
 		employeeService.saveEmployee(employee);
 		user.setEmployee(employee);
 		

@@ -60,8 +60,8 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
     List<LeaveApplication> findLeavesByEmployee_employeeIdAndApprovalStatusIn(Integer employeeId, List<ApprovalStatus> approvalStatus);
     
     @Query("select leaves from LeaveApplication leaves where leaves.employee.employeeId = :employeeId "
-    		+ "and leaves.approvalStatus = 3 "
-    		+ "and leaves.fromDate = :inputDate or leaves.fromDate > :inputDate")
+    		+ "and leaves.approvalStatus = 'APPROVED' "
+    		+ "and leaves.fromDate >= :inputDate")
     List<LeaveApplication> findUpcomingLeavesForEmployee(@Param("employeeId") Integer employeeId, @Param("inputDate") Date inputDate);
 
     // find leave by leaveId
