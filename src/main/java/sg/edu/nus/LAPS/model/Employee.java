@@ -29,17 +29,17 @@ public class Employee {
 	
 
 	//Relations
-	@OneToOne(mappedBy = "employee") //one Employee can only have one set of login credentials
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL) //one Employee can only have one set of login credentials
 	private UserCredentials userCredentials;
 
-	@OneToMany(mappedBy = "employee") //one Employee can have many leave applications
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL) //one Employee can have many leave applications
 	private List<LeaveApplication> leaves;
 
 	@ManyToOne //one Department can have many employees
 	@JoinColumn(name = "departmentId", referencedColumnName = "departmentId")
 	private Department department;
 
-	@OneToMany(mappedBy = "employee") //one Employee can have many compensation leave claims
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL) //one Employee can have many compensation leave claims
 	private List<Claim> claims;
 	
 	@ManyToOne
