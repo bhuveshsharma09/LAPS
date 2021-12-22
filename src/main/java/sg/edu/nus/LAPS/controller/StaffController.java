@@ -1,8 +1,6 @@
 package sg.edu.nus.LAPS.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -224,11 +222,10 @@ public class StaffController {
 	public void downloadList(HttpServletResponse response,@ModelAttribute("id") Integer eid) throws DocumentException, IOException{
 		List<LeaveApplication> list = leaveApplicationService.findAllLeaves(eid);
 		response.setContentType("test/pdf");
-		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
+		
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=" + employeeService.findEmployeeById(eid) + ".pdf";
         response.setHeader(headerKey, headerValue);
 		pdfGenerateService.export(response,(ArrayList<LeaveApplication>) list);
 	}
