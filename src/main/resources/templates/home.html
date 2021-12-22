@@ -4,7 +4,7 @@
 <head th:replace="fragment/layout.html :: head"/>
 <head>
     <meta charset="UTF-8">
-    <title>My Plant Diary</title>
+    <title>LAPS</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,9 +16,9 @@
 <body  class="align-items-center align-content-center align-self-center mx-auto" style="background: #ffffff;">
 
 <div th:replace="fragment/layout.html :: navbar"/>
-<div style="background: #bde0ff; margin:0;">
-	<h2 style="margin-bottom:0; margin-left:20px; ">Welcome <span th:text="${session.userSession.userCredentials.username}">!</span></h2 ></div >
-<section class="d-flex justify-content-center align-items-center align-content-center highlight-blue" style="padding: 133px 0px;background: #bde0ff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;">
+<div style="background:rgba(152,181,255,0.57); margin:0;">
+	<h4 style="margin-bottom:0;  margin-left:200px;">Welcome <span th:text="${session.userSession.userCredentials.username}">!</span></h4 ></div >
+<section class="d-flex justify-content-center align-items-center align-content-center highlight-blue" style="padding: 133px 0px;background:rgba(152,181,255,0.57);color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 380px;">
 	
 	<div class="container">
         <!--<div class="intro">-->

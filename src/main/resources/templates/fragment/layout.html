@@ -31,6 +31,9 @@
             	<span class="navbar-toggler-icon"></span></button>
         		<div class="collapse navbar-collapse" id="navcol-1" style="padding-right: 0px;">
             		<ul class="navbar-nav ms-auto">
+            			<li class="nav-link" style="padding-right: 0px; margin-right: 25px;">
+            			Welcome <span th:text="${session.userSession.userCredentials.username}">!</span></li>
+            			<li class="nav-item"></li>
                 		<li class="nav-item"
                     		style="padding-right: 0px;margin-right: 5px;">
                     		<a class="nav-link active" href="/back">Home</a></li>
