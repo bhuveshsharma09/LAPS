@@ -36,7 +36,7 @@ public interface ClaimRepository extends JpaRepository<Claim, Integer> {
     @Query("SELECT c from Claim c order by c.claimId desc")
     List<Claim> findAllClaimsSorted();
 
-    @Query("SELECT claims FROM Claim claims JOIN claims.employee e WHERE e.manager.employeeId = :mid AND claims.approvalStatus = :status")
+    @Query("SELECT claims FROM Claim claims JOIN claims.employee e WHERE e.managerId = :mid AND claims.approvalStatus = :status")
     List<Claim> findAllClaimsOfEmployeeByManagerIdWithStatus(@Param("mid") int mid, @Param("status") ApprovalStatus approval);
 
 
