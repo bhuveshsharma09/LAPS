@@ -12,7 +12,7 @@ import sg.edu.nus.LAPS.model.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-	@Query("SELECT DISTINCT e2 FROM Employee e1, Employee e2 WHERE e1.employeeId = e2.manager.employeeId AND e1.employeeId = :eid")
+	@Query("SELECT DISTINCT e2 FROM Employee e1, Employee e2 WHERE e1.employeeId = e2.managerId AND e1.employeeId = :eid")
 	public List<Employee> findEmployeesByManagerId(@Param("eid") Integer employeeId);
 	
 

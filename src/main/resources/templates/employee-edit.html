@@ -23,13 +23,13 @@
 		
 		<fieldset> 
 			Manager:
-             <select th:field="*{manager}" name="manager" size="1" id="manager">
+             <select th:field="*{managerId}" name="managerId" size="1" id="managerId">
             	<option value="">Select Manager</option>
                 <option th:each="employee: ${employees}" th:value="${employee.employeeId}" 
                 	th:text="${employee.name}"> 
                 	</option>
             </select>    
-			<p th:if="${#fields.hasErrors('manager')}" th:errors="*{manager}"></p>
+			<p th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></p>
 		</fieldset>
 		
 		

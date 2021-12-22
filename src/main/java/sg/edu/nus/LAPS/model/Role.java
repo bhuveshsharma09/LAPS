@@ -21,8 +21,9 @@ public class Role {
 	@Column(name = "roleId")
 	private Integer roleId; //1
 
-	private String roleTitle; //2
-	private String roleDesc; //3
+	private String roleTitle; //2 
+	
+	private String roleDesc; //3 
 
 	//Relations
 	@ManyToMany(mappedBy = "roles") // one User can have many roles, and every role can have many Users

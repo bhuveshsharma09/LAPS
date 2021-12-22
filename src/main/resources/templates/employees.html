@@ -25,7 +25,7 @@
 		<tr >
 			<th >ID</th>
 			<th >Name</th>
-			<th >Manager</th>
+			<th >Manager ID</th>
 			<th >Department</th>
 			<th >Email</th>
 			<th >Edit Details</th>
@@ -39,7 +39,7 @@
 		<tr th:each="employee:${employees}" class="table-row">
 			<td th:text=${employee.employeeId}>ID</td>
 			<td th:text=${employee.name}>Name</td>
-			<td th:text=${employee.manager}>Manager</td>
+			<td th:text=${employee.managerId}>Manager ID</td>
 			<td th:text=${employee.department}>Department</td>
 			<td th:text=${employee.emailId}>Email</td>
 

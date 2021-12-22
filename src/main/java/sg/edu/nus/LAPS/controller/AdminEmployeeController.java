@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.nus.LAPS.services.DepartmentService;
 import sg.edu.nus.LAPS.services.DepartmentServiceImpl;
+import sg.edu.nus.LAPS.exceptions.EmployeeNotFound;
 import sg.edu.nus.LAPS.model.Department;
 ///import Exceptions.EmployeeNotFound;
 //import Validators.EmployeeValidator;
@@ -84,7 +85,9 @@ public class AdminEmployeeController {
 	
 	//Edit Employee - employee/edit/id
 	@RequestMapping("/edit/{id}")
-	public String editEmployee(@PathVariable("id") Integer id, Model model) {
+	public String editEmployee(@PathVariable("id") Integer id, Model model) 
+			throws EmployeeNotFound {
+		
 		Employee e = employeeService.findEmployeeById(id);
 		model.addAttribute("employee", e);
 		
@@ -100,7 +103,9 @@ public class AdminEmployeeController {
 	
 	//Return successful edit - employee/editsuccess/id
 	@PostMapping("/editsuccess/{id}")
-	public String editedEmployee(@PathVariable("id") Integer id, @ModelAttribute("e") Employee employee, Model model) {
+	public String editedEmployee(@PathVariable("id") Integer id, @ModelAttribute("e") Employee employee, Model model) 
+			throws EmployeeNotFound {
+		
 		employeeService.editEmployee(employee);
 		
 		return "forward:/employee/all";
@@ -109,7 +114,9 @@ public class AdminEmployeeController {
 	
 	//Edit employee leave entitlement - employee/editLeave/id
 	@RequestMapping("/editLeaveEntitlement/{id}")
-	public String editEmployeeLeave(@PathVariable("id") Integer id, Model model) {
+	public String editEmployeeLeave(@PathVariable("id") Integer id, Model model) 
+			throws EmployeeNotFound {
+		
 		Employee e = employeeService.findEmployeeById(id);
 		model.addAttribute("employee", e);
 		
@@ -122,7 +129,9 @@ public class AdminEmployeeController {
 	
 	//Successfully edited leave entitlement - employee/editLeaveSuccess/id
 	@PostMapping("/editLeaveSuccess/{id}")
-	public String editedEmployeeLeave(@PathVariable("id") Integer id, @ModelAttribute("e") Employee employee, Model model) {
+	public String editedEmployeeLeave(@PathVariable("id") Integer id, @ModelAttribute("e") Employee employee, Model model) 
+			throws EmployeeNotFound {
+		
 		employeeService.editEmployee(employee);
 		
 		return "forward:/employee/all";
@@ -131,7 +140,9 @@ public class AdminEmployeeController {
 	
 	//Delete existing employee
 	@RequestMapping(value = "/delete/{id}")
-	public String deleteEmployee(@PathVariable("id") Integer id) {
+	public String deleteEmployee(@PathVariable("id") Integer id) 
+			throws EmployeeNotFound {
+		
 		employeeService.deleteEmployee(employeeService.findEmployeeById(id));
 		
 		return "forward:/employee/all";
