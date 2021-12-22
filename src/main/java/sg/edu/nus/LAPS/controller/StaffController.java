@@ -78,12 +78,14 @@ public class StaffController {
     	if(bdResult.hasErrors()){
 			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate");
-			return "forward:/employee/addLeave/"+employee.getEmployeeId();
+			return "leaveForm";
+			//return "forward:/employee/addLeave/"+employee.getEmployeeId();
 		}
 		if(leaveApplicationService.comapreTwoDates(fromDate, toDate) == false){
 			model.addAttribute("leaveTypeValue", leaveType);
 			model.addAttribute("wrongDate", "Date is wrong");
-			return "forward:/employee/addLeave/"+employee.getEmployeeId();
+			return "leaveForm";
+			//return "forward:/employee/addLeave/"+employee.getEmployeeId();
 		}
     	LA.setEmployee(employee);
         LA.setApprovalStatus(ApprovalStatus.APPLIED);
