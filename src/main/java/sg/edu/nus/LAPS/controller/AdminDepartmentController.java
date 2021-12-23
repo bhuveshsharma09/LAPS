@@ -33,11 +33,11 @@ public class AdminDepartmentController {
 	}
 	
 	@Autowired
-	private EmployeeService empService;
+	private EmployeeService employeeService;
 	
 	@Autowired
 	public void setEmployeeService(EmployeeServiceImpl empServiceImpl) {
-		this.empService = empServiceImpl;
+		this.employeeService = empServiceImpl;
 	}
 	
 	//View a list of all departments - department/all
@@ -54,8 +54,8 @@ public class AdminDepartmentController {
 	public String addDepartment(Model model) {
 		model.addAttribute("department", new Department());
 		
-		ArrayList<Employee> emps = empService.findAllEmployees();
-		model.addAttribute("employees", emps);
+		ArrayList<Employee> managerId = employeeService.findAllEmployees();
+		model.addAttribute("employees", managerId);
 		
 		return "department-form";
 	}
@@ -66,9 +66,12 @@ public class AdminDepartmentController {
 	public String saveDepartment(@ModelAttribute("department") @Valid Department department, 
 			BindingResult bindingResult,  Model model) {
 		if (bindingResult.hasErrors()) {
+			
 			return "department-form";
 		}
+		
 		deptService.saveDepartment(department);
+		
 		return "forward:/department/all";
 	}
 	
@@ -77,11 +80,12 @@ public class AdminDepartmentController {
 	//Edit department - department/editDeparment/id
 		@RequestMapping("/editDepartment/{id}")
 		public String editDepartment(@PathVariable("id") Integer id, Model model) {
+			
 			Department d = deptService.findById(id);
 			model.addAttribute("department", d);
 			
-			ArrayList<Employee> employees = empService.findAllEmployees();
-			model.addAttribute("employees", employees);
+			ArrayList<Employee> managerId = employeeService.findAllEmployees();
+			model.addAttribute("employees", managerId);
 			
 			return "department-edit";
 		}
@@ -90,10 +94,8 @@ public class AdminDepartmentController {
 		//Return successful edit - department/editDepartmentSuccess/id
 		@PostMapping("/editDepartmentSuccess/{id}")
 		public String editedDepartment(@PathVariable("id") Integer id, @ModelAttribute("d") Department department, Model model) {
-			deptService.editDepartment(department);
 			
-			ArrayList<Employee> employees = empService.findAllEmployees();
-			model.addAttribute("employees", employees);
+			deptService.editDepartment(department);
 		
 			return "forward:/department/all";
 		}
@@ -103,7 +105,9 @@ public class AdminDepartmentController {
 		//Delete existing department - department/delete/id
 		@RequestMapping(value = "/delete/{id}")
 		public String deleteDepartment(@PathVariable("id") Integer id) {
+			
 			deptService.deleteDepartment(deptService.findById(id));
+			
 			return "forward:/department/all";
 		}
 
