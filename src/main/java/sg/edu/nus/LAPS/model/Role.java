@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +23,13 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "roleId")
 	private Integer roleId; //1
-
+	
+	@NotEmpty(message = "Role Title cannot be empty")
+	@Length(max=15)
 	private String roleTitle; //2 
 	
+	@NotEmpty(message = "Role Description cannot be empty")
+	@Length(max=15)
 	private String roleDesc; //3 
 
 	//Relations

@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -27,10 +29,12 @@ public class UserCredentials {
 	private Integer userId; //1
 
 	@NonNull
+	@Length(max=20)
 	@Column(name="username")
 	private String username;//2
 
 	@NotNull
+	@Length(max=20)
 	@Column(name="password")
 	private String password;//3
 
@@ -48,4 +52,7 @@ public class UserCredentials {
 		this.username = username;
 		this.password = password;
 	}
+
+
+	
 }
