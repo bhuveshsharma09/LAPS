@@ -11,37 +11,37 @@
 			<div class="col" style="width: 1320px;">
 				<div class="container" style="padding: 50px;padding-top: 0px;padding-bottom: 10px;width: 673px;background: url(&quot;https://i.ibb.co/ygmsBnL/paper.jpg&quot;) no-repeat;">
 					<div class="intro"></div>
-					<h3 style="margin-bottom: 44px;margin-top: 20px;padding-top: 23px;">Leave Details</h3>
+					<h3 style="margin-bottom: 44px;margin-top: 20px;padding-top: 23px;"><span th:text="#{leave.leaveDetailsTitle}"></span></h3>
 					<div class="buttons"></div>
 					<div class="table-responsive" style="border-radius: 8px;border-width: 2px;border-bottom-width: 0px;width: 564px;background: rgba(15,11,11,0);transform: translate(0px);">
 						<table class="table" th:object="${newLeave}">
 							<tbody style="border-width: 0px;font-weight: bold; font-size: 18px;">
 								<tr>
-									<td>From Date:</td>
+									<td><span th:text="#{Label.leaveFromDate}"></span></td>
 									<td th:text="*{fromDate}"></td>
 								</tr>
 								<tr>
-									<td>To Date:</td>
+									<td><span th:text="#{Label.leaveToDate}"></span></td>
 									<td th:text="*{toDate}"></td>
 								</tr>
 								<tr>
-									<td>Remarks:</td>
+									<td><span th:text="#{Label.leaveRemarks}"></span></td>
 									<td th:text="*{remarks}"></td>
 								</tr>
 								<tr>
-									<td>Covering Employee:</td>
+									<td><span th:text="#{Label.leaveCoveringEmp}"></span></td>
 									<td th:text="*{coveringEmp}"></td>
 								</tr>
 								<tr>
-									<td>Contact Details:</td>
+									<td><span th:text="#{Label.leaveContactDetails}"></span></td>
 									<td th:text="*{contactDetails}"></td>
 								</tr>
 								<tr>
-									<td>Leave Type:</td>
+									<td><span th:text="#{Label.leaveLeaveType}"></span></td>
 									<td th:text="*{leaveType.leaveName}"></td>
 								</tr>
 								<tr>
-									<td>Leave Status:</td>
+									<td><span th:text="#{Label.leaveStatus}"></span></td>
 									<td th:text="*{approvalStatus}"></td>
 								</tr>
 							</tbody>
@@ -51,16 +51,19 @@
 				<div class="container" style="padding: 10px;">
 					<form method="POST" th:object="${newLeave}">
 						<button class="btn btn-primary" type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED')}" th:formaction="@{/employee/editLeave/}+*{leaveId}" 
-						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;">Edit</button>
+						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;"><span th:text="#{Label.leaveEdit}"></span></button>
 						<button class="btn btn-primary" type="submit" th:unless="${newLeave.approvalStatus.toString().equalsIgnoreCase('DELETED') or newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/deleteLeave/}+*{leaveId}"
-						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;">Delete</button>
+						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;"><span th:text="#{Label.leaveDelete}"></span></button>
 						<button class="btn btn-primary" type="submit" th:if="${newLeave.approvalStatus.toString().equalsIgnoreCase('APPROVED')}" th:formaction="@{/employee/cancelLeave/}+*{leaveId}"
-						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;">Cancel leave</button >
+						style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;border-left-width: 0px; margin: 5px;"><span th:text="#{Label.leaveCancel}"></span></button >
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
+	<footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
 	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
 </html>

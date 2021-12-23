@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>LAPS-Form Edit</title>
+<title>LAPS-Edit Leave</title>
 <head th:replace="fragment/layout.html :: head"/>
 
 <body class="align-items-center align-content-center align-self-center mx-auto"
@@ -18,7 +18,7 @@ style="background: #ffffff;">
                     <div class="intro">
 
                     </div>
-                    <h3><span th:text="#{leave.formTitle}"></span></h3>
+                    <h3><span th:text="#{leave.editLeaveFormTitle}"></span></h3>
                     <form class="flex-fill" action="#" th:object="${newLeave}" th:action="@{/employee/updateLeave/}+${newLeave.leaveId}" method="post" 
                                 style="padding: 114px;
                                 padding-top: 20px;
