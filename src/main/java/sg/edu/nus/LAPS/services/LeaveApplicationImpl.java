@@ -33,6 +33,13 @@ public class LeaveApplicationImpl implements LeaveApplicationService{
     }
 
     @Override
+    public List<LeaveApplication> findLeaveApplicationByApprovalStatus(Integer id, ApprovalStatus approvalStatus) {
+//        return leaveApplicationRepository.findLeaveApplicationByApprovalStatus(id,approvalStatus);
+        return null;
+
+    }
+
+    @Override
     public LeaveApplication saveLeaveApplication(LeaveApplication LA) {
         return leaveApplicationRepository.saveAndFlush(LA);
     }
