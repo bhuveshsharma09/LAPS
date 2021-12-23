@@ -15,7 +15,7 @@ import sg.edu.nus.LAPS.model.LeaveApplication;
 public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication, Integer> {
 
     //Use case: Find all leaves
-    @Query("SELECT leaves from LeaveApplication leaves where leaves.leaveId >:leaveId")
+    @Query("SELECT leaves from LeaveApplication leaves where leaves.leaveId >:leaveId ")
     List<LeaveApplication> findAllById(@Param("leaveId") int leaveId);
 
     //Use case: Find all leaves under the employee

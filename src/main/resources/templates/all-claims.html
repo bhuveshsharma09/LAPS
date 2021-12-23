@@ -32,7 +32,9 @@
                         <tr class="text-start" style="background: rgba(152,181,255,0.57);font-size: 18px;">
                             <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Claim Id</th>
                             <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Approval Status</th>
+<!--
                             <th style="border-right-width: 0px;">Eligible Claim</th>
+-->
                             <th style="border-right-width: 0px;">Extra Hours Worked</th>
                             <th style="border-right-width: 0px;">Overtime Day</th>
                             <th style="border-right-width: 0px;">Remarks</th>
@@ -48,7 +50,9 @@
                         <tr th:each="claim:${claimList}">
                             <td style="background: rgba(152,181,255,0.09);"><span th:text="${claim.claimId}"></span></td>
                             <td style="background: rgba(152,181,255,0.09);"><span th:text="${claim.approvalStatus}"></span></td>
+<!--
                             <td style="background: rgba(152,181,255,0.09);"><span th:text="${claim.eligibleClaim}"></span></td>
+-->
                             <td style="background: rgba(152,181,255,0.09);"><span th:text="${claim.hoursWorked}"></span></td>
                             <td style="background: rgba(152,181,255,0.09);"><span th:text="${claim.overtimeDate}"></span></td>
                             <td style="background: rgba(152,181,255,0.09);"><span th:text="${claim.remarks}"></span></td>

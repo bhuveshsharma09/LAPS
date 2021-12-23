@@ -22,7 +22,9 @@ public class ClaimValidator implements Validator {
 
         ValidationUtils.rejectIfEmpty(errors,"hoursWorked","error.claim.hoursWorked.empty");
 
+/*
         ValidationUtils.rejectIfEmpty(errors,"eligibleClaim","error.claim.eligibleClaim.empty");
+*/
 
         System.out.println(claim.toString());
 

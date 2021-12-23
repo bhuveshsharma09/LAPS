@@ -12,11 +12,13 @@ import sg.edu.nus.LAPS.repo.UserCredentialsRepository;
 @SpringBootApplication
 public class LapsApplication {
 
+/*
 	@Autowired
 	UserCredentialsRepository userCredentialsRepository;
 
 	@Autowired
 	LeaveApplicationRepository leaveApplicationRepository;
+*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(LapsApplication.class, args);
