@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.nus.LAPS.model.LeaveType;
+import sg.edu.nus.LAPS.model.UserCredentials;
 import sg.edu.nus.LAPS.services.LeaveTypeService;
 
 
@@ -52,7 +53,17 @@ public class LeaveTypeController {
 	public String editLeaveType(@PathVariable("name") String name, Model model) {
 		LeaveType lt = ltService.findLeaveTypeByName(name);
 		model.addAttribute("leaveType", lt);
-		return "ltform";
+		return "ltedit";
+	}
+	
+	@PostMapping("/edit/{name}")
+	public String finishEditLeaveType(@PathVariable("name") String name, @ModelAttribute("leaveType") @Valid LeaveType leaveType,BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "ltedit";
+		} 
+//		ltService.editLeaveType(leaveType);
+		ltService.editLeaveType(leaveType);
+		return "forward:/leavetype/all";
 	}
 
 	@RequestMapping("/delete/{name}")
