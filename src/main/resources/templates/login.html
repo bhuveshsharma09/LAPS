@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--added bootstrap links-->
-<!--probably need to make fragment-->
-<head th:replace="fragment/layout.html :: head"/>
-
-
-
-<body style="background: #98b5ff;">
-<div class="container-fluid fill d-flex flex-column">
-    <div class="container">
-        <div class="row fill">
-            <div class="col-lg-3" style="background: #000000;"></div>
-            <div class="col" style="background: #98b5ff;/*border-radius: 102px;*/">
-                <h5 style="padding-top: 204px;padding-left: 115px;font-family: 'Abril Fatface', serif;">Login to LAPS!<br></h5>
-
-
-                <form  style="padding: 114px;padding-top: 14px;padding-right: 358px;padding-bottom: 107px;" action="#" th:object="${usercredentials}" th:action="@{'/authenticate'}">
-                    <div class="mb-3">
+   <head th:replace="fragment/layout.html :: head"/>
+   <body style="background: #98b5ff;">
+      <div class="container-fluid fill d-flex flex-column">
+         <div class="container">
+            <div class="row fill">
+               <div class="col-lg-3" style="background: rgb(255, 255, 255);">
+                  <img th:src="@{/assets/img/login.PNG}" style="height: 300px; width: 350px; margin-top: 200px; margin-bottom:auto; border-radius: 17px;"/>
+                  <p style="text-align:center;"><small>Time: <b th:text="${execInfo.now.time}"></b></small ><br/> 
+                  <small>&copy NUS-ISS Leave Application System(LAPS), 2021</small > </p >
+                </div>
+               <div class="col" style="background: #98b5ff;/*border-radius: 102px;*/">
+                  <h3 style="padding-top: 244px; padding-left: 115px;font-family: 'Abril Fatface', serif;">One-stop leave management portal<br></h3>
+                  <h3 style="padding-left: 115px;font-family: 'Abril Fatface', serif; color:rgb(255, 255, 255);">Now faster and easier!<br></h3>
+                  <h5 style="padding-top: 20px; padding-left: 115px;font-family: 'Abril Fatface', serif;">Login to LAPS<br></h5>
+                  <form  style="padding: 114px;padding-top: 14px;padding-right: 358px;padding-bottom: 107px;" action="#" th:object="${usercredentials}" th:action="@{'/authenticate'}">
+                     <div class="mb-3">
                         <input class="form-control" type="text" name="username" placeholder="Your user name" th:field="*{username}">
-                    </div>
-                    <div class="mb-3">
+                     </div>
+                     <div class="mb-3">
                         <input class="form-control" type="password" placeholder="Your password" name="password" th:field="*{password}">
-                    </div>
-                    <div class="mb-3">
-                        <button class="btn btn-primary"
-                                style="background: #80ffc6;color: rgb(0,0,0); border-width: 0px"
-                                type="submit"
-                                name="login"
-                                value="login">Login</button>
-                    </div>
-                </form>
+                     </div>
+                     <div class="mb-3">
+                        <button class="btn btn-primary" style="background: #80ffc6;color: rgb(0,0,0); border-width: 0px"
+                           type="submit"
+                           name="login"
+                           value="login">Login</button>
+                     </div>
+                  </form>
+               </div>
             </div>
-        </div>
-    </div>
-</div>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-</body>
-
+         </div>
+      </div>
+      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+   </body>
 </html>
