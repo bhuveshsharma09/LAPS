@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<title>Approve/Reject Leave</title>
+<title>LAPS-Approve/Reject Leave</title>
 <head th:replace="fragment/layout.html :: head"/>
 
 <body class="align-items-center align-content-center align-self-center mx-auto"
@@ -21,62 +21,62 @@
         <div class="col">
             <div class="container" style="padding: 0px 50px 10px;">
                 <div class="intro"></div>
-                <h3>Approve or Reject Leave</h3>
+                <h3><span th:text="#{leave.leaveApprovalFormTitle}"></span></h3>
                 <div class="buttons"></div>
                 <form class="flex-fill" action="#" th:object="${selectedLeave}" th:action="@{/manager/approveLeave/}+${selectedLeave.leaveId}" method="post" 
                 style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
                 <!-- one entry-->
                     <fieldset class="mb-3">
-                        <label class="form-label" for="leaveId" style="font-weight:bold; margin-bottom: 3px;">LeaveId: </label>
+                        <label class="form-label" for="leaveId" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveId}"></span></label>
                         <input class="form-control" type="text" th:field="*{leaveId}" style="background: rgba(152,181,255,0.26);" readonly />
                     </fieldset>
                     <fieldset class="mb-3">
-                        <label class="form-label" for="empId" style="font-weight:bold; margin-bottom: 3px;">Employee Id: </label>
+                        <label class="form-label" for="empId" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.empId}"></span></label>
                         <input class="form-control"  type="text" th:field="${employee.employeeId}" style="background: rgba(152,181,255,0.26);" id="empId" readonly />
                     </fieldset>
                     <fieldset class="mb-3">
-                        <label class="form-label" for="empName" style="font-weight:bold; margin-bottom: 3px;">Employee Name: </label>
+                        <label class="form-label" for="empName" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.empName}"></span></label>
                         <input class="form-control"  type="text" th:field="${employee.name}" id="empName" style="background: rgba(152,181,255,0.26);" readonly />
                     </fieldset >
                     <fieldset class="mb-3">
                         <!-- https://coderedirect.com/questions/278783/wrong-date-format-when-submit-spring-form -->
-                        <label for="fromDate" style="font-weight:bold; margin-bottom: 3px;">From Date: </label>
+                        <label for="fromDate" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveFromDate}"></span></label>
                         <input class="form-control"  type="text" th:field="*{fromDate}" placeholder="dd-MM-yyyy" style="background: rgba(152,181,255,0.26);" readonly />
                     </fieldset >
                     <fieldset class="mb-3">
-                        <label class="form-label" for="toDate" style="font-weight:bold; margin-bottom: 3px;">To Date: </label>
+                        <label class="form-label" for="toDate" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveToDate}"></span></label>
                         <input class="form-control"  type="text" th:field="*{toDate}" placeholder="dd-MM-yyyy" style="background: rgba(152,181,255,0.26);" readonly />
                     </fieldset >
                     <fieldset class="mb-3">
-                        <label class="form-label" for="remarks" style="font-weight:bold; margin-bottom: 3px;">Remarks: </label>
+                        <label class="form-label" for="remarks" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveRemarks}"></span></label>
                         <input class="form-control" type="text" name="remarks" id="remarks" th:field="*{remarks}" style="background: rgba(152,181,255,0.26);" readonly />
                     </fieldset >
                     <fieldset class="mb-3">
-                        <label class="form-label" for="coveringEmp" style="font-weight:bold; margin-bottom: 3px;">Covering Employee: </label>
+                        <label class="form-label" for="coveringEmp" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveCoveringEmp}"></span></label>
                         <input type="text" class="form-control" name="coveringEmp" id="coveringEmp" th:field="*{coveringEmp}" style="background: rgba(152,181,255,0.26);"  readonly />
                     </fieldset >
                     <fieldset class="mb-3">
-                        <label class="form-label" for="contactDetails" style="font-weight:bold; margin-bottom: 3px;">Contact Details: </label>
+                        <label class="form-label" for="contactDetails" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveContactDetails}"></span></label>
                         <input type="text" class="form-control" name="contactDetails" id="contactDetails" th:field="*{contactDetails}" style="background: rgba(152,181,255,0.26);" readonly />
                     </fieldset >
                     <fieldset class="mb-3">
-                        <label class="form-label" for="leaveName" style="font-weight:bold; margin-bottom: 3px;">Leave Type: </label>
+                        <label class="form-label" for="leaveName" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveLeaveType}"></span></label>
                         <input type="text" class="form-control" name="leaveName" id="leaveName" th:field="*{leaveType.leaveName}" style="background: rgba(152,181,255,0.26);" readonly />
                     </fieldset >
                     <fieldset class="mb-3">
-                        <label class="form-label" for="approve-leave" style="font-weight:bold; margin-bottom: 3px;">Approve</label>
+                        <label class="form-label" for="approve-leave" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveApprove}"></span></label>
                         <input class="form-check-input" type="radio" name="approve_reject" id="approve-leave" value="Approve">
                     </fieldset >
                     <fieldset class="mb-3">
-                    	<label for="reject-leave" style="font-weight:bold; margin-bottom: 3px;">Reject</label>
+                    	<label for="reject-leave" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveReject}"></span></label>
                         <input class="form-check-input" type="radio" name="approve_reject" id="reject-leave" value="Reject">
                     </fieldset>
                     <fieldset class="mb-3">
-                        <label class="form-label" for="manager-remarks" style="font-weight:bold; margin-bottom: 3px;">Manager's remarks</label>
-                        <textarea class="form-control" id="manager-remarks" name="manager-remarks" rows="3" placeholder="Remarks here" style="background: rgba(152,181,255,0.26);" required></textarea>
+                        <label class="form-label" for="manager-remarks" style="font-weight:bold; margin-bottom: 3px;"><span th:text="#{Label.leaveManagerRemarks}"></span></label>
+                        <textarea class="form-control" id="manager-remarks" name="manager-remarks" rows="3" placeholder="Remarks here" style="background: rgb(231, 254, 194,0.86);" required></textarea>
                     </fieldset >
                     <fieldset class="mb-3">
-                        <button class="btn btn-primary" type="submit" value="Submit" style="font-weight:bold; background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;">Submit</button>
+                        <button class="btn btn-primary" type="submit" value="Submit" style="font-weight:bold; background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;"><span th:text="#{Label.leaveSubmit}"></span></button>
                     </fieldset >
                 </form>
             </div>
@@ -87,6 +87,9 @@
         </div>
     </div>
     </section>
+    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
     <script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body >
 </html>

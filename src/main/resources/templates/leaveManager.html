@@ -20,19 +20,17 @@
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr class="text-start" style="background: rgba(152,181,255,0.57); font-size: 18px;">
-									<th
-										style="background: #e2d5d5;border-right-width: 2px;">
-										Leave Id</th>
-									<th
-										style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">
-										Employee Id</th>
-									<th>From Date</th>
-									<th>To Date</th>
-									<th>Leave Type</th>
-									<th>Remarks</th>
-									<th>Contact Details</th>
-									<th>Status</th>
-									<th>Manager's Comment</th>
+									<th style="background: #e2d5d5;border-right-width: 2px;">
+										<span th:text="#{heading.leave.leaveId}"></span></th >
+									<th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">
+										<span th:text="#{heading.employee.employeeId}"></span></th>
+									<th><span th:text="#{heading.leave.fromDate}"></span></th>
+									<th><span th:text="#{heading.leave.toDate}"></span></th>
+									<th><span th:text="#{heading.leave.leaveType}"></span></th>
+									<th><span th:text="#{heading.leave.remarks}"></span></th>
+									<th><span th:text="#{heading.leave.contactDetail}"></span></th>
+									<th><span th:text="#{heading.leave.approvalStatus}"></span></th>
+									<th><span th:text="#{heading.leave.managerRemarks}"></span></th>
 									<th style="background: #80ffc6;border-left-width: 1px;">View Details</th>
 								</tr>
 							</thead>
@@ -58,6 +56,9 @@
 			</div>
 		</div>
 	</section>
+	<footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
 	<script type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 

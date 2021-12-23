@@ -12,23 +12,23 @@ style="background: #ffffff;">
             <div class="col" style="width: 1320px;">
                 <div class="container" style="padding: 50px;padding-top: 0px;padding-bottom: 10px;width: 1314px;">
                     <div class="intro"></div>
-					<h3 style="margin-bottom: 30px;">View Leaves for Approval</h3>
+					<h3 style="margin-bottom: 30px;"><span th:text="#{Site.ViewLeavesForApprovalTitle}"></span></h3>
 					<div class="buttons"></div>
                     <p th:if="${#lists.isEmpty(appliedStatusList)}">No leaves for approval!</p>
                     <div class="table-responsive" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
                         <table class= "table table-bordered table-striped" th:if="${not #lists.isEmpty(appliedStatusList)}" width="400" cellpadding="10" cellspacing="5">
                             <thead>
                                 <tr class="text-start" style="background: rgba(152,181,255,0.57);font-size: 18px;">
-                                    <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Leave Id</th>
-                                    <th>Approval Status</th>
-                                    <th>Contact details</th>
-                                    <th>Covering Employee</th>
-                                    <th>From Date</th>
-                                    <th>To Date</th>
-                                    <th>Remarks</th>
-                                    <th>Employee Id</th>
-                                    <th>Employee Name</th>
-                                    <th>Leave Type</th>
+                                    <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;"><span th:text="#{heading.leave.leaveId}"></span></th>
+                                    <th><span th:text="#{heading.leave.approvalStatus}"></span></th>
+                                    <th><span th:text="#{heading.leave.contactDetail}"></span></th>
+                                    <th><span th:text="#{heading.leave.coveringEmp}"></span></th>
+                                    <th><span th:text="#{heading.leave.fromDate}"></span></th>
+                                    <th><span th:text="#{heading.leave.toDate}"></span></th>
+                                    <th><span th:text="#{heading.leave.remarks}"></span></th>
+                                    <th><span th:text="#{heading.employee.employeeId}"></span></th>
+                                    <th><span th:text="#{heading.employee.employeeName}"></span></th>
+                                    <th><span th:text="#{heading.leave.leaveType}"></span></th>
                                     <th style="background: #80ffc6;border-left-width: 1px;">View Details</th>
                                 </tr >
                             </thead>
@@ -53,6 +53,9 @@ style="background: #ffffff;">
             </div>
         </div>
     </section >
+    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info" style="margin-top:90px;">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
     <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
 </html>
