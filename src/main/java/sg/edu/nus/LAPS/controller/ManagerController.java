@@ -12,10 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Claim;
@@ -28,6 +25,7 @@ import sg.edu.nus.LAPS.services.EmployeeService;
 import sg.edu.nus.LAPS.services.LeaveApplicationService;
 
 @Controller
+@SessionAttributes(value = {"userSession"}, types = {SessionController.class}) //Session
 @RequestMapping("/manager")
 public class ManagerController {
 	@Autowired
@@ -195,4 +193,18 @@ public class ManagerController {
 
 		return "home";
 	}
+
+
+	@RequestMapping(value = "/claim/all")
+	public String getSubordinateClaimHistory(HttpSession httpSession, Model model)
+	{
+		SessionController sessionController = (SessionController) httpSession.getAttribute("userSession");
+
+		System.out.println(sessionController.getEmployee().getEmployeeId());
+
+		model.addAttribute("claimList", claimRepository.findAllClaimsOfEmployeeByManagerIdWithStatus(sessionController.getEmployee().getEmployeeId(), ApprovalStatus.APPROVED));
+		return "all-claims-for-manager";
+	}
+
+
 }
