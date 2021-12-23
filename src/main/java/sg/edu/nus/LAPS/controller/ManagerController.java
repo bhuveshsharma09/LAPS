@@ -205,6 +205,15 @@ public class ManagerController {
 		model.addAttribute("claimList", claimRepository.findAllClaimsOfEmployeeByManagerIdWithStatus(sessionController.getEmployee().getEmployeeId(), ApprovalStatus.APPROVED));
 		return "all-claims-for-manager";
 	}
+	
+	@RequestMapping(value="/viewSubordinateListForLeave")
+	public String getSubordinateListForLeave(HttpSession httpSession, Model model) 
+	{
+		SessionController sessionController = (SessionController)httpSession.getAttribute("userSession");
+		List<Employee> subordinates = sessionController.getSubordinates();
+		model.addAttribute("subordinates", subordinates);
+		return "manager-subordinate-list-for-leave";
+	}
 
 
 }
