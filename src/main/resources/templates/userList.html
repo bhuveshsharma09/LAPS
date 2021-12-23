@@ -12,7 +12,7 @@
 <body class="align-items-center align-content-center align-self-center mx-auto"
         style="background: #F0F0F0;">
         
-     <div th:replace="fragment/layout.html :: navbar"/>
+     <div th:replace="fragment/layout.html :: navbar-inv"/>
 	    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
 	            style="padding: 133px 0px;
 	            background: #F0F0F0;
@@ -50,8 +50,8 @@
 				            <td th:text="${user.employee.employeeId}">EMPLOYEE ID</td>
 				            <!--<td th:text="${user.roles}">ROLE</td>-->
 				
-				            <td><a href="userEdit.html" th:href="@{/adminuser/edit/}+${user.userId}">Edit</a></td> >
-				            <td><a href="userForm.html" th:href="@{/adminuser/delete/}+${user.userId}">Delete</a></td> >
+				            <td><a href="userEdit.html" th:href="@{/adminuser/edit/}+${user.userId}">Edit</a></td> 
+				            <td><a href="userForm.html" th:href="@{/adminuser/delete/}+${user.userId}">Delete</a></td> 
 				
 				        </tr>
 				    </table>
