@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragment/layout.html :: head"/>
+<head>
+	<link rel="stylesheet" media="all"  th:href="@{/assets/bootstrap/css/bootstrap.min.css}" href="/assets/bootstrap/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" media="all"  th:href="@{/assets/css/form.css}" href="/assets/css/form.css" type="text/css" />
+    <link rel="stylesheet" media="all"   th:href="@{/assets/css/footer.css}" href="/assets/css/footer.css" type="text/css" />
+    <link rel="stylesheet" media="all" th:href="@{/assets/css/highlighted-blue.css}"  href="/assets/css/highlighted-blue.css" type="text/css" />
+    <link rel="stylesheet" media="all" th:href="@{/assets/css/highlighted-clean.css}"  href="/assets/css/highlighted-clean.css" type="text/css" />
+    <link rel="stylesheet" media="all"  th:href="@{/assets/css/styles.css}" href="/assets/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"/>
+    
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subordinate List</title>
+</head>
 <body>
-<div th:replace="fragment/layout.html :: navbar-inv"/>
+<div th:replace="fragment/layout.html :: navbar-inv"/></div>
 	<div class="container">
     <div class="row">
     <div class="col-lg-10 mt-5 mb-5">
@@ -14,7 +29,6 @@
             <th>Employee Name</th>
             <th>Employee Email</th>
             <th>Department</th>
-            <th>Manager Name</th>
             <th>Annual Leave Count</th>
             <th>Medical Leave Count</th>
             <th>Compensation Leave Count</th>
@@ -27,7 +41,6 @@
         <td th:text="${subordinate.name}" />
         <td th:text="${subordinate.emailId}" />
         <td th:text="${subordinate.department.departmentName}" />
-        <td th:text="${subordinate.manager.name}" />
         <td th:text="${subordinate.annualLeaveCount}" />
         <td th:text="${subordinate.medicalLeaveCount}" />
         <td th:text="${subordinate.compensationLeaveCount}" />

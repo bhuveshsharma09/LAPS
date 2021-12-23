@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link rel="stylesheet" media="all"  th:href="@{/assets/bootstrap/css/bootstrap.min.css}" href="/assets/bootstrap/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" media="all"  th:href="@{/assets/css/form.css}" href="/assets/css/form.css" type="text/css" />
+    <link rel="stylesheet" media="all"   th:href="@{/assets/css/footer.css}" href="/assets/css/footer.css" type="text/css" />
+    <link rel="stylesheet" media="all" th:href="@{/assets/css/highlighted-blue.css}"  href="/assets/css/highlighted-blue.css" type="text/css" />
+    <link rel="stylesheet" media="all" th:href="@{/assets/css/highlighted-clean.css}"  href="/assets/css/highlighted-clean.css" type="text/css" />
+    <link rel="stylesheet" media="all"  th:href="@{/assets/css/styles.css}" href="/assets/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"/>
+    
 	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Leave History</title>
 </head>
 <body>
+	<div th:replace="fragment/layout.html :: navbar-inv"/></div>
 	<div class="container">
     <div class="row">
     <div class="col-lg-10 mt-5 mb-5">
@@ -14,13 +25,13 @@
     <table id="posts" class="table table-bordered table-responsive-sm">
         <thead>
         <tr>
-            <th >Leave Id</th>
+            <th>Leave Id</th>
             <th>Employee Id</th>
-            <th>from date</th>
-            <th>to date</th>
-            <th>leave type</th>
-            <th>remark</th>
-            <th>contact detail</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Leave Type</th>
+            <th>Remarks</th>
+            <th>Contact Details</th>
             <th>Status</th>
             <th>View Details</th>
     
@@ -45,13 +56,13 @@
     <table id="posts" class="table table-bordered table-responsive-sm">
         <thead>
         <tr>
-            <th >Leave Id</th>
+            <th>Leave Id</th>
             <th>Employee Id</th>
-            <th>from date</th>
-            <th>to date</th>
-            <th>leave type</th>
-            <th>remark</th>
-            <th>contact detail</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Leave Type</th>
+            <th>Remarks</th>
+            <th>Contact Details</th>
             <th>Status</th>
     
         </tr>
@@ -78,11 +89,11 @@
         <tr>
             <th>Leave Id</th>
             <th>Employee Id</th>
-            <th>from date</th>
-            <th>to date</th>
-            <th>leave type</th>
-            <th>remark</th>
-            <th>contact detail</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Leave Type</th>
+            <th>Remarks</th>
+            <th>Contact Details</th>
             <th>Status</th>
     
         </tr>
@@ -126,6 +137,7 @@
     </div>
     </div>
     </div>
+<script type="text/javascript" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>   
