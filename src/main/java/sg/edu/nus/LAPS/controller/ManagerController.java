@@ -12,7 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.Claim;
@@ -201,8 +205,10 @@ public class ManagerController {
 		SessionController sessionController = (SessionController) httpSession.getAttribute("userSession");
 
 		System.out.println(sessionController.getEmployee().getEmployeeId());
-
-		model.addAttribute("claimList", claimRepository.findAllClaimsOfEmployeeByManagerIdWithStatus(sessionController.getEmployee().getEmployeeId(), ApprovalStatus.APPROVED));
+		List<Claim> claim1= claimRepository.findAllClaimsOfEmployeeByManagerIdWithStatus(sessionController.getEmployee().getEmployeeId(), ApprovalStatus.APPLIED);
+		List<Claim> claim2= claimRepository.findAllClaimsOfEmployeeByManagerIdWithStatus(sessionController.getEmployee().getEmployeeId(), ApprovalStatus.UPDATED);
+		claim1.addAll(claim2);
+		model.addAttribute("claimList", claim1);
 		return "all-claims-for-manager";
 	}
 	

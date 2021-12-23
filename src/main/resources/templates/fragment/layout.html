@@ -50,10 +50,10 @@
                     					<div class="dropdown-menu">
                         					<div>
                             					<a class="dropdown-item" th:href="@{/employee/all}">Manage Employees</a>
-                            					<a class="dropdown-item" th:href="@{/adminuser/all}">Manager User Credentials</a>
+                            					<a class="dropdown-item" th:href="@{/adminuser/all}">Manage User Credentials</a>
                             					<a class="dropdown-item" th:href="@{/department/all}">Manage Departments</a>
                             					<a class="dropdown-item" th:href="@{/leavetype/all}">Manage Leave Types</a>
-                            					<a class="dropdown-item" th:href="@{/role/all}">Manage Use Roles</a>
+                            					<a class="dropdown-item" th:href="@{/role/all}">Manage User Roles</a>
                         					</div>
                     					</div>
                 					</li>
@@ -76,7 +76,7 @@
 
                 					</li>
                 					<!--Staff Services DropDown list-->
-                					<li class="nav-item dropdown" th:if="${role.roleDesc == 'STAFF'}">
+                					<li class="nav-item dropdown" th:if="${role.roleDesc == 'STAFF' || role.roleDesc == 'MANAGER'}">
                    						 <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="margin-right: 5px;">Staff Services</a>
                							 
                         				<div class="dropdown-menu">
@@ -154,10 +154,10 @@
                     					<div class="dropdown-menu">
                         					<div>
                             					<a class="dropdown-item" th:href="@{/employee/all}">Manage Employees</a>
-                            					<a class="dropdown-item" th:href="@{/adminuser/all}">Manager User Credentials</a>
+                            					<a class="dropdown-item" th:href="@{/adminuser/all}">Manage User Credentials</a>
                             					<a class="dropdown-item" th:href="@{/department/all}">Manage Departments</a>
                             					<a class="dropdown-item" th:href="@{/leavetype/all}">Manage Leave Types</a>
-                            					<a class="dropdown-item" th:href="@{/role/all}">Manage Use Roles</a>
+                            					<a class="dropdown-item" th:href="@{/role/all}">Manage User Roles</a>
                         					</div>
                     					</div>
                 					</li>
@@ -180,7 +180,7 @@
 
                 					</li>
                 					<!--Staff Services DropDown list-->
-                					<li class="nav-item dropdown" th:if="${role.roleDesc == 'STAFF'}">
+                					<li class="nav-item dropdown" th:if="${role.roleDesc == 'STAFF' || role.roleDesc == 'MANAGER'}">
                    						 <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="margin-right: 5px;">Staff Services</a>
                							 
                         				<div class="dropdown-menu">

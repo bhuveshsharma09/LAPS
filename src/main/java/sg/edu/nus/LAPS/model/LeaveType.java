@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class LeaveType {
 	private String leaveName; //2
 
 	@Column(name = "granularity")
-	@NotEmpty(message = "Granularity cannot be empty")
+	@NotNull
 	private Integer granularity; //3
 	
 	@Column(name = "leaveCode")
