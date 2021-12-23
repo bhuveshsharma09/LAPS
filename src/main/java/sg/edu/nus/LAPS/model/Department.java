@@ -25,7 +25,6 @@ public class Department {
 
 	private String departmentName; //2
 
-	@NotNull
 	private Integer managerId; //3
 
 	//Relations

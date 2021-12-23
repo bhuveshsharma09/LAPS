@@ -1,71 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="fragment/layout.html :: head"/>
-	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leave type</title>
-</head >
-
-<body class="align-items-center align-content-center align-self-center mx-auto"
-        style="background: #F0F0F0;">
-        
-     <div th:replace="fragment/layout.html :: navbar"/>
-	    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
-	            style="padding: 133px 0px;
-	            background: #F0F0F0;
-	            color: rgb(0,0,0);
-	            margin-bottom: 0px;
-	            padding-top: 39px;">
-	         <div class="row">
-             <div class="col" style="width: 1320px;">
-                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
-                    <div class="intro">
-                    </div>
-				    <div class="row">
-				    <div class="col-lg-10 mt-5 mb-5">   
-     
-				    <h3>Hello, admin! You can manage all leave types!</h3>
-				    <br />
-				    <h2>Please <a th:href="@{/leavetype/load}">Add</a> a new leave type </h2>
-				    <br>
-				    <!--<p><a th:href="@{/leavetype/load}">Add</a></p>
-				    <br>-->
-				    <table th:if="${not #lists.isEmpty(leaveTypes)}" class="table table-bordered table-responsive-sm" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
-				        <tr class="text-start" style="background:	#ffaad5;font-size: 18px;">
-				            <th>LEAVE NAME</th>
-				            <th>Granularity</th>
-				            <th>LEAVE CODE</th>           
-				            <th>EDIT</th>           
-				            <th>DELETE</th>           
-				        </tr >
-				        <tr th:each="leaveType:${leaveTypes}">
-				            <td th:text="${leaveType.leaveName}">LEAVE NAME</td>
-				            <td th:text="${leaveType.granularity}">Granularity</td>
-				            <td th:text="${leaveType.leaveCode}">LEAVE CODE</td>
-				            
-				            <td><a href="ltform.html" th:href="@{/leavetype/edit/}+${leaveType.leaveName}">Edit</a></td>
-				            <td><a href="ltform.html" th:href="@{/leavetype/delete/}+${leaveType.leaveName}">Delete</a></td>
-				            
-				        </tr>
-				    </table>
-				    </div>
-				    </div>
-				    </div>
-				</div>
+<html lang="en">
+   <head th:replace="fragment/layout.html :: head"/>
+   <body
+      class="align-items-center align-content-center align-self-center mx-auto"
+      style="background: #ffffff;">
+      <div th:replace="fragment/layout.html :: navbar-inv"/>
+      <section
+         class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+         style="padding: 133px 0px;background: #ffffff;color: rgb(0,0,0);margin-bottom: 0px;padding-bottom: 50px;padding-top: 39px;">
+         <div class="row">
+            <div class="col" style="width: 1320px;">
+               <h3 style="margin-bottom: 30px;">Hey <span th:text="${session.userSession.userCredentials.username}"></span>, you can now manage all Leave Types in one place.</h3>
+               <div  class="buttons"></div>
+               <div class="table-responsive align-content-center" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
+                  <a href="employee-form.html" th:href="@{/leavetype/load}">Add Leave Type</a>
+                  <br>
+                  <br>
+                  <h5 th:if="${not #lists.isEmpty(leaveTypes)}">
+                     Edit or delete a Leave Type using the options available below.
+                  </h5>
+                  <table 
+                     class="table" th:if="${not #lists.isEmpty(leaveTypes)}">
+                     <thead>
+                        <tr class="text-start" style="background:  rgba(152,181,255,0.57);font-size: 20px;">
+                           <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Name</th>
+                           <th style="background: #e2d5d5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Granularity</th>
+                           <th style="border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Code</th>
+                           <th style="background: #80ffc6; border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Edit Details</th>
+                           <th style="background: rgb(255, 128, 128); border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">Delete</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr th:each="leaveType:${leaveTypes}">
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${leaveType.leaveName}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${leaveType.granularity}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><span th:text="${leaveType.leaveCode}"></span></td>
+                           <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/leavetype/edit/}+${leaveType.leaveName}">
+                              Edit Details</a>
+                           </td>
+                           <td style="background: rgba(152,181,255,0.09);"><a th:href="@{/leavetype/delete/}+${leaveType.leaveName}">Delete</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
             </div>
-        </div>
-    </section>
-    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
-        <h1 class="text-start text-white">Take your holidays without worry!</h1>
-    </footer>
-    <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>  
-</body >
-</html>
-</body >
+         </div>
+      </section>
+      <div class="col" style="text-align: center;">
+         <img th:src="@{/assets/img/leavetype.PNG}"
+            style="height: 395px;width: 427.78px;margin-top: 50px;border-radius: 17px;"/>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+         <h1 class="text-start text-white">Take your holidays without worry!</h1>
+      </footer>
+      <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+   </body>
 </html>

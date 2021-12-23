@@ -2,6 +2,7 @@ package sg.edu.nus.LAPS.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,10 +42,10 @@ public class UserCredentials {
 	private Integer employeeId; //4
 
 	//Relations
-	@OneToOne //One employee can only have one login account
+	@OneToOne (cascade = CascadeType.ALL)//One employee can only have one login account
 	private Employee employee;
 
-	@ManyToMany //One User can have many roles, and every role can have many Users
+	@ManyToMany (cascade = CascadeType.ALL) //One User can have many roles, and every role can have many Users
 	private List<Role> roles;
 
 	public UserCredentials(Integer userId, @NonNull String username, String password) {
