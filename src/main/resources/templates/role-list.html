@@ -46,53 +46,6 @@
                      </tbody>
                   </table>
                </div>
-=======
-        style="background: #F0F0F0;">
-
-
-	<div th:replace="fragment/layout.html :: navbar-inv"/>
-	    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
-	            style="padding: 133px 0px;
-	            background: #F0F0F0;
-	            color: rgb(0,0,0);
-	            margin-bottom: 0px;
-	            padding-top: 39px;">
-	         <div class="row">
-             <div class="col" style="width: 1320px;">
-                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
-                    <div class="intro">
-                    </div>
-				    <div class="row">
-				    <div class="col-lg-10 mt-5 mb-5">
-				    <h3>Hello, admin! You can manage all roles!</h3>
-				    <br />
-				    <h4>Please <a th:href="@{/role/load}">Add</a> a new role </h4>
-				    <br>
-		<!--		    <p><a th:href="@{/role/load}">Add</a></p>
-				    <br>-->
-				    <table th:if="${not #lists.isEmpty(roles)}" class="table table-bordered table-responsive-sm" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
-				        <tr  class="text-start" style="background:	#FFFF6F;font-size: 18px;">
-				            <th style="background: #ffaad5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">ROLE ID</th >
-				            <th>ROLE DESCRIPTION</th>
-				            <th>ROLE TITLE</th>           
-				            <th>EDIT</th>           
-				            <th>DELETE</th>           
-				        </tr >
-				        <tr th:each="role:${roles}">
-				            <td style="color: #FF2D2D;" th:text="${role.roleId}">ROLE ID</td>
-				            <td th:text="${role.roleDesc}">ROLE DESCRIPTION</td>
-				            <td th:text="${role.roleTitle}">ROLE TITLE</td>
-				            
-				            <td><a href="role-form.html" th:href="@{/role/edit/}+${role.roleId}">Edit</a></td> 
-				            <td><a href="role-form.html" th:href="@{/role/delete/}+${role.roleId}">Delete</a></td> 
-				            
-				        </tr>
-				    </table>
-					</div>
-				    </div>
-				    </div>
-				</div>
->>>>>>> branch 'master' of https://github.com/bhuveshsharma09/LAPS.git
             </div>
          </div>
       </section>
