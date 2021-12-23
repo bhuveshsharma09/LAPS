@@ -6,13 +6,13 @@
          <div class="container">
             <div class="row fill">
                <div class="col-lg-3" style="background: rgb(255, 255, 255);">
-                  <img th:src="@{/assets/img/login.PNG}" style="height: 300px; width: 350px; margin-top: 200px; margin-bottom:auto; border-radius: 17px;"/>
+                  <img th:src="@{/assets/img/login.PNG}" style="height: 300px; width: 350px; margin-top: 210px; margin-bottom:auto; border-radius: 17px;"/>
                   <p style="text-align:center;"><small>Time: <b th:text="${execInfo.now.time}"></b></small ><br/> 
                   <small>&copy NUS-ISS Leave Application System(LAPS), 2021</small > </p >
                 </div>
                <div class="col" style="background: #98b5ff;/*border-radius: 102px;*/">
-                  <h3 style="padding-top: 244px; padding-left: 115px;font-family: 'Abril Fatface', serif;">One-stop leave management portal<br></h3>
-                  <h3 style="padding-left: 115px;font-family: 'Abril Fatface', serif; color:rgb(255, 255, 255);">Now faster and easier!<br></h3>
+                  <h2 style="padding-top: 244px; padding-left: 115px;">One-stop leave management portal<br></h2>
+                  <h3 style="padding-left: 115px; color:rgb(255, 255, 255);">Now faster and easier!<br></h3>
                   <h5 style="padding-top: 20px; padding-left: 115px;font-family: 'Abril Fatface', serif;">Login to LAPS<br></h5>
                   <form  style="padding: 114px;padding-top: 14px;padding-right: 358px;padding-bottom: 107px;" action="#" th:object="${usercredentials}" th:action="@{'/authenticate'}">
                      <div class="mb-3">
