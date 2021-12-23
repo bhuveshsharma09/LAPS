@@ -1,37 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace="fragment/layout.html :: head"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Role form</title>
-</head>
+</head >
 
-<body>
-    <h1>Welcome admin!</h1>
+<body class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #ffffff;">
+        
+     <div th:replace="fragment/layout.html :: navbar"/>
+	    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+	            style="padding: 133px 0px;
+	            background: #ffffff;
+	            color: rgb(0,0,0);
+	            margin-bottom: 0px;
+	            padding-top: 39px;">
+	         <div class="row">
+             <div class="col">
+                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
+                    <div class="intro">
 
-    <form th:object="${role}" th:action="@{/role/addRole}" method="POST">
-        <fieldset>
-			<input type="hidden" th:field="*{roleId}" />
-		</fieldset>
-
-        <fieldset>
-            ROLE DESCRIPTION: <input type="text" th:field="*{roleDesc}" />
-            <p th:if="${#fields.hasErrors('roleDesc')}" th:errors="*{roleDesc}"></p>
-        </fieldset>
-
-        <fieldset>
-            ROLE TITLE: <input type="text" th:field="*{roleTitle}" />
-            <p th:if="${#fields.hasErrors('roleTitle')}" th:errors="*{roleTitle}"></p>
-        </fieldset>
-
-        <fieldset>
-            <input type="submit" value="SAVE" />
-            &nbsp;&nbsp;&nbsp;
-            <input type="reset" value="RESET" />
-        </fieldset>
-    </form>
+                    </div>   
+	            
+					         
+				    <h3>Welcome admin!</h3>
+				
+				    <form class="flex-fill" th:object="${role}" th:action="@{/role/addRole}" method="POST"
+				    style="padding: 114px;
+                                padding-top: 20px;
+                                padding-right: 510px;
+                                padding-bottom: 50px;
+                                padding-left: 0px;">
+				        <fieldset>
+							<input type="hidden" th:field="*{roleId}" />
+						</fieldset>
+												
+				
+				        <fieldset class="mb-3">
+				            <label class="form-label" style="margin-bottom: 3px;"><strong>ROLE DESCRIPTION:</strong></label> 
+				            <input class="form-control" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{roleDesc}" placeholder="Please enter the role description, no more than 15 characters"/>
+				            <p class="mb-3 error-message" th:if="${#fields.hasErrors('roleDesc')}" th:errors="*{roleDesc}"></p>
+				        </fieldset >
+				
+				        <fieldset class="mb-3">
+				            <label class="form-label" style="margin-bottom: 3px;"><strong>ROLE TITLE:</strong></label>
+				            <input class="form-control" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{roleTitle}" placeholder="Please enter the role title, no more than 15 characters"/>
+				            <p class="mb-3 error-message" th:if="${#fields.hasErrors('roleTitle')}" th:errors="*{roleTitle}"></p>
+				        </fieldset >
+				
+				        <fieldset class="text-end mb-3">
+				            <input class="btn btn-primary"  type="submit" value="SAVE" 
+				             style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;"  />
+				            &nbsp;&nbsp;&nbsp;
+				            <input class="btn btn-primary" type="reset" value="RESET" 
+				             style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;"/>
+				        </fieldset >
+				    </form >
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
+    <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
-
 </html>

@@ -1,59 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace="fragment/layout.html :: head"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>user form</title>
-</head>
+</head >
 
-<body>
-    <h1>Welcome admin!</h1>
+<body class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #ffffff;">
+        
+     <div th:replace="fragment/layout.html :: navbar"/>
+	    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+	            style="padding: 133px 0px;
+	            background: #ffffff;
+	            color: rgb(0,0,0);
+	            margin-bottom: 0px;
+	            padding-top: 39px;">
+	         <div class="row">
+             <div class="col">
+                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
+                    <div class="intro">
 
-    <form th:object="${user}" th:action="@{/adminuser/adduser}" method="POST">
-        <fieldset>
-            <input type="hidden" th:field="*{userId}" /> 
-        </fieldset>
-
-        <fieldset>
-            USER NAME : <input type="text" th:field="*{username}" />
-         	<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
-        </fieldset>
-
-        <fieldset>
-            PASSWORD : <input type="password" th:field="*{password}" />
- 			<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
-        </fieldset>
-
-       <fieldset>
-            EMPLOYEE NAME: 
-            <select name="employee">
-                <option value="">=Please choose=</option>
-                <option th:each="emp : ${allEmployees}" th:value="${emp.employeeId}"
-								th:text="${emp.name}">
-				</option>
-            </select>
- 			
-        </fieldset>
-
-        <fieldset>
-            ROLE: 
-            <select name="roles" <!--multiple="multiple" id="roles"-->>
-            	<option value="">=Please choose=</option>
-                <option th:each="role : ${rolesall}" th:value="${role.roleId}"
-								th:text="${role.roleDesc}">
-				</option>
-            </select>
-            
-        </fieldset>
-
-        <fieldset>
-            <input type="submit" value="SAVE" />
-            &nbsp;&nbsp;&nbsp;
-            <input type="reset" value="RESET" />
-        </fieldset>
-    </form>
+                    </div>   
+				    <h3>Welcome admin!</h3>
+				
+				    <form class="flex-fill" th:object="${user}" th:action="@{/adminuser/adduser}" method="POST"
+				    style="padding: 114px;
+                                padding-top: 20px;
+                                padding-right: 510px;
+                                padding-bottom: 50px;
+                                padding-left: 0px;">
+				        <fieldset>
+				            <input type="hidden" th:field="*{userId}" /> 
+				        </fieldset>
+				
+				        <fieldset class="mb-3">
+				            <label class="form-label" style="margin-bottom: 3px;"><strong>USER NAME :</strong></label> 
+				            <input class="form-control" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{username}" placeholder="Please enter the user name, no more than 20 characters"/>
+				         	<td class="mb-3 error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+				        </fieldset >
+				
+				        <fieldset class="mb-3">
+				            <label class="form-label" style="margin-bottom: 3px;"><strong>PASSWORD :</strong></label> 
+				            <input class="form-control" style="background: rgba(152,181,255,0.26);" type="password" th:field="*{password}" placeholder="Please set the password, do not exceed 20 in length" />
+				 			<td class="mb-3 error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+				        </fieldset >
+				
+				       <fieldset class="mb-3">
+				            <label class="form-label" style="margin-bottom: 3px;"><strong>EMPLOYEE NAME:</strong></label>
+				            <select class="form-select" aria-label="Default select example" style="background: rgba(152,181,255,0.26);" name="employee">
+				                <option value="">=Please choose=</option>
+				                <option th:each="emp : ${allEmployees}" th:value="${emp.employeeId}"
+												th:text="${emp.name}">
+								</option>
+				            </select>
+				 			
+				        </fieldset >
+				
+				        <fieldset class="mb-3">
+				            <label class="form-label" style="margin-bottom: 3px;"><strong>ROLE:</strong></label>
+				            <select class="form-select" aria-label="Default select example" style="background: rgba(152,181,255,0.26);" name="roles">
+				            	<option value="">=Please choose=</option>
+				                <option th:each="role : ${rolesall}" th:value="${role.roleId}"
+												th:text="${role.roleDesc}">
+								</option>
+				            </select>
+				            
+				        </fieldset >
+				
+				        <fieldset class="text-end mb-3">
+				            <input class="btn btn-primary" type="submit" value="SAVE" 
+				            style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;"/>
+				            &nbsp;&nbsp;&nbsp;
+				            <input class="btn btn-primary" type="reset" value="RESET" 
+				            style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;"/>
+				        </fieldset >
+				    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
+    <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
-
 </html>

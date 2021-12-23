@@ -1,43 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace="fragment/layout.html :: head"/>
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
-</head>
+</head >
 
-<body>
-    <h1>Hello, admin! You can manage all user credentials!</h1>
-    <br />
-    <h2>Please add a new user credential </h2>
-    <br>
-    <p><a th:href="@{/adminuser/add}">Add</a></p>
-    <br>
-    <table th:if="${not #lists.isEmpty(ulist)}" border="1" cellpadding="20" cellspacing="0" width="500"
-        height="249">
-        <tr>
-            <th>USER ID</th>
-            <th>USER NAME</th>
-            <th>PASSWORD</th>
-            <th>EMPLOYEE ID</th>
-           <!-- <th>ROLE</th>-->
-            <th>EDIT</th>
-            <th>DELETE</th>
-        </tr>
-        <tr th:each="user:${ulist}">
-            <td th:text="${user.userId}">USER ID</td>
-            <td th:text="${user.username}">USER NAME</td>
-            <td th:text="${user.password}">PASSWORD</td>
-            <td th:text="${user.employee.employeeId}">EMPLOYEE ID</td>
-            <!--<td th:text="${user.roles}">ROLE</td>-->
-
-            <td><a href="userEdit.html" th:href="@{/adminuser/edit/}+${user.userId}">Edit</a></td> >
-            <td><a href="userForm.html" th:href="@{/adminuser/delete/}+${user.userId}">Delete</a></td> >
-
-        </tr>
-    </table>
-</body>
-
+<body class="align-items-center align-content-center align-self-center mx-auto"
+        style="background: #F0F0F0;">
+        
+     <div th:replace="fragment/layout.html :: navbar"/>
+	    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+	            style="padding: 133px 0px;
+	            background: #F0F0F0;
+	            color: rgb(0,0,0);
+	            margin-bottom: 0px;
+	            padding-top: 39px;">
+	         <div class="row">
+             <div class="col" style="width: 1320px;">
+                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
+                    <div class="intro">
+                    </div>
+				    <div class="row">
+				    <div class="col-lg-10 mt-5 mb-5">
+     
+				    <h3>Hello, admin! You can manage all user credentials!</h3>
+				    <br />
+				    <h2>Please <a th:href="@{/adminuser/add}">Add</a> a new user credential </h2>
+				    <br>
+				    <!--<p><a th:href="@{/adminuser/add}">Add</a></p>
+				    <br>-->
+				    <table th:if="${not #lists.isEmpty(ulist)}" class="table table-bordered table-responsive-sm" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
+				        <tr class="text-start" style="background:	#FFFF6F;font-size: 18px;">
+				          <th style="background: #ffaad5;border-right-width: 2px;border-right-color: rgb(111,111,111);border-left-width: 2px;">USER ID</th >
+				            <th>USER NAME</th>
+				            <th>PASSWORD</th>
+				            <th>EMPLOYEE ID</th>
+				           <!-- <th>ROLE</th>-->
+				            <th>EDIT</th>
+				            <th>DELETE</th>
+				        </tr >
+				        <tr th:each="user:${ulist}">
+				            <td style="color: #FF2D2D;" th:text="${user.userId}">USER ID</td>
+				            <td th:text="${user.username}">USER NAME</td>
+				            <td th:text="${user.password}">PASSWORD</td>
+				            <td th:text="${user.employee.employeeId}">EMPLOYEE ID</td>
+				            <!--<td th:text="${user.roles}">ROLE</td>-->
+				
+				            <td><a href="userEdit.html" th:href="@{/adminuser/edit/}+${user.userId}">Edit</a></td> >
+				            <td><a href="userForm.html" th:href="@{/adminuser/delete/}+${user.userId}">Delete</a></td> >
+				
+				        </tr>
+				    </table>
+					</div>
+				    </div>
+				    </div>
+				</div>
+            </div>
+        </div>
+    </section>
+    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+        <h1 class="text-start text-white">Take your holidays without worry!</h1>
+    </footer>
+    <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>  
+</body >
 </html>

@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,8 +55,11 @@ public class AdminUserController {
 	}
 	
 	@PostMapping("/adduser")
-	public String addUser(@ModelAttribute("user") UserCredentials user, Model model) {
-		 ArrayList<Role> newRoles = new ArrayList<Role>();
+	public String addUser(@ModelAttribute("user") @Valid UserCredentials user,BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "userForm";
+		} 
+		ArrayList<Role> newRoles = new ArrayList<Role>();
 		 for (Iterator<Role> iterator = user.getRoles().iterator(); iterator.hasNext();) {
 				Role role = (Role) iterator.next();
 				Role newRole = rService.findRoleByName(role.getRoleDesc());
@@ -85,7 +91,10 @@ public class AdminUserController {
 	}
 	
 	@PostMapping("/edit/{id}")
-	public String finishEditUser(@PathVariable("id") Integer id, @ModelAttribute("user") UserCredentials user, Model model) {
+	public String finishEditUser(@PathVariable("id") Integer id, @ModelAttribute("user") @Valid UserCredentials user,BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "userEdit";
+		} 
 		ucService.eidtUser(user);
 		return "forward:/adminuser/all";
 	}
