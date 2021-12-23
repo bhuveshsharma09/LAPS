@@ -1,8 +1,6 @@
 package sg.edu.nus.LAPS.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,7 +33,8 @@ import sg.edu.nus.LAPS.services.LeaveTypeService;
 import sg.edu.nus.LAPS.services.PDFGenerateService;
 
 @Controller
-@RequestMapping("/employee")
+@RequestMapping(value = "/employee")
+
 public class StaffController {
 	
     @Autowired
@@ -93,7 +92,7 @@ public class StaffController {
         leaveApplicationService.saveLeaveApplication(LA);
 		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
 		System.out.println(last.get(0).getLeaveId());
-		// emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
+		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.APPLIED);
         return "forward:/employee/leaveList/"+employee.getEmployeeId();
     }
     
@@ -172,7 +171,7 @@ public class StaffController {
     	// send email to manager
 		List<LeaveApplication> last = leaveApplicationService.findAllLeaveApplicationSorted();
 		System.out.println(last.get(0).getLeaveId());
-		emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.UPDATED);
+		//emailController.sendTheEmail(2, last.get(0).getLeaveId(), ApprovalStatus.UPDATED);
     	
     	model.addAttribute("newLeave", leaveAppToChange);
 		
@@ -225,11 +224,10 @@ public class StaffController {
 	public void downloadList(HttpServletResponse response,@ModelAttribute("id") Integer eid) throws DocumentException, IOException{
 		List<LeaveApplication> list = leaveApplicationService.findAllLeaves(eid);
 		response.setContentType("test/pdf");
-		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
+		
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=" + employeeService.findEmployeeById(eid) + ".pdf";
         response.setHeader(headerKey, headerValue);
 		pdfGenerateService.export(response,(ArrayList<LeaveApplication>) list);
 	}
