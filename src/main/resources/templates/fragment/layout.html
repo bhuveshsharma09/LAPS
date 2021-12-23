@@ -40,7 +40,7 @@
                 		<li class="nav-item"></li>
                 		<li class="nav-item"></li>
 							<th:block th:each="role:${session.userSession.userCredentials.roles}">
-                		<!--Admin Services DropDown list-->
+                					<!--Admin Services DropDown list-->
                 					<li class="nav-item dropdown" th:if="${role.roleDesc == 'ADMIN'}">
                     					<a class="dropdown-toggle nav-link"
                        						aria-expanded="false"
@@ -49,15 +49,15 @@
                    					 	</a>
                     					<div class="dropdown-menu">
                         					<div>
-                            					<a class="dropdown-item" href="/employee/all">Manage Employee</a>
-                            					<a class="dropdown-item" href="#">Manager User Credentials</a>
-                            					<a class="dropdown-item" href="#">Manage Leave Types</a>
-                            					<a class="dropdown-item" href="#">Manage Role</a>
-                            					<a class="dropdown-item" href="/onLeave">Employees On Leave</a>
+                            					<a class="dropdown-item" th:href="@{/employee/all}">Manage Employees</a>
+                            					<a class="dropdown-item" th:href="@{/adminuser/all}">Manager User Credentials</a>
+                            					<a class="dropdown-item" th:href="@{/department/all}">Manage Departments</a>
+                            					<a class="dropdown-item" th:href="@{/leavetype/all}">Manage Leave Types</a>
+                            					<a class="dropdown-item" th:href="@{/role/all}">Manage Use Roles</a>
                         					</div>
                     					</div>
                 					</li>
-                				<!--Manager Services DropDown list-->
+                					<!--Manager Services DropDown list-->
                						 <li class="nav-item dropdown" th:if="${role.roleDesc == 'MANAGER'}">
                     					<a class="dropdown-toggle nav-link"
                        					aria-expanded="false"
@@ -66,21 +66,19 @@
                     					</a>
                     					<div class="dropdown-menu">
                         					<div>
-                            					<a class="dropdown-item" href="#">View Leaves for Approval</a>
-                            					<a class="dropdown-item" href="#">View Claims for Approval</a>
+                            					<a class="dropdown-item" th:href="@{/manager/request/{id}(id=${session.userSession.employee.employeeId})}">Approve/Reject Leave Applications</a>
+                            					<a class="dropdown-item" th:href="@{/manager/claimRequest/}+${session.userSession.employee.employeeId}">Approve/Reject Claim Applications</a>
                             					<div class="dropdown-divider"></div>
                             					<a class="dropdown-item" href="#">View Subordinate Leave History</a>
                             					<a class="dropdown-item" href="#">View Subordinate Claim History</a>
-                            					<div class="dropdown-divider"></div>
-                            					<a class="dropdown-item" th:href="@{/manager/request/}+${session.userSession.employee.employeeId}">Manage Leave Applications</a>
-                            					<a class="dropdown-item" th:href="@{/manager/claimRequest/}+${session.userSession.employee.employeeId}">Manage Claim Requests</a>
                         					</div>
                     					</div>
 
-                						</li>
+                					</li>
+                					<!--Staff Services DropDown list-->
                 					<li class="nav-item dropdown" th:if="${role.roleDesc == 'STAFF'}">
                    						 <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="margin-right: 5px;">Staff Services</a>
-               							 <!--Staff Services DropDown list-->
+               							 
                         				<div class="dropdown-menu">
                             				<div>
                             					<a class="dropdown-item" th:href="@{/employee/addLeave/}+${session.userSession.employee.employeeId}">Submit Leave Application</a>
@@ -96,7 +94,7 @@
                         				</div>
                         			</li>
                 	</ul>
-                </div>
+                
          
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -109,6 +107,7 @@
                 type="button"
                 onclick="window.location.href='/logout'"
                 style="background: #ffa588;border-width: 0px;border-color: rgb(0,0,0);border-radius: 5px;color: rgb(0,0,0);margin-left: 0px;">Logout</button>
+        </div>
         </div>
 </nav>
    <!-- navbar ends-->
@@ -126,7 +125,7 @@
 <div th:fragment="navbar-inv" id="navbar-inv">
     <!--navbar inverted colour for non home pages-->
     <nav
-            class="navbar navbar-light navbar-expand-md sticky-top text-center border rounded justify-content-center"
+ 			class="navbar navbar-light navbar-expand-md sticky-top text-center border rounded justify-content-center"
             style="background: #98b5ff;border-radius: 5px;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">
         <div class="container">
             <a class="navbar-brand" href="/back">LAPS</a>
@@ -144,62 +143,60 @@
                         <a class="nav-link active" href="/back">Home</a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle nav-link"
-                           aria-expanded="false"
-                           data-bs-toggle="dropdown"
-                           href="#" style="margin-right: 5px;">Admin Services</a>
+                    	<th:block th:each="role:${session.userSession.userCredentials.roles}">
+							<!--Admin Services DropDown list-->
+                					<li class="nav-item dropdown" th:if="${role.roleDesc == 'ADMIN'}">
+                    					<a class="dropdown-toggle nav-link"
+                       						aria-expanded="false"
+                       						data-bs-toggle="dropdown" href="#"
+                      					 	style="margin-right: 5px;">Admin Services
+                   					 	</a>
+                    					<div class="dropdown-menu">
+                        					<div>
+                            					<a class="dropdown-item" th:href="@{/employee/all}">Manage Employees</a>
+                            					<a class="dropdown-item" th:href="@{/adminuser/all}">Manager User Credentials</a>
+                            					<a class="dropdown-item" th:href="@{/department/all}">Manage Departments</a>
+                            					<a class="dropdown-item" th:href="@{/leavetype/all}">Manage Leave Types</a>
+                            					<a class="dropdown-item" th:href="@{/role/all}">Manage Use Roles</a>
+                        					</div>
+                    					</div>
+                					</li>
+                					<!--Manager Services DropDown list-->
+               						 <li class="nav-item dropdown" th:if="${role.roleDesc == 'MANAGER'}">
+                    					<a class="dropdown-toggle nav-link"
+                       					aria-expanded="false"
+                       					data-bs-toggle="dropdown"
+                       					href="#" style="margin-right: 5px;">Manager Services
+                    					</a>
+                    					<div class="dropdown-menu">
+                        					<div>
+                            					<a class="dropdown-item" th:href="@{/manager/request/{id}(id=${session.userSession.employee.employeeId})}">Approve/Reject Leave Applications</a>
+                            					<a class="dropdown-item" th:href="@{/manager/claimRequest/}+${session.userSession.employee.employeeId}">Approve/Reject Claim Applications</a>
+                            					<div class="dropdown-divider"></div>
+                            					<a class="dropdown-item" href="#">View Subordinate Leave History</a>
+                            					<a class="dropdown-item" href="#">View Subordinate Claim History</a>
+                        					</div>
+                    					</div>
 
-
-                        <div class="dropdown-menu" th:each="role:${session.userSession.userCredentials.roles}">
-                            <div th:if="${role.roleDesc == 'ADMIN'}">
-                                <a class="dropdown-item" href="/employee/all">Manage Employee</a>
-                                <a class="dropdown-item" href="#">Manager User Credentials</a>
-                                <a class="dropdown-item" href="#">Manage Leave Types</a>
-                                <a class="dropdown-item" href="#">Manage Role</a>
-                                <a class="dropdown-item" href="/onLeave">Employees On Leave</a>
-                            </div>
-                        </div>
-
-
-
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="margin-right: 5px;">Manager Services</a>
-
-                        <div class="dropdown-menu" th:each="role:${session.userSession.userCredentials.roles}">
-                            <div th:if="${role.roleDesc == 'MANAGER'}">
-                                <a class="dropdown-item" href="#">View Leaves for Approval</a>
-                                <a class="dropdown-item" href="#">View Claims for Approval</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">View Subordinate Leave History</a>
-                                <a class="dropdown-item" href="#">View Subordinate Claim History</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" th:href="@{/manager/request/}+${session.userSession.employee.employeeId}">Manage Leave Applications</a>
-                                <a class="dropdown-item" th:href="@{/manager/claimRequest/}+${session.userSession.employee.employeeId}">Manage Claim Requests</a>
-                            </div>
-                        </div>
-
-
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="margin-right: 5px;">Staff Services</a>
-
-                        <div class="dropdown-menu"  th:each="role:${session.userSession.userCredentials.roles}">
-                            <div th:if="${role.roleDesc == 'STAFF' || role.roleDesc == 'MANAGER'}">
-                                <a class="dropdown-item" th:href="@{/employee/addLeave/}+${session.userSession.employee.employeeId}">Submit Leave Application</a>
-                                <a class="dropdown-item" href="/Claim/new">Submit Claim Request</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" th:href="@{/employee/manageLeave/}+${session.userSession.employee.employeeId}" >Manage Leave Applications</a>
-                                <a class="dropdown-item" href="/Claim/all">Manage Claim Requests</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" th:href="@{/employee/leaveList/}+${session.userSession.employee.employeeId}">View Personal Leave History</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/onLeave">Employees On Leave</a>
-                            </div>
-                        </div>
-
-                    </li>
+                					</li>
+                					<!--Staff Services DropDown list-->
+                					<li class="nav-item dropdown" th:if="${role.roleDesc == 'STAFF'}">
+                   						 <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="margin-right: 5px;">Staff Services</a>
+               							 
+                        				<div class="dropdown-menu">
+                            				<div>
+                            					<a class="dropdown-item" th:href="@{/employee/addLeave/}+${session.userSession.employee.employeeId}">Submit Leave Application</a>
+                           						 <a class="dropdown-item" href="/Claim/new">Submit Claim Request</a>
+                            					<div class="dropdown-divider"></div>
+                            					<a class="dropdown-item" th:href="@{/employee/manageLeave/}+${session.userSession.employee.employeeId}" >Manage Leave Applications</a>
+                            					<a class="dropdown-item" href="/Claim/all">Manage Claim Requests</a>
+                            					<div class="dropdown-divider"></div>
+                            					<a class="dropdown-item" th:href="@{/employee/history}">View Personal Leave History</a>
+                            					<div class="dropdown-divider"></div>
+                            					<a class="dropdown-item" href="/onLeave">Employees On Leave</a>
+                        					</div>
+                        				</div>
+                        			</li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#" style="margin-right: 5px;">About</a></li>
