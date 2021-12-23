@@ -42,10 +42,10 @@ public class UserCredentials {
 	private Integer employeeId; //4
 
 	//Relations
-	@OneToOne (cascade = CascadeType.ALL)//One employee can only have one login account
+	@OneToOne//One employee can only have one login account
 	private Employee employee;
 
-	@ManyToMany (cascade = CascadeType.ALL) //One User can have many roles, and every role can have many Users
+	@ManyToMany //One User can have many roles, and every role can have many Users
 	private List<Role> roles;
 
 	public UserCredentials(Integer userId, @NonNull String username, String password) {

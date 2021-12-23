@@ -49,8 +49,18 @@ public class AdminUserController {
 		model.addAttribute("user", uc);
 		ArrayList<Role> roles = rService.findAllRoles();
 		model.addAttribute("rolesall", roles);
-		ArrayList<Employee> allEmployees = employeeService.findAllEmployees();
+		ArrayList<Employee> allEmployees1 = employeeService.findAllEmployees();
+		ArrayList<Employee> allEmployees = new ArrayList<>();
+		
+		for(Employee emp : allEmployees1)
+		{
+			if(emp.getUserCredentials() == null)
+			{
+				allEmployees.add(emp);
+			}
+		}
 		model.addAttribute("allEmployees", allEmployees);
+		
 		return "userForm";
 	}
 	
@@ -102,6 +112,7 @@ public class AdminUserController {
 	@RequestMapping("/delete/{id}")
 	public String deleteUser(@PathVariable("id") Integer id, Model model) {
 		UserCredentials user = ucService.findByUserId(id);
+		
 		ucService.deleteUser(user);
 		return "forward:/adminuser/all";
 		
