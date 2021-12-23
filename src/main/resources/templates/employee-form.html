@@ -16,18 +16,17 @@
       padding-top: 39px;">
       <div class="row">
          <div class="col">
-            <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
-               <div class="intro"></div>
-               <h3><span th:text="#{Site.NewEmpTitle}"></span></h3>
+            <div class="container" style="padding: 50px; padding-top: 0px;">
                <div class="buttons"></div>
                <form class="flex-fill" 
                   action="#" 
                   th:object="${employee}" th:action="@{/employee/save}"
                   method="post"
-                  style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
+                  style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 20px; padding-left: 80px;">
+                  <h3><span th:text="#{Site.NewEmpTitle}"></span></h3> <br>
                   <div class="mb-3">
                      <!--1.Name-->
-                     <label class="form-label" style="margin-bottom: 3px;">
+                     <label class="form-label">
                      <strong><span th:text="#{Label.empName}"></span></strong>
                      </label>
                      <input
@@ -47,7 +46,7 @@
                   </div>
                   <div class="mb-3">
                      <!--2.ManagerId-->
-                     <label class="form-label" style="margin-bottom: 3px;"> 
+                     <label class="form-label" style="margin-bottom: 1px;"> 
                      <strong><span th:text="#{Label.empMgr}"></span></strong></label>
                      <select class="form-select" aria-label="Default select example" 
                         name="managerId" id="managerId" size="1"
@@ -67,7 +66,7 @@
                   </div>
                   <div class="mb-3">
                      <!--3.Department Name-->
-                     <label class="form-label" style="margin-bottom: 3px;"> 
+                     <label class="form-label" style="margin-bottom: 1px;"> 
                      <strong><span th:text="#{Label.empDept}"></span></strong></label>
                      <select class="form-select" aria-label="Default select example" 
                         name="department" id="department" size="1"
@@ -88,7 +87,7 @@
                   </div>
                   <div class="mb-3">
                      <!--4.Annual Leave Entitlement-->
-                     <label class="form-label" style="margin-bottom: 3px;">
+                     <label class="form-label" style="margin-bottom: 1px;">
                      <strong><span th:text="#{Label.empAL}"></span></strong>
                      </label>
                      <input
@@ -108,7 +107,7 @@
                   </div>
                   <div class="mb-3">
                      <!--5. Medical Leave Entitlement-->
-                     <label class="form-label" style="margin-bottom: 3px;">
+                     <label class="form-label">
                      <strong><span th:text="#{Label.empML}"></span></strong>
                      </label>
                      <input
@@ -128,7 +127,7 @@
                   </div>
                   <div class="mb-3">
                      <!--6. Compensation Leave Entitlement-->
-                     <label class="form-label" style="margin-bottom: 3px;">
+                     <label class="form-label">
                      <strong><span th:text="#{Label.empCL}"></span></strong>
                      </label>
                      <input
@@ -148,7 +147,7 @@
                   </div>
                   <div class="mb-3">
                      <!--7. Email-->
-                     <label class="form-label" style="margin-bottom: 3px;">
+                     <label class="form-label">
                      <strong><span th:text="#{Label.empEm}"></span></strong>
                      </label>
                      <input
@@ -172,7 +171,7 @@
                         style="background: rgb(192, 192, 192);
                         color: rgb(0,0,0);
                         border-width: 0px;
-                        margin-top: 50px;">
+                        margin-top: 10px;">
                      <strong><span th:text="#{Label.editEmpBack}"
                         onclick="window.location.href='/employee/all'; return false"></span></strong></button>
                          &nbsp; &nbsp;                                  
@@ -181,7 +180,7 @@
                         style="background: rgb(255, 128, 128);
                         color: rgb(0,0,0);
                         border-width: 0px;
-                        margin-top: 50px;">
+                        margin-top: 10px;">
                      <strong><span th:text="#{Label.newEmpReset}"></span></strong></button>
 						&nbsp; &nbsp;
                      <button class="btn btn-primary"
@@ -189,7 +188,7 @@
                         style="background: #80ffc6;
                         color: rgb(0,0,0);
                         border-width: 0px;
-                        margin-top: 50px;">
+                        margin-top: 10px;">
                      <strong><span th:text="#{Label.newEmpSubmit}"></span></strong></button>
                   </div>
                </form>
@@ -197,7 +196,7 @@
          </div>
          <div class="col" style="text-align: center;">
             <img th:src="@{/assets/img/newEmp.PNG}"
-               style="height: 395px;width: 427.78px;margin-top: 144px;border-radius: 17px;"/>
+               style="height: 395px;width: 427.78px;margin-top: 50px;border-radius: 17px;"/>
          </div>
       </div>
       </section>
