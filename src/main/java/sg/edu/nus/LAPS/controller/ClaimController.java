@@ -100,6 +100,8 @@ public class ClaimController {
     }
 
 
+
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editClaim(@PathVariable("id") Integer id
             , Model model
@@ -186,6 +188,19 @@ public class ClaimController {
         return "claim-view";
     }
 
+    @RequestMapping("/viewClaimDetailsManager/{id}")
+    public String viewClaimDetailsManager(@PathVariable("id") Integer id, Model model, @ModelAttribute Employee employee) {
+
+        Claim selectedClaim= claimService.findClaimById(id);
+        Employee selectedEmp = selectedClaim.getEmployee();
+        //List<Object> leaveType = claimService.findAllLeaveType();
+        List<Claim> claimList = new ArrayList<Claim>(Arrays. asList(selectedClaim));
+        model.addAttribute("newClaim", claimList);
+        model.addAttribute("employee", selectedEmp);
+        // model.addAttribute("leaveTypeValue", leaveType);
+
+        return "claim-view-manager";
+    }
 
 
 

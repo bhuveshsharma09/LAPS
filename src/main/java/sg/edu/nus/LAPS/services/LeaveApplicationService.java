@@ -3,6 +3,7 @@ package sg.edu.nus.LAPS.services;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import sg.edu.nus.LAPS.model.ApprovalStatus;
 import sg.edu.nus.LAPS.model.LeaveApplication;
 import sg.edu.nus.LAPS.model.paging.Paged;
@@ -12,6 +13,8 @@ public interface LeaveApplicationService {
     List<LeaveApplication> findAllLeaves(Integer eid);
 
     List<LeaveApplication> findAllById(Integer id);
+
+    List<LeaveApplication> findLeaveApplicationByApprovalStatus(Integer id, ApprovalStatus approvalStatus);
     
     LeaveApplication findSingleLeaveById(Integer leaveId);
 
