@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/layout.html :: head"/>
+<body>
+<div th:replace="fragment/layout.html :: navbar-inv"/>
+	<div class="container">
+    <div class="row">
+    <div class="col-lg-10 mt-5 mb-5">
+	<h3>Subordinate List</h3>
+    <table id="posts" class="table table-bordered table-responsive-sm">
+        <thead>
+        <tr>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>Employee Email</th>
+            <th>Department</th>
+            <th>Manager Name</th>
+            <th>Annual Leave Count</th>
+            <th>Medical Leave Count</th>
+            <th>Compensation Leave Count</th>
+            <th>View Leave History</th>
+        </tr>
+        </thead>
+        <tbody>
+    <tr th:each="subordinate: ${subordinates}">
+        <td th:text="${subordinate.employeeId}" />
+        <td th:text="${subordinate.name}" />
+        <td th:text="${subordinate.emailId}" />
+        <td th:text="${subordinate.department.departmentName}" />
+        <td th:text="${subordinate.manager.name}" />
+        <td th:text="${subordinate.annualLeaveCount}" />
+        <td th:text="${subordinate.medicalLeaveCount}" />
+        <td th:text="${subordinate.compensationLeaveCount}" />
+        <td><a th:href="@{/manager/leavelist/{employeeId}(employeeId=${subordinate.employeeId})}">Leave History</a></td>
+    </tr>
+        </tbody>
+    
+    </table>
+
+    </div>
+    </div>
+    </div>
+ 
+</body>
+</html>
