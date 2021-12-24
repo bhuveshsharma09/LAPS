@@ -26,6 +26,13 @@
                   method="POST"
                   style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
                   <input type="hidden" th:field="*{userId}"/> <!--userId-->
+                  
+                  <div class="mb-3">
+                     <label class="form-label" style="margin-bottom: 1px;"> 
+                     <strong><span th:text="#{Label.emp}"></span></strong></label>
+              		<input class="form-control" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{employee.employeeId}" readonly="readonly"/>
+                  </div>
+                  
                   <div class="mb-3">
                      <label class="form-label" style="margin-bottom: 3px;">
                      <strong><span th:text="#{Label.username}"></span></strong>
@@ -63,18 +70,7 @@
                      </label>
                   </div>
 
-                  <div class="mb-3">
-                     <label class="form-label" style="margin-bottom: 1px;"> 
-                     <strong><span th:text="#{Label.emp}"></span></strong></label>
-                     <select class="form-select" aria-label="Default select example" 
-                        name="employee" id="employee" size="1"
-                        style="background: rgba(152,181,255,0.26);"  
-                        th:field="*{employee}">				<!--employee-->
-                        <option th:each="employee: ${allEmployees}" 
-                           th:value="${employee.employeeId}"
-                           th:text="${employee.name}"></option>
-                     </select>
-                  </div>
+         
   
                   <div class="mb-3">
                      <label class="form-label" style="margin-bottom: 1px;"> 
