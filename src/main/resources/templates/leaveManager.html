@@ -15,6 +15,18 @@
 					<div class="intro"></div>
 					<h3 style="margin-bottom: 30px;">Manage your personal leave in one place</h3>
 					<div class="buttons"></div>
+					<div class="table-responsive" style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
+						<table class="table table-bordered" style="text-align:center;">
+							<thead style="background: rgb(255, 255, 196);border-right-width: 2px; font-size: 18px;">
+								<th>Remaining Annual Leave</th>
+								<th>Remaining Medical Leave</th>
+							</thead >
+							<tbody style="font-size: x-large;">
+								<td th:text="${employee.annualLeaveCount}"></td >
+								<td th:text="${employee.medicalLeaveCount}"></td >
+							</tbody >
+						</table >
+					</div>
 					<div class="table-responsive"
 						style="border-radius: 10px;border-width: 2px;border-bottom-width: 0px;">
 						<table class="table table-bordered table-striped">

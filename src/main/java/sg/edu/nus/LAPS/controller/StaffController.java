@@ -103,7 +103,7 @@ public class StaffController {
         
         model.addAttribute("leaveList", list);
         model.addAttribute("employee", employeeService.findEmployeeById(id));
-        
+
         return "leaveManager";
     }
     
