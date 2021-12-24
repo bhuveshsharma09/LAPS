@@ -221,13 +221,14 @@ public class StaffController {
     }
 
 	@GetMapping("/download/{id}")
-	public void downloadList(HttpServletResponse response,@ModelAttribute("id") Integer eid) throws DocumentException, IOException{
-		List<LeaveApplication> list = leaveApplicationService.findAllLeaves(eid);
+	public void downloadList(HttpServletResponse response,@ModelAttribute("id") Integer eid,HttpSession session) throws DocumentException, IOException{
+		SessionController usession = (SessionController) session.getAttribute("userSession");
+		List<LeaveApplication> list = leaveApplicationService.findAllLeaves(usession.getEmployee().getEmployeeId());
 		response.setContentType("test/pdf");
 		
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + employeeService.findEmployeeById(eid) + ".pdf";
+        String headerValue = "attachment; filename=" + employeeService.findEmployeeById(usession.getEmployee().getEmployeeId()) + ".pdf";
         response.setHeader(headerKey, headerValue);
 		pdfGenerateService.export(response,(ArrayList<LeaveApplication>) list);
 	}

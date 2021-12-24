@@ -138,6 +138,11 @@ public class AuthenticationController {
 
     }
 
-
+    @RequestMapping("/about")
+    public String about(HttpSession httpSession){
+        SessionController sessionController = (SessionController)  httpSession.getAttribute("userSession");
+        httpSession.setAttribute("userSession", sessionController);
+        return "about";
+    }
 
 }
