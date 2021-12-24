@@ -1,81 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
    <head th:replace="fragment/layout.html :: head"/>
+   <body
+      class="align-items-center align-content-center align-self-center mx-auto"
+      style="background: #ffffff;">
+      <div th:replace="fragment/layout.html :: navbar-inv"/>
+      <br>
+      <br>
+      <sectionclass="d-flex justify-content-center align-items-center align-content-center highlight-blue"
+      style="padding: 133px 0px;
+      background: #ffffff;
+      color: rgb(0,0,0);
+      margin-bottom: 0px;
+      padding-bottom: 380px;
+      padding-top: 50px;">
+      <div class="row">
+         <div class="col">
+            <div class="container" style="padding: 100px; padding-top: 0px; padding-bottom: 200px;">
+               <div class="intro"></div>
+               <h3><span th:text="#{Site.EditUserTitle}"></span></h3>
+               <div class="buttons"></div>
+               <form class="flex-fill" 
+                  action="#" 
+                  th:object="${user}" th:action="@{/adminuser/edit/}+${user.userId}"
+                  method="POST"
+                  style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
+                  <input type="hidden" th:field="*{userId}"/> <!--userId-->
+                  <div class="mb-3">
+                     <label class="form-label" style="margin-bottom: 3px;">
+                     <strong><span th:text="#{Label.username}"></span></strong>
+                     </label>
+                     <input
+                        class="form-control"
+                        type="text"
+                        name="username"
+                        placeholder="Enter username in lowercase"
+                        style="background: rgba(152,181,255,0.26);"
+                        th:field="*{username}"> <!--username-->
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></strong>
+                     </label>
+                  </div>
+                  <div class="mb-3">
+                     <label class="form-label" style="margin-bottom: 3px;">
+                     <strong><span th:text="#{Label.password}"></span></strong>
+                     </label>
+                     <input
+                        class="form-control"
+                        type="password"
+                        name="password"
+                        placeholder="Enter a password"
+                        style="background: rgba(152,181,255,0.26);"
+                        th:field="*{password}">  <!--password-->
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></strong>
+                     </label>
+                  </div>
 
-<body class="align-items-center align-content-center align-self-center mx-auto"
-        style="background: #ffffff;">
-        
-     <div th:replace="fragment/layout.html :: navbar"/>
-	    <section class="d-flex justify-content-center align-items-center align-content-center highlight-blue"
-	            style="padding: 133px 0px;
-	            background: #ffffff;
-	            color: rgb(0,0,0);
-	            margin-bottom: 0px;
-	            padding-top: 39px;">
-	         <div class="row">
-             <div class="col">
-                <div class="container" style="padding: 50px; padding-top: 0px; padding-bottom: 10px;">
-                    <div class="intro">
-
-                    </div>   
-				    <h3>Welcome admin! Please edit!</h3>
-				
-				    <form class="flex-fill" th:object="${user}" th:action="@{/adminuser/edit/}+${user.userId}" method="POST"
-				    style="padding: 114px;
-                                padding-top: 20px;
-                                padding-right: 510px;
-                                padding-bottom: 50px;
-                                padding-left: 0px;">
-				        <fieldset>
-				           <input type="hidden" th:field="*{userId}" />
-				        </fieldset>
-				        
-				        <fieldset class="mb-3">
-				            <label class="form-label" style="margin-bottom: 3px;"><strong>EMPLOYEE ID:</strong></label>
-				            <input class="form-control" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{employee.employeeId}" readonly="readonly"/>
-							
-				        </fieldset >
-				
-				        <fieldset class="mb-3">
-				            <label class="form-label" style="margin-bottom: 3px;"><strong>USER NAME :</strong></label> 
-				            <input class="form-control" style="background: rgba(152,181,255,0.26);" type="text" th:field="*{username}" placeholder="Please enter the user name, no more than 20 characters" />
-							<td class="mb-3 error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
-				        </fieldset >
-				
-				        <fieldset class="mb-3">
-				            <label class="form-label" style="margin-bottom: 3px;"><strong>PASSWORD :</strong></label>  
-				            <input class="form-control" style="background: rgba(152,181,255,0.26);" type="password" th:field="*{password}" placeholder="Please set the password, do not exceed 20 in length"/>
-							<td class="mb-3 error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
-				        </fieldset >
-				
-				        
-				
-				        <fieldset class="mb-3">
-				             <label class="form-label" style="margin-bottom: 3px;"><strong>ROLE:</strong></label> 
-				            <select class="form-select" aria-label="Default select example" style="background: rgba(152,181,255,0.26);" name="roles">
-				            	<option value="">=Please choose=</option>
-				                <option th:each="role : ${rolesall}" th:value="${role.roleId}"
-												th:text="${role.roleDesc}">
-								</option >
-				            </select>
-				           
-				        </fieldset >
-				
-				        <fieldset class="text-end mb-3">
-				            <input class="btn btn-primary" type="submit" value="UPDATE" 
-				            style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;"/>
-				            &nbsp;&nbsp;&nbsp;
-				            <input class="btn btn-primary" type="reset" value="RESET" 
-				            style="background: #80ffc6;color: rgb(0,0,0);border-width: 0px;margin-top: 50px;"/>
-				        </fieldset>
-				    </form>
-                </div>
+                  <div class="mb-3">
+                     <label class="form-label" style="margin-bottom: 1px;"> 
+                     <strong><span th:text="#{Label.emp}"></span></strong></label>
+                     <select class="form-select" aria-label="Default select example" 
+                        name="employee" id="employee" size="1"
+                        style="background: rgba(152,181,255,0.26);"  
+                        th:field="*{employee}">				<!--employee-->
+                        <option th:each="employee: ${allEmployees}" 
+                           th:value="${employee.employeeId}"
+                           th:text="${employee.name}"></option>
+                     </select>
+                  </div>
+  
+                  <div class="mb-3">
+                     <label class="form-label" style="margin-bottom: 1px;"> 
+                     <strong><span th:text="#{Label.empRole}"></span></strong></label>
+                     <select class="form-select" aria-label="Default select example" 
+                        name="roles" id="roles" size="1"
+                        style="background: rgba(152,181,255,0.26);" 
+                        th:field="*{roles}">		<!--roles-->
+                        <option th:each="role: ${rolesall}" 
+                           th:value="${role.roleId}"
+                           th:text="${role.roleDesc}"></option>
+                     </select>
+                  </div>
+                  <div class="mb-3">
+                     <label
+                        class="error-message">
+                     <strong><span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span></strong>
+                     </label>
+                  </div>
+                  <div class="text-end mb-3">
+                     <button class="btn btn-primary"
+                        type="button"
+                        style="background: rgb(192, 192, 192);
+                        color: rgb(0,0,0);
+                        border-width: 0px;
+                        margin-top: 20px;">
+                     <strong><span th:text="#{Label.userBack}"
+                        onclick="window.location.href='/adminuser/all'; return false"></span></strong></button>
+                      &nbsp; &nbsp;  
+                     <button class="btn btn-primary"
+                        type="submit"
+                        style="background: #80ffc6;
+                        color: rgb(0,0,0);
+                        border-width: 0px;
+                        margin-top: 20px;">
+                     <strong><span th:text="#{Label.editEmpUpdate}"></span></strong></button>
+                  </div>
+               </form>
             </div>
-        </div>
-    </section>
-    <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
-        <h1 class="text-start text-white">Take your holidays without worry!</h1>
-    </footer>
-    <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
-</body>
+         </div>
+         <div class="col" style="text-align: center;">
+            <img th:src="@{/assets/img/user.PNG}"
+               style="height: 300px; width: 350px;margin-top: 50px; margin-bottom: 230px; border-radius: 17px;"/>
+         </div>
+      </div>
+      </section>
+      <!--<footer style="background-color: #98b5ff; height: 50px;"></footer>-->
+      <footer class="text-start d-flex flex-fill justify-content-start align-items-start align-content-start align-self-start justify-content-xl-center align-items-xl-center footer-clean bg-info">
+         <h1 class="text-start text-white">Take your holidays without worry!</h1>
+      </footer>
+      <script  type="text/javascript" media="all" th:src="@{/assets/bootstrap/js/bootstrap.min.js}" ></script>
+   </body>
 </html>

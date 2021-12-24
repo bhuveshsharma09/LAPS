@@ -40,6 +40,10 @@ public class AdminUserController {
 	public String findAllUsers(Model model) {
 		List<UserCredentials> all = ucService.findAllUserCredentials();
 		model.addAttribute("ulist", all);
+		
+		ArrayList<Role> roles = rService.findAllRoles();
+		model.addAttribute("rolesall", roles);
+		
 		return "userList";
 	}
 	
@@ -93,8 +97,9 @@ public class AdminUserController {
 		ArrayList<Role> roles = rService.findAllRoles();
 		model.addAttribute("rolesall", roles);
 		
-//		ArrayList<Employee> allEmployees = employeeService.findAllEmployees();
-//		model.addAttribute("allEmployees", allEmployees);
+		ArrayList<Employee> allEmployees = employeeService.findAllEmployees();
+		model.addAttribute("allEmployees", allEmployees);
+		
 //		return "userForm";
 		
 		return "userEdit";

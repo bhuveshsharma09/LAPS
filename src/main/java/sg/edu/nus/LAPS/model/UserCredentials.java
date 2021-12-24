@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -45,7 +46,7 @@ public class UserCredentials {
 	@OneToOne//One employee can only have one login account
 	private Employee employee;
 
-	@ManyToMany //One User can have many roles, and every role can have many Users
+	@ManyToMany//One User can have many roles, and every role can have many Users
 	private List<Role> roles;
 
 	public UserCredentials(Integer userId, @NonNull String username, String password) {

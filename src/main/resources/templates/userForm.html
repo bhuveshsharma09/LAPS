@@ -25,7 +25,7 @@
                   th:object="${user}" th:action="@{/adminuser/adduser}"
                   method="POST"
                   style="padding: 114px; padding-top: 20px; padding-right: 510px; padding-bottom: 50px; padding-left: 0px;">
-                  <input type="hidden" th:field="*{userId}"/>
+                  <input type="hidden" th:field="*{userId}"/> <!--userId-->
                   <div class="mb-3">
                      <label class="form-label" style="margin-bottom: 3px;">
                      <strong><span th:text="#{Label.username}"></span></strong>
@@ -36,7 +36,7 @@
                         name="username"
                         placeholder="Enter username in lowercase"
                         style="background: rgba(152,181,255,0.26);"
-                        th:field="*{username}"> 
+                        th:field="*{username}"> <!--username-->
                   </div>
                   <div class="mb-3">
                      <label
@@ -54,7 +54,7 @@
                         name="password"
                         placeholder="Enter a password"
                         style="background: rgba(152,181,255,0.26);"
-                        th:field="*{password}"> 
+                        th:field="*{password}">  <!--password-->
                   </div>
                   <div class="mb-3">
                      <label
@@ -62,31 +62,14 @@
                      <strong><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></strong>
                      </label>
                   </div>
-                  <div class="mb-3">
-                     <label class="form-label" style="margin-bottom: 1px;"> 
-                     <strong><span th:text="#{Label.empID}"></span></strong></label>
-                     <select class="form-select" aria-label="Default select example" 
-                        name="employeeId" id="employeeId" size="1"
-                        style="background: rgba(152,181,255,0.26);" 
-                        th:field="*{employeeId}">
-                        <option th:each="employee: ${allEmployees}" 
-                           th:value="${employee.employeeId}"
-                           th:text="${employee.name}"></option>
-                     </select>
-                  </div>
-                  <div class="mb-3">
-                     <label
-                        class="error-message">
-                     <strong><span th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></span></strong>
-                     </label>
-                  </div>
+
                   <div class="mb-3">
                      <label class="form-label" style="margin-bottom: 1px;"> 
                      <strong><span th:text="#{Label.emp}"></span></strong></label>
                      <select class="form-select" aria-label="Default select example" 
                         name="employee" id="employee" size="1"
                         style="background: rgba(152,181,255,0.26);" 
-                        th:field="*{employee}">
+                        th:field="*{employee}">				<!--employee-->
                         <option th:each="employee: ${allEmployees}" 
                            th:value="${employee.employeeId}"
                            th:text="${employee.name}"></option>
@@ -104,7 +87,7 @@
                      <select class="form-select" aria-label="Default select example" 
                         name="roles" id="roles" size="1"
                         style="background: rgba(152,181,255,0.26);" 
-                        th:field="*{roles}">
+                        th:field="*{roles}">		<!--roles-->
                         <option th:each="role: ${rolesall}" 
                            th:value="${role.roleId}"
                            th:text="${role.roleDesc}"></option>
@@ -146,7 +129,7 @@
             </div>
          </div>
          <div class="col" style="text-align: center;">
-            <img th:src="@{/assets/img/role.PNG}"
+            <img th:src="@{/assets/img/user.PNG}"
                style="height: 300px; width: 350px;margin-top: 50px; margin-bottom: 230px; border-radius: 17px;"/>
          </div>
       </div>

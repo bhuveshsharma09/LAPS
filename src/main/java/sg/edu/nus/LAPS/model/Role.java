@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -34,6 +35,6 @@ public class Role {
 	private String roleDesc; //3 
 
 	//Relations
-	@ManyToMany(mappedBy = "roles") // one User can have many roles, and every role can have many Users
+	@OneToMany(mappedBy = "roles") // one User can have many roles, and every role can have many Users
 	private List<UserCredentials> userCredentials;
 }
