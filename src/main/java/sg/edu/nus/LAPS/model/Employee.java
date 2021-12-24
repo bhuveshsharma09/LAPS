@@ -29,7 +29,7 @@ public class Employee {
 	
 
 	//Relations
-	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL) //one Employee can only have one set of login credentials
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.REMOVE) //one Employee can only have one set of login credentials
 	private UserCredentials userCredentials;
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL) //one Employee can have many leave applications
